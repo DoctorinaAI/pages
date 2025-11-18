@@ -6,10 +6,16 @@
             "**/.*",
             "**/node_modules/**"
         ],
-        "rewrites": [
+        "redirects": [
             {
                 "source": "/",
-                "destination": "/index.html"
+                "destination": "https://doctorina.com",
+                "type": 301
+            },
+            {
+                "source": "/index.html",
+                "destination": "https://doctorina.com",
+                "type": 301
             }
         ],
         "headers": [

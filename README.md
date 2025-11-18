@@ -1,105 +1,105 @@
 # [Doctorina Pages](https://pages.doctorina.com)
 
-Множество независимых легковесных HTML страниц для организации Doctorina, размещаемых на одном домене.
+Multiple independent lightweight HTML pages for the Doctorina organization, deployed on a single domain.
 
-## 📁 Структура проекта
+## 📁 Project Structure
 
 ```
 pages/
-├── pages/                  # Директория со всеми страницами
-│   ├── index/             # Главная страница (домашняя)
+├── pages/                  # Directory with all pages
+│   ├── index/             # Main page (home)
 │   │   ├── index.html
 │   │   ├── main.ts
 │   │   └── style.css
-│   ├── links/             # Страница сокращения URL
+│   ├── links/             # URL shortener page
 │   │   ├── index.html
 │   │   ├── main.ts
 │   │   └── style.css
-│   ├── tools/             # Страница с утилитами
+│   ├── tools/             # Utilities page
 │   │   ├── index.html
 │   │   ├── main.ts
 │   │   └── style.css
-│   └── ...                # Другие страницы
+│   └── ...                # Other pages
 ├── src/
-│   └── shared/            # Общий код для всех страниц
-│       ├── utils/         # Утилиты (clipboard, validation и т.д.)
-│       └── styles/        # Общие стили
-├── public/                # Статические файлы
-├── vite.config.ts         # Конфигурация Vite (автосканирование страниц)
+│   └── shared/            # Shared code for all pages
+│       ├── utils/         # Utilities (clipboard, validation, etc.)
+│       └── styles/        # Shared styles
+├── public/                # Static files
+├── vite.config.ts         # Vite configuration (auto-discovery of pages)
 └── package.json
 ```
 
-## 🚀 Быстрый старт
+## 🚀 Quick Start
 
-### Установка зависимостей
+### Install Dependencies
 
 ```bash
 npm install
 ```
 
-### Разработка
+### Development
 
-Запустить dev сервер (откроется главная страница):
+Start dev server (opens main page):
 
 ```bash
 npm run dev
 ```
 
-Открыть конкретную страницу:
+Open specific page:
 
 ```bash
-npm run dev:index     # Главная страница
-npm run dev:links     # Страница Links
-npm run dev:tools     # Страница Tools
+npm run dev:index     # Main page
+npm run dev:links     # Links page
+npm run dev:tools     # Tools page
 ```
 
-Или откройте в браузере:
+Or open in browser:
 - `http://localhost:3000/pages/index/index.html`
 - `http://localhost:3000/pages/links/index.html`
 - `http://localhost:3000/pages/tools/index.html`
 
-### Сборка
+### Build
 
 ```bash
-npm run build              # Собрать все страницы
-npm run build:analyze      # Собрать с анализом размера бандла
-npm run preview            # Предпросмотр собранного проекта
+npm run build              # Build all pages
+npm run build:analyze      # Build with bundle size analysis
+npm run preview            # Preview built project
 ```
 
-### Проверка кода
+### Code Checking
 
 ```bash
-npm run type-check         # Проверка типов TypeScript
-npm run lint               # Проверка линтером
-npm run lint:fix           # Автоисправление линтером
+npm run type-check         # TypeScript type checking
+npm run lint               # Lint code
+npm run lint:fix           # Auto-fix with linter
 ```
 
-### Деплой
+### Deploy
 
 ```bash
-npm run deploy             # Собрать и задеплоить на Firebase
-npm run deploy:preview     # Деплой на preview канал
-npm run firebase:serve     # Локальный тест Firebase hosting
+npm run deploy             # Build and deploy to Firebase
+npm run deploy:preview     # Deploy to preview channel
+npm run firebase:serve     # Local Firebase hosting test
 ```
 
-## ➕ Добавление новой страницы
+## ➕ Adding a New Page
 
-1. **Создайте новую директорию** в папке `pages/`:
+1. **Create a new directory** in the `pages/` folder:
 
 ```bash
 mkdir pages/my-new-page
 ```
 
-2. **Создайте файлы страницы**:
+2. **Create page files**:
 
 ```
 pages/my-new-page/
-├── index.html      # HTML шаблон
-├── main.ts         # TypeScript код
-└── style.css       # Стили (опционально)
+├── index.html      # HTML template
+├── main.ts         # TypeScript code
+└── style.css       # Styles (optional)
 ```
 
-3. **index.html** - минимальный шаблон:
+3. **index.html** - minimal template:
 
 ```html
 <!DOCTYPE html>
@@ -119,7 +119,7 @@ pages/my-new-page/
 </html>
 ```
 
-4. **main.ts** - код страницы:
+4. **main.ts** - page code:
 
 ```typescript
 import { initPage } from '~/shared/utils/page-init';
@@ -138,17 +138,17 @@ if (app) {
 }
 ```
 
-5. **Добавьте npm скрипт** (опционально) в `package.json`:
+5. **Add npm script** (optional) to `package.json`:
 
 ```json
 "dev:my-new-page": "vite --open /pages/my-new-page/index.html"
 ```
 
-6. **Готово!** Vite автоматически найдет вашу страницу при сборке.
+6. **Done!** Vite will automatically discover your page during build.
 
-## 🔧 Использование общих утилит
+## 🔧 Using Shared Utilities
 
-В `src/shared/utils/` доступны готовые утилиты:
+Ready-to-use utilities are available in `src/shared/utils/`:
 
 ```typescript
 import { initPage } from '~/shared/utils/page-init';
@@ -156,66 +156,66 @@ import { copyToClipboard } from '~/shared/utils/clipboard';
 import { formatDate, getRelativeTime } from '~/shared/utils/date';
 import { isValidEmail, isValidUrl } from '~/shared/utils/validation';
 
-// Инициализация страницы
+// Initialize page
 initPage('Page Title');
 
-// Работа с буфером обмена
+// Clipboard operations
 await copyToClipboard('Text to copy');
 
-// Форматирование дат
+// Date formatting
 const formatted = formatDate(new Date());
 const relative = getRelativeTime(new Date());
 
-// Валидация
+// Validation
 if (isValidEmail(email)) { /* ... */ }
 if (isValidUrl(url)) { /* ... */ }
 ```
 
-## 🎨 Общие стили
+## 🎨 Shared Styles
 
-Подключите общие CSS переменные и утилиты:
+Import shared CSS variables and utilities:
 
 ```typescript
 import '~/shared/styles/common.css';
 ```
 
-Доступные CSS переменные:
+Available CSS variables:
 
 ```css
 var(--primary-color)      /* #667eea */
 var(--success-color)      /* #28a745 */
 var(--shadow-lg)          /* 0 10px 40px rgba(0,0,0,0.2) */
 var(--radius-md)          /* 8px */
-/* и другие... */
+/* and others... */
 ```
 
-## 📦 Структура сборки
+## 📦 Build Structure
 
-После `npm run build` в `dist/` будет создана структура:
+After `npm run build`, the `dist/` directory will have the following structure:
 
 ```
 dist/
-├── index.html              # Главная страница
-├── links.html              # Страница Links
-├── tools.html              # Страница Tools
-├── assets/                 # JS, CSS, и другие ассеты
+├── index.html              # Main page
+├── links.html              # Links page
+├── tools.html              # Tools page
+├── assets/                 # JS, CSS, and other assets
 └── ...
 ```
 
-Каждая страница собирается независимо с минимальными зависимостями.
+Each page is built independently with minimal dependencies.
 
 ## 🔥 Firebase Hosting
 
-Конфигурация для деплоя на `pages.doctorina.com`.
+Configuration for deploying to `pages.doctorina.com`.
 
-Первичная настройка:
+Initial setup:
 
 ```bash
 npm run firebase:login
 npm run firebase:init
 ```
 
-Деплой:
+Deploy:
 
 ```bash
 npm run deploy
