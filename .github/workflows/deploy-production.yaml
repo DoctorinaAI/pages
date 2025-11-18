@@ -1,0 +1,97 @@
+name: "Pages: Deploy to Production"
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+      - main
+    paths:
+      - "pages/**"
+      - "src/**"
+      - "public/**"
+      - "package.json"
+      - "package-lock.json"
+      - "vite.config.ts"
+      - ".github/workflows/deploy-production.yaml"
+
+permissions:
+  contents: read
+  actions: read
+  checks: write
+
+env:
+  NODE_VERSION: "20"
+  FIREBASE_PROJECT_ID: "doctorina-pages"
+
+jobs:
+  ##############################################################################
+  # BUILD
+  ##############################################################################
+
+  build:
+    name: "🏗️ Build Pages"
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: 📦 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: 📥 Install dependencies
+        run: npm ci
+
+      - name: 🔍 Type check
+        run: npm run type-check
+
+      - name: 🏗️ Build production
+        run: npm run build
+
+      - name: 📦 Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          retention-days: 1
+
+  ##############################################################################
+  # DEPLOY TO FIREBASE HOSTING
+  ##############################################################################
+
+  deploy:
+    name: "🚀 Deploy to Firebase Hosting"
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: 📦 Checkout repository
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            firebase.json
+            .firebaserc
+
+      - name: 📦 Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+
+      - name: 🚀 Deploy to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          projectId: ${{ env.FIREBASE_PROJECT_ID }}
+          channelId: live
+
+      - name: ✅ Deployment successful
+        run: |
+          echo "🎉 Successfully deployed to https://pages.doctorina.com"
