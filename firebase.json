@@ -1,5 +1,6 @@
 {
     "hosting": {
+        "target": "doctorina-pages",
         "public": "dist",
         "ignore": [
             "firebase.json",
