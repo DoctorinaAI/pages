@@ -34,7 +34,7 @@ permissions:
 
 env:
   NODE_VERSION: "20"
-  FIREBASE_PROJECT_ID: "doctorina-pages"
+  FIREBASE_PROJECT_ID: "doctorina-5d063"
 
 jobs:
   ##############################################################################
@@ -116,8 +116,10 @@ jobs:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
           projectId: ${{ env.FIREBASE_PROJECT_ID }}
-          channelId: ${{ steps.channel.outputs.channel }}
+          channelId: ${{ steps.channel.outputs.channel || 'preview' }}
           expires: ${{ github.event.inputs.expires_days || 7 }}d
+          target: doctorina-pages
+          entryPoint: .
 
       - name: 💬 Comment preview URL on PR
         if: github.event_name == 'pull_request'
