@@ -1,0 +1,136 @@
+name: "Pages: Deploy Preview"
+
+on:
+  workflow_dispatch:
+    inputs:
+      channel:
+        description: "Preview channel name"
+        required: false
+        default: "preview"
+      expires_days:
+        description: "Preview expiration (days)"
+        required: false
+        type: number
+        default: 7
+  pull_request:
+    branches:
+      - master
+      - main
+      - develop
+    paths:
+      - "pages/**"
+      - "src/**"
+      - "public/**"
+      - "package.json"
+      - "package-lock.json"
+      - "vite.config.ts"
+      - ".github/workflows/deploy-preview.yaml"
+
+permissions:
+  contents: read
+  actions: read
+  checks: write
+  pull-requests: write
+
+env:
+  NODE_VERSION: "20"
+  FIREBASE_PROJECT_ID: "doctorina-pages"
+
+jobs:
+  ##############################################################################
+  # BUILD
+  ##############################################################################
+
+  build:
+    name: "🏗️ Build Preview"
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: 📦 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: 📥 Install dependencies
+        run: npm ci
+
+      - name: 🔍 Type check
+        run: npm run type-check
+
+      - name: 🏗️ Build preview
+        run: npm run build
+
+      - name: 📦 Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          retention-days: 1
+
+  ##############################################################################
+  # DEPLOY PREVIEW TO FIREBASE HOSTING
+  ##############################################################################
+
+  deploy:
+    name: "🚀 Deploy Preview"
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      preview-url: ${{ steps.deploy.outputs.details_url }}
+
+    steps:
+      - name: 📦 Checkout repository
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            firebase.json
+            .firebaserc
+
+      - name: 📦 Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+
+      - name: 🔍 Determine channel name
+        id: channel
+        run: |
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            CHANNEL="pr-${{ github.event.pull_request.number }}"
+          else
+            CHANNEL="${{ github.event.inputs.channel || 'preview' }}"
+          fi
+          echo "channel=$CHANNEL" >> $GITHUB_OUTPUT
+          echo "📢 Preview channel: $CHANNEL"
+
+      - name: 🚀 Deploy to Firebase Hosting Preview
+        id: deploy
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          projectId: ${{ env.FIREBASE_PROJECT_ID }}
+          channelId: ${{ steps.channel.outputs.channel }}
+          expires: ${{ github.event.inputs.expires_days || 7 }}d
+
+      - name: 💬 Comment preview URL on PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `🚀 Preview deployed!\n\n📺 Preview URL: ${{ steps.deploy.outputs.details_url }}\n\n⏰ Expires in ${{ github.event.inputs.expires_days || 7 }} days`
+            })
+
+      - name: ✅ Deployment successful
+        run: |
+          echo "🎉 Preview deployed to: ${{ steps.deploy.outputs.details_url }}"

@@ -1,0 +1,41 @@
+{
+    "name": "pages",
+    "version": "0.0.1",
+    "description": "Doctorina Pages - Multiple lightweight HTML pages",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "dev:index": "vite --open /pages/index/index.html",
+        "dev:tools": "vite --open /pages/tools/index.html",
+        "build": "vite build",
+        "build:analyze": "ANALYZE=true vite build",
+        "preview": "vite preview",
+        "type-check": "tsc --noEmit",
+        "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
+        "lint:fix": "eslint . --ext .ts,.tsx,.js,.jsx --fix",
+        "clean": "rimraf dist",
+        "deploy": "npm run build && firebase deploy --only hosting",
+        "deploy:preview": "npm run build && firebase hosting:channel:deploy preview",
+        "firebase:login": "firebase login",
+        "firebase:init": "firebase init",
+        "firebase:serve": "npm run build && firebase serve"
+    },
+    "license": "MIT",
+    "dependencies": {
+        "@mui/icons-material": "7.3.4"
+    },
+    "devDependencies": {
+        "@fullhuman/postcss-purgecss": "7.0.2",
+        "@types/crypto-js": "4.2.2",
+        "@types/node": "24.9.1",
+        "@types/sharp": "0.31.1",
+        "autoprefixer": "10.4.21",
+        "firebase-tools": "14.21.0",
+        "postcss-csso": "6.0.1",
+        "rollup-plugin-visualizer": "6.0.5",
+        "sharp": "0.34.4",
+        "terser": "5.44.0",
+        "typescript": "5.9.3",
+        "vite": "7.1.12"
+    }
+}

@@ -1,0 +1,96 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        /* ───── Client ───── */
+        {
+            "label": "npm:ci",
+            "detail": "Install frontend dependencies",
+            "icon": {
+                "color": "terminal.ansiYellow",
+                "id": "wrench"
+            },
+            "type": "process",
+            "command": "npm",
+            "args": [
+                "ci"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": {
+                "kind": "none",
+                "isDefault": false
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": true
+            }
+        },
+        {
+            "label": "npm:run:build",
+            "detail": "Build production",
+            "type": "process",
+            "command": "npm",
+            "args": [
+                "run",
+                "build"
+            ],
+            "group": "build",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": [
+                "$tsc"
+            ]
+        },
+        {
+            "label": "types:check",
+            "detail": "TypeScript type-check (no emit)",
+            "type": "process",
+            "command": "npx",
+            "args": [
+                "tsc",
+                "--noEmit"
+            ],
+            "group": "build",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "lint:fix",
+            "detail": "ESLint --fix (if configured)",
+            "type": "process",
+            "command": "npx",
+            "args": [
+                "eslint",
+                ".",
+                "--ext",
+                ".ts,.tsx,.js,.jsx",
+                "--fix"
+            ],
+            "group": "build",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": "$eslint-stylish",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        }
+    ]
+}
