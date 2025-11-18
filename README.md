@@ -1,2 +1,1 @@
-# pages
-https://pages.doctorina.com
+# [Doctorina Pages](https://pages.doctorina.com)

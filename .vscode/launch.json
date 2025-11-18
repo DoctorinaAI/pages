@@ -1,0 +1,36 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        /* ───── Client ───── */
+        {
+            "name": "Run",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": [
+                "run",
+                "dev"
+            ],
+            "envFile": "${workspaceFolder}/.env",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "serverReadyAction": {
+                "pattern": "Local:\\s+(https?://[^/]+)",
+                "uriFormat": "%s",
+                "action": "openExternally"
+            }
+        }
+    ],
+    "inputs": [
+        {
+            "id": "testName",
+            "description": "Enter test name to debug",
+            "default": "test_",
+            "type": "promptString"
+        }
+    ]
+}

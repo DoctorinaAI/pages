@@ -1,0 +1,41 @@
+{
+    "name": "pages",
+    "version": "0.0.1",
+    "description": "Doctorina Pages",
+    "type": "module",
+    "scripts": {
+        "start": "vite",
+        "dev": "vite",
+        "build": "vite build",
+        "build:analyze": "ANALYZE=true vite build",
+        "serve": "vite preview",
+        "build:firebase": "vite build",
+        "build:github": "HOSTING=github vite build",
+        "build:version": "VITE_APP_VERSION=$(node -p \"require('./package.json').version\") vite build",
+        "deploy": "npm run build:firebase && firebase deploy",
+        "deploy:hosting": "npm run build:firebase && firebase deploy --only hosting",
+        "deploy:version": "npm run build:version && firebase deploy --only hosting",
+        "firebase:login": "firebase login",
+        "firebase:init": "firebase init",
+        "firebase:serve": "npm run build:firebase && firebase serve"
+    },
+    "license": "MIT",
+    "dependencies": {
+        "@mui/icons-material": "7.3.4"
+    },
+    "devDependencies": {
+        "@fullhuman/postcss-purgecss": "7.0.2",
+        "@types/crypto-js": "4.2.2",
+        "@types/node": "24.9.1",
+        "@types/sharp": "0.31.1",
+        "autoprefixer": "10.4.21",
+        "firebase-tools": "14.21.0",
+        "postcss-csso": "6.0.1",
+        "rollup-plugin-visualizer": "6.0.5",
+        "sharp": "0.34.4",
+        "terser": "5.44.0",
+        "typescript": "5.9.3",
+        "vite": "7.1.12",
+        "vite-plugin-solid": "2.11.10"
+    }
+}
