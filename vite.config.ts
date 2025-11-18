@@ -1,8 +1,7 @@
 import { existsSync, readdirSync } from 'fs';
 import { resolve } from 'path';
 import { visualizer } from 'rollup-plugin-visualizer';
-import { defineConfig } from 'vite';
-import solidPlugin from 'vite-plugin-solid';
+import { defineConfig, ViteDevServer } from 'vite';
 
 /**
  * Automatically discover all HTML pages in the pages/ directory
@@ -37,7 +36,6 @@ export default defineConfig(({ mode }) => {
 
   return {
     plugins: [
-      solidPlugin(),
       // Analyze bundle size if ANALYZE env var is set
       mode === 'production' && process.env.ANALYZE
         ? visualizer({
@@ -47,6 +45,27 @@ export default defineConfig(({ mode }) => {
             brotliSize: true,
           })
         : undefined,
+      // Custom plugin to handle short URLs
+      {
+        name: 'rewrite-page-urls',
+        configureServer(server: ViteDevServer) {
+          server.middlewares.use((req: any, res: any, next: any) => {
+            const url = req.url || '';
+
+            // Match patterns like /pagename.html
+            const match = url.match(/^\/([a-zA-Z0-9-]+)\.html$/);
+            if (match) {
+              const pageName = match[1];
+              const fullPath = resolve(__dirname, 'pages', pageName, 'index.html');
+              if (existsSync(fullPath)) {
+                req.url = `/pages/${pageName}/index.html`;
+              }
+            }
+
+            next();
+          });
+        },
+      },
     ].filter(Boolean),
 
     server: {
