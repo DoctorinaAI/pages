@@ -1,0 +1,16 @@
+{
+    "projects": {
+        "default": "doctorina-5d063"
+    },
+    "targets": {
+        "doctorina-5d063": {
+            "hosting": {
+                "doctorina-pages": [
+                    "doctorina-pages"
+                ]
+            }
+        }
+    },
+    "etags": {},
+    "dataconnectEmulatorConfig": {}
+}
