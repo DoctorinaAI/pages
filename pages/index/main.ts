@@ -16,7 +16,6 @@ if (app) {
         <section class="pages-list">
           <h2>Available Pages</h2>
           <ul>
-            <li><a href="/links.html">🔗 Links - URL Shortener</a></li>
             <li><a href="/tools.html">🔧 Tools - Utility Tools</a></li>
           </ul>
         </section>

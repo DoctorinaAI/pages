@@ -6,7 +6,6 @@
     "scripts": {
         "dev": "vite",
         "dev:index": "vite --open /pages/index/index.html",
-        "dev:links": "vite --open /pages/links/index.html",
         "dev:tools": "vite --open /pages/tools/index.html",
         "build": "vite build",
         "build:analyze": "ANALYZE=true vite build",

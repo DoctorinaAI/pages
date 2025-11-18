@@ -11,10 +11,6 @@ pages/
 │   │   ├── index.html
 │   │   ├── main.ts
 │   │   └── style.css
-│   ├── links/             # URL shortener page
-│   │   ├── index.html
-│   │   ├── main.ts
-│   │   └── style.css
 │   ├── tools/             # Utilities page
 │   │   ├── index.html
 │   │   ├── main.ts
@@ -49,13 +45,11 @@ Open specific page:
 
 ```bash
 npm run dev:index     # Main page
-npm run dev:links     # Links page
 npm run dev:tools     # Tools page
 ```
 
 Or open in browser:
 - `http://localhost:3000/pages/index/index.html`
-- `http://localhost:3000/pages/links/index.html`
 - `http://localhost:3000/pages/tools/index.html`
 
 ### Build
@@ -196,7 +190,6 @@ After `npm run build`, the `dist/` directory will have the following structure:
 ```
 dist/
 ├── index.html              # Main page
-├── links.html              # Links page
 ├── tools.html              # Tools page
 ├── assets/                 # JS, CSS, and other assets
 └── ...
