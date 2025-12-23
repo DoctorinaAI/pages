@@ -1,7 +1,7 @@
-import { existsSync, readdirSync } from 'fs';
-import { resolve } from 'path';
+import { existsSync, readdirSync, copyFileSync, unlinkSync, rmdirSync } from 'fs';
+import { resolve, join } from 'path';
 import { visualizer } from 'rollup-plugin-visualizer';
-import { defineConfig, ViteDevServer } from 'vite';
+import { defineConfig, ViteDevServer, Plugin } from 'vite';
 
 /**
  * Automatically discover all HTML pages in the pages/ directory
@@ -100,6 +100,42 @@ export default defineConfig(({ mode }) => {
           chunkFileNames: 'assets/[name]-[hash].js',
           assetFileNames: 'assets/[name]-[hash].[ext]',
         },
+        // Custom plugin to flatten HTML files in output
+        plugins: [
+          {
+            name: 'flatten-html-pages',
+            writeBundle(options) {
+              const outDir = options.dir || 'dist';
+
+              // Move HTML files from pages/*/index.html to *.html
+              for (const [pageName] of Object.entries(pages)) {
+                const oldPath = join(outDir, 'pages', pageName, 'index.html');
+                const newPath = join(outDir, `${pageName}.html`);
+
+                if (existsSync(oldPath)) {
+                  copyFileSync(oldPath, newPath);
+                  unlinkSync(oldPath);
+                  console.log(`📄 Moved: pages/${pageName}/index.html -> ${pageName}.html`);
+
+                  // Try to remove empty directory
+                  try {
+                    rmdirSync(join(outDir, 'pages', pageName));
+                  } catch (e) {
+                    // Directory not empty or doesn't exist, ignore
+                  }
+                }
+              }
+
+              // Try to remove empty pages directory
+              try {
+                rmdirSync(join(outDir, 'pages'));
+                console.log(`🗑️  Removed empty pages directory`);
+              } catch (e) {
+                // Directory not empty or doesn't exist, ignore
+              }
+            },
+          },
+        ],
       },
     },
 
