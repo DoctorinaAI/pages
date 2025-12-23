@@ -121,17 +121,17 @@ jobs:
           target: doctorina-pages
           entryPoint: .
 
-      - name: 💬 Comment preview URL on PR
-        if: github.event_name == 'pull_request'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: `🚀 Preview deployed!\n\n📺 Preview URL: ${{ steps.deploy.outputs.details_url }}\n\n⏰ Expires in ${{ github.event.inputs.expires_days || 7 }} days`
-            })
+      #      - name: 💬 Comment preview URL on PR
+      #        if: github.event_name == 'pull_request'
+      #        uses: actions/github-script@v7
+      #        with:
+      #          script: |
+      #            github.rest.issues.createComment({
+      #              issue_number: context.issue.number,
+      #              owner: context.repo.owner,
+      #              repo: context.repo.repo,
+      #              body: `🚀 Preview deployed!\n\n📺 Preview URL: ${{ steps.deploy.outputs.details_url }}\n\n⏰ Expires in ${{ github.event.inputs.expires_days || 7 }} days`
+      #            })
 
       - name: ✅ Deployment successful
         run: |

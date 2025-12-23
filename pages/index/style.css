@@ -1,86 +1,325 @@
-body {
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
         'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
         sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #ffffff;
     min-height: 100vh;
+    color: #333;
+}
+
+.hero {
+    min-height: 100vh;
+    padding: 2rem 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .container {
-    background: white;
-    border-radius: 12px;
-    padding: 2rem;
-    max-width: 600px;
-    width: 90%;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
 }
 
-header {
+/* Header Styles */
+.hero-header {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
+    animation: fadeInDown 0.8s ease-out;
 }
 
-h1 {
-    margin: 0;
-    font-size: 2.5rem;
-    color: #667eea;
+.logo-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.logo-icon {
+    font-size: 3.5rem;
+    animation: pulse 2s infinite;
+}
+
+.brand-name {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #2563eb;
+}
+
+.tagline {
+    font-size: 1.5rem;
+    color: #1e40af;
+    font-weight: 500;
+    margin: 0.5rem 0;
 }
 
 .subtitle {
-    margin: 0.5rem 0 0;
-    color: #666;
     font-size: 1.1rem;
+    color: #64748b;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
-.pages-list {
-    margin: 2rem 0;
+/* Features Section */
+.features {
+    margin: 3rem 0;
+    animation: fadeIn 1s ease-out 0.2s backwards;
 }
 
-.pages-list h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
+.feature-list {
+    list-style: none;
+    padding: 0;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.feature-list li {
+    font-size: 1.1rem;
+    line-height: 2;
+    color: #475569;
+    padding: 0.5rem 0;
+}
+
+/* CTA Section */
+.cta-section {
+    text-align: center;
+    margin: 4rem 0 3rem;
+    animation: fadeIn 1s ease-out 0.4s backwards;
+}
+
+.cta-section h2 {
+    font-size: 2.5rem;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.cta-description {
+    font-size: 1.2rem;
+    color: #64748b;
+    margin-bottom: 2.5rem;
+}
+
+/* Download Links */
+.download-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.download-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    flex: 0 1 auto;
+}
+
+.download-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.download-btn:hover::before {
+    left: 100%;
+}
+
+.download-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-color: #cbd5e1;
+}
+
+.btn-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.btn-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.btn-label {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-title {
+    font-size: 1.2rem;
+    font-weight: 700;
     color: #333;
 }
 
-.pages-list ul {
-    list-style: none;
-    padding: 0;
+.download-btn.primary {
+    background: #2563eb;
+    border-color: #2563eb;
 }
 
-.pages-list li {
-    margin: 0.75rem 0;
-}
-
-.pages-list a {
-    display: block;
-    padding: 1rem;
-    background: #f5f5f5;
-    border-radius: 8px;
-    text-decoration: none;
-    color: #667eea;
-    font-size: 1.1rem;
-    transition: all 0.2s;
-}
-
-.pages-list a:hover {
-    background: #667eea;
+.download-btn.primary .btn-label,
+.download-btn.primary .btn-title {
     color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
-footer {
+.download-btn.primary:hover {
+    background: #1d4ed8;
+    border-color: #1d4ed8;
+}
+
+.download-btn.apple:hover {
+    background: #000;
+}
+
+.download-btn.apple:hover .btn-label,
+.download-btn.apple:hover .btn-title {
+    color: white;
+}
+
+.download-btn.google:hover {
+    background: #01875f;
+}
+
+.download-btn.google:hover .btn-label,
+.download-btn.google:hover .btn-title {
+    color: white;
+}
+
+.download-btn.telegram:hover {
+    background: #0088cc;
+}
+
+.download-btn.telegram:hover .btn-label,
+.download-btn.telegram:hover .btn-title {
+    color: white;
+}
+
+/* Footer */
+.footer {
     text-align: center;
-    margin-top: 2rem;
-    padding-top: 1rem;
-    border-top: 1px solid #eee;
-    color: #999;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e2e8f0;
+    color: #64748b;
+}
+
+.footer p {
+    margin: 0.5rem 0;
+}
+
+.footer-note {
     font-size: 0.9rem;
+    font-style: italic;
+    color: #94a3b8;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .brand-name {
+        font-size: 2.5rem;
+    }
+
+    .logo-icon {
+        font-size: 2.5rem;
+    }
+
+    .tagline {
+        font-size: 1.2rem;
+    }
+
+    .cta-section h2 {
+        font-size: 2rem;
+    }
+
+    .download-btn .btn-content {
+        display: none;
+    }
+
+    .download-btn {
+        width: 64px;
+        height: 64px;
+        padding: 0;
+        justify-content: center;
+    }
+
+    .btn-icon {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .brand-name {
+        font-size: 2rem;
+    }
+
+    .logo-icon {
+        font-size: 2rem;
+    }
+
+    .logo-section {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
 }
