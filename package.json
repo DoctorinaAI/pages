@@ -7,6 +7,7 @@
         "dev": "vite",
         "dev:index": "vite --open /pages/index/index.html",
         "dev:tools": "vite --open /pages/tools/index.html",
+        "dev:ads": "vite --open /ads",
         "build": "vite build",
         "build:analyze": "ANALYZE=true vite build",
         "preview": "vite preview",
