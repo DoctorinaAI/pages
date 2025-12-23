@@ -163,3 +163,5 @@ vite.config.ts.timestamp-*
 # VS Code
 .vscode/chrome-debug/
 .vscode/firefox-debug/
+
+nul
