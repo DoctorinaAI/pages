@@ -4,7 +4,7 @@
     "description": "Doctorina Pages - Multiple lightweight HTML pages",
     "type": "module",
     "scripts": {
-        "dev": "vite",
+        "dev": "vite --open /index",
         "dev:index": "vite --open /pages/index/index.html",
         "dev:tools": "vite --open /pages/tools/index.html",
         "dev:ads": "vite --open /ads",

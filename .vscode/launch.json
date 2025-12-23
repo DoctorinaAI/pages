@@ -18,11 +18,11 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "serverReadyAction": {
+            /* "serverReadyAction": {
                 "pattern": "Local:\\s+(https?://[^/]+)",
                 "uriFormat": "%s",
                 "action": "openExternally"
-            }
+            } */
         }
     ],
     "inputs": [
