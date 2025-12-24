@@ -1,7 +1,129 @@
 import { initPage } from '~/shared/utils/page-init';
 import './style.css';
 
-initPage('Watch Ad - Doctorina');
+// Internationalization (i18n) - Inline translations
+const translations = {
+  en: {
+    // Page
+    pageTitle: 'Watch Ad - Doctorina',
+    // Progress
+    remaining: 'Remaining:',
+    // Warnings
+    watchToEnd: 'Please watch the video to the end without skipping',
+    doNotSkip: 'Do not skip ahead! Video will restart.',
+    keyboardDisabled: 'Keyboard controls are disabled',
+    // Dialog
+    confirmLeaveTitle: 'Are you sure you want to leave?',
+    confirmLeaveText: 'The video is not finished yet. If you leave now, the ad view will not be counted.',
+    stayAndWatch: 'Stay and watch',
+    leaveAnyway: 'Leave anyway',
+    // Completion
+    thankYou: 'Thank you for watching!',
+    sendingConfirmation: 'Sending confirmation...',
+    confirmationSent: 'Confirmation sent successfully!',
+    confirmationFailed: 'Failed to send confirmation. Please check your connection.',
+    noSessionId: 'No session ID provided. Callback not sent.',
+    closeAndReturn: 'Close and return',
+    canCloseManually: 'You can now close this tab manually.',
+    // Tooltips & Aria
+    closeButtonLabel: 'Close',
+    closeButtonTooltip: 'Close and return to app',
+  },
+  ru: {
+    // Страница
+    pageTitle: 'Просмотр рекламы - Doctorina',
+    // Прогресс
+    remaining: 'Осталось:',
+    // Предупреждения
+    watchToEnd: 'Пожалуйста, посмотрите видео до конца без пропусков',
+    doNotSkip: 'Не перематывайте! Видео начнется сначала.',
+    keyboardDisabled: 'Управление с клавиатуры отключено',
+    // Диалог
+    confirmLeaveTitle: 'Вы уверены, что хотите уйти?',
+    confirmLeaveText: 'Видео еще не закончилось. Если вы уйдете сейчас, просмотр рекламы не будет засчитан.',
+    stayAndWatch: 'Остаться и смотреть',
+    leaveAnyway: 'Все равно уйти',
+    // Завершение
+    thankYou: 'Спасибо за просмотр!',
+    sendingConfirmation: 'Отправка подтверждения...',
+    confirmationSent: 'Подтверждение успешно отправлено!',
+    confirmationFailed: 'Не удалось отправить подтверждение. Проверьте соединение.',
+    noSessionId: 'ID сессии не указан. Подтверждение не отправлено.',
+    closeAndReturn: 'Закрыть и вернуться',
+    canCloseManually: 'Вы можете закрыть эту вкладку вручную.',
+    // Подсказки и Aria
+    closeButtonLabel: 'Закрыть',
+    closeButtonTooltip: 'Закрыть и вернуться в приложение',
+  },
+  es: {
+    // Página
+    pageTitle: 'Ver anuncio - Doctorina',
+    // Progreso
+    remaining: 'Restante:',
+    // Advertencias
+    watchToEnd: 'Por favor, mira el vídeo hasta el final sin saltarlo',
+    doNotSkip: '¡No adelantes! El vídeo se reiniciará.',
+    keyboardDisabled: 'Los controles del teclado están deshabilitados',
+    // Diálogo
+    confirmLeaveTitle: '¿Estás seguro de que quieres salir?',
+    confirmLeaveText: 'El vídeo aún no ha terminado. Si sales ahora, la visualización del anuncio no se contará.',
+    stayAndWatch: 'Quedarse y ver',
+    leaveAnyway: 'Salir de todos modos',
+    // Finalización
+    thankYou: '¡Gracias por ver!',
+    sendingConfirmation: 'Enviando confirmación...',
+    confirmationSent: '¡Confirmación enviada con éxito!',
+    confirmationFailed: 'Error al enviar la confirmación. Comprueba tu conexión.',
+    noSessionId: 'No se proporcionó ID de sesión. Confirmación no enviada.',
+    closeAndReturn: 'Cerrar y volver',
+    canCloseManually: 'Ahora puedes cerrar esta pestaña manualmente.',
+    // Tooltips y Aria
+    closeButtonLabel: 'Cerrar',
+    closeButtonTooltip: 'Cerrar y volver a la aplicación',
+  },
+  de: {
+    // Seite
+    pageTitle: 'Werbung ansehen - Doctorina',
+    // Fortschritt
+    remaining: 'Verbleibend:',
+    // Warnungen
+    watchToEnd: 'Bitte schauen Sie das Video bis zum Ende ohne zu überspringen',
+    doNotSkip: 'Nicht vorspulen! Video wird neu gestartet.',
+    keyboardDisabled: 'Tastatursteuerung ist deaktiviert',
+    // Dialog
+    confirmLeaveTitle: 'Bist du sicher, dass du gehen möchtest?',
+    confirmLeaveText: 'Das Video ist noch nicht zu Ende. Wenn Sie jetzt gehen, wird die Anzeige nicht gezählt.',
+    stayAndWatch: 'Bleiben und ansehen',
+    leaveAnyway: 'Trotzdem verlassen',
+    // Abschluss
+    thankYou: 'Vielen Dank fürs Ansehen!',
+    sendingConfirmation: 'Bestätigung wird gesendet...',
+    confirmationSent: 'Bestätigung erfolgreich gesendet!',
+    confirmationFailed: 'Bestätigung konnte nicht gesendet werden. Überprüfen Sie Ihre Verbindung.',
+    noSessionId: 'Keine Sitzungs-ID angegeben. Bestätigung nicht gesendet.',
+    closeAndReturn: 'Schließen und zurückkehren',
+    canCloseManually: 'Sie können diesen Tab jetzt manuell schließen.',
+    // Tooltips und Aria
+    closeButtonLabel: 'Schließen',
+    closeButtonTooltip: 'Schließen und zur App zurückkehren',
+  },
+};
+
+// Detect browser language with fallback to English
+function detectLanguage(): keyof typeof translations {
+  const browserLang = navigator.language.split('-')[0].toLowerCase();
+  const supportedLanguages: (keyof typeof translations)[] = ['en', 'ru', 'es', 'de'];
+  return supportedLanguages.includes(browserLang as any) ? (browserLang as keyof typeof translations) : 'en';
+}
+
+// Get current language and translations
+const currentLang = detectLanguage();
+const t = translations[currentLang];
+
+// Update HTML lang attribute
+document.documentElement.lang = currentLang;
+
+initPage(t.pageTitle);
 
 // Types for YouTube IFrame API
 interface YTPlayer {
@@ -52,9 +174,10 @@ declare global {
 const VIDEO_ID = '8fy94RQnnzw'; // https://www.youtube.com/watch?v=8fy94RQnnzw
 const CALLBACK_URL = 'http://localhost:3000/callback';
 
-// Get session from URL
+// Get parameters from URL
 const urlParams = new URLSearchParams(window.location.search);
 const sessionId = urlParams.get('session');
+const referrer = urlParams.get('referrer'); // 'web' or 'app'
 
 // State management
 let player: YTPlayer | null = null;
@@ -84,6 +207,12 @@ if (!app) throw new Error('App element not found');
 
 app.innerHTML = `
   <div class="video-container">
+    <button class="close-button" id="closeButton" aria-label="${t.closeButtonLabel}" title="${t.closeButtonTooltip}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
     <div id="player"></div>
     <div class="overlay" id="overlay">
       <div class="controls-info">
@@ -92,13 +221,23 @@ app.innerHTML = `
             <div class="progress-fill" id="progressFill"></div>
           </div>
           <div class="time-info">
-            <span class="time-label">Remaining:</span>
+            <span class="time-label">${t.remaining}</span>
             <span class="time-countdown" id="countdown">--:--</span>
           </div>
         </div>
       </div>
       <div class="warning-message" id="warningMessage">
-        Please watch the video to the end without skipping
+        ${t.watchToEnd}
+      </div>
+    </div>
+  </div>
+  <div class="confirmation-dialog" id="confirmationDialog">
+    <div class="dialog-content">
+      <h3>${t.confirmLeaveTitle}</h3>
+      <p>${t.confirmLeaveText}</p>
+      <div class="dialog-buttons">
+        <button class="dialog-button dialog-button-secondary" id="dialogStay" title="${t.stayAndWatch}">${t.stayAndWatch}</button>
+        <button class="dialog-button dialog-button-danger" id="dialogLeave" title="${t.leaveAnyway}">${t.leaveAnyway}</button>
       </div>
     </div>
   </div>
@@ -108,8 +247,9 @@ app.innerHTML = `
         <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
         <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
       </svg>
-      <h2>Thank you for watching!</h2>
-      <p id="completionMessage">Sending confirmation...</p>
+      <h2>${t.thankYou}</h2>
+      <p id="completionMessage">${t.sendingConfirmation}</p>
+      <button class="close-final-button" id="closeFinalButton" style="display: none;" title="${t.closeButtonTooltip}">${t.closeAndReturn}</button>
     </div>
   </div>
 `;
@@ -172,7 +312,7 @@ function startProgressTracking() {
     // Detect seek attempts (forward seeking)
     if (currentTime > maxWatchedTime + 1) {
       seekAttempts++;
-      showWarning('Do not skip ahead! Video will restart.');
+      showWarning(t.doNotSkip);
       player.seekTo(maxWatchedTime, true);
       return;
     }
@@ -221,11 +361,19 @@ function showWarning(message: string) {
 }
 
 async function onVideoComplete() {
+  // Wait 1.5 seconds before showing completion screen for smoother UX
+  await new Promise(resolve => setTimeout(resolve, 1500));
+
   const completionScreen = document.getElementById('completionScreen');
   const overlay = document.getElementById('overlay');
+  const closeFinalButton = document.getElementById('closeFinalButton');
+  const closeButton = document.getElementById('closeButton');
 
   if (completionScreen) completionScreen.classList.add('show');
   if (overlay) overlay.style.display = 'none';
+
+  // Hide the X button in top-left corner
+  if (closeButton) closeButton.classList.add('hidden');
 
   // Send callback if session exists
   if (sessionId) {
@@ -233,8 +381,13 @@ async function onVideoComplete() {
   } else {
     const completionMessage = document.getElementById('completionMessage');
     if (completionMessage) {
-      completionMessage.textContent = 'No session ID provided. Callback not sent.';
+      completionMessage.textContent = t.noSessionId;
     }
+  }
+
+  // Show close button after completion
+  if (closeFinalButton) {
+    closeFinalButton.style.display = 'block';
   }
 }
 
@@ -282,7 +435,7 @@ async function sendCallback() {
 
     if (response.ok) {
       if (completionMessage) {
-        completionMessage.textContent = 'Confirmation sent successfully!';
+        completionMessage.textContent = t.confirmationSent;
       }
     } else {
       throw new Error(`Server responded with ${response.status}`);
@@ -290,7 +443,7 @@ async function sendCallback() {
   } catch (error) {
     console.error('Failed to send callback:', error);
     if (completionMessage) {
-      completionMessage.textContent = 'Failed to send confirmation. Please check your connection.';
+      completionMessage.textContent = t.confirmationFailed;
     }
   }
 }
@@ -327,7 +480,7 @@ document.addEventListener('keydown', (e) => {
   if (blockedKeys.includes(e.key) || blockedKeys.includes(e.code)) {
     e.preventDefault();
     e.stopPropagation();
-    showWarning('Keyboard controls are disabled');
+    showWarning(t.keyboardDisabled);
     return false;
   }
 });
@@ -358,12 +511,143 @@ document.addEventListener('visibilitychange', () => {
   }
 });
 
-// Warn before leaving page
-window.addEventListener('beforeunload', (e) => {
-  if (!isVideoCompleted && maxWatchedTime > 0) {
-    e.preventDefault();
-    const message = 'Are you sure you want to leave? The video is not finished yet.';
-    e.returnValue = message;
-    return message;
+// No beforeunload warning - we handle closing with custom dialog
+
+// Close button handler
+const closeButton = document.getElementById('closeButton');
+closeButton?.addEventListener('click', handleCloseAttempt);
+
+function handleCloseAttempt() {
+  if (isVideoCompleted) {
+    // Video completed - close immediately
+    closeAndReturn();
+  } else {
+    // Video not completed - show confirmation dialog
+    const confirmationDialog = document.getElementById('confirmationDialog');
+    if (confirmationDialog) {
+      confirmationDialog.classList.add('show');
+    }
+  }
+}
+
+// Dialog button handlers
+const dialogStay = document.getElementById('dialogStay');
+const dialogLeave = document.getElementById('dialogLeave');
+
+dialogStay?.addEventListener('click', () => {
+  const confirmationDialog = document.getElementById('confirmationDialog');
+  if (confirmationDialog) {
+    confirmationDialog.classList.remove('show');
   }
 });
+
+dialogLeave?.addEventListener('click', () => {
+  closeAndReturn();
+});
+
+// Close and return logic
+async function closeAndReturn() {
+  try {
+    if (referrer === 'web') {
+      // Try to switch to web app tab
+      await redirectToWebApp();
+    } else if (referrer === 'app') {
+      // Try to open mobile app
+      await redirectToMobileApp();
+    }
+  } catch (error) {
+    console.error('Failed to redirect:', error);
+  }
+
+  // Try to close the tab
+  tryCloseTab();
+}
+
+async function redirectToWebApp() {
+  try {
+    // Try to focus existing app.doctorina.com tab
+    // This is limited by browser security, but we can try opening it
+    const webAppUrl = 'https://app.doctorina.com';
+
+    // Open in same window to give focus
+    window.location.href = webAppUrl;
+  } catch (error) {
+    console.error('Failed to redirect to web app:', error);
+  }
+}
+
+async function redirectToMobileApp() {
+  try {
+    const userAgent = navigator.userAgent.toLowerCase();
+    const isIOS = /iphone|ipad|ipod/.test(userAgent);
+    const isAndroid = /android/.test(userAgent);
+
+    if (isIOS) {
+      // iOS Universal Link / Custom URL Scheme
+      const universalLink = 'doctorina://';
+      window.location.href = universalLink;
+
+      // Fallback to App Store if app not installed (after timeout)
+      setTimeout(() => {
+        // If still here, app might not be installed
+        console.log('iOS app might not be installed');
+      }, 2000);
+    } else if (isAndroid) {
+      // Android App Link / Intent
+      const intentUrl = 'intent://callback#Intent;' +
+        'scheme=doctorina;' +
+        'package=com.doctorina.app.android.production;' +
+        'S.browser_fallback_url=https://play.google.com/store/apps/details?id=com.doctorina.app.android.production;' +
+        'end';
+
+      window.location.href = intentUrl;
+
+      // Fallback
+      setTimeout(() => {
+        console.log('Android app might not be installed');
+      }, 2000);
+    } else {
+      // Desktop or unknown platform - just try generic link
+      window.location.href = 'doctorina://';
+    }
+  } catch (error) {
+    console.error('Failed to redirect to mobile app:', error);
+  }
+}
+
+function tryCloseTab() {
+  try {
+    // Try to close the window (will only work if opened via window.open)
+    window.close();
+
+    // Check if window is still open after close attempt
+    setTimeout(() => {
+      // If we're still here, window.close() didn't work
+      // Only show message if video was completed
+      if (isVideoCompleted) {
+        const completionScreen = document.getElementById('completionScreen');
+        const completionMessage = document.getElementById('completionMessage');
+
+        if (completionScreen && !completionScreen.classList.contains('show')) {
+          completionScreen.classList.add('show');
+        }
+
+        if (completionMessage) {
+          completionMessage.textContent = t.canCloseManually;
+        }
+
+        // Hide the close button since we're showing the message
+        const closeFinalButton = document.getElementById('closeFinalButton');
+        if (closeFinalButton) {
+          closeFinalButton.style.display = 'none';
+        }
+      }
+    }, 100);
+  } catch (error) {
+    console.error('Failed to close tab:', error);
+  }
+}
+
+// Final close button handler (after completion)
+const closeFinalButton = document.getElementById('closeFinalButton');
+closeFinalButton?.addEventListener('click', closeAndReturn);

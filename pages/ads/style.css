@@ -282,3 +282,197 @@ body {
   width: 100%;
   height: 100%;
 }
+
+/* Close Button */
+.close-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 44px;
+  height: 44px;
+  background: rgba(0, 0, 0, 0.6);
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.close-button.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.close-button:hover {
+  background: rgba(0, 0, 0, 0.8);
+  transform: scale(1.1);
+}
+
+.close-button:active {
+  transform: scale(0.95);
+}
+
+.close-button svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Confirmation Dialog */
+.confirmation-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.confirmation-dialog.show {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.dialog-content {
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: dialogSlideUp 0.3s ease-out;
+}
+
+@keyframes dialogSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dialog-content h3 {
+  margin: 0 0 12px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.dialog-content p {
+  margin: 0 0 24px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #666;
+}
+
+.dialog-buttons {
+  display: flex;
+  gap: 12px;
+  flex-direction: column;
+}
+
+.dialog-button {
+  padding: 14px 24px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dialog-button:active {
+  transform: scale(0.98);
+}
+
+.dialog-button-secondary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+}
+
+.dialog-button-secondary:hover {
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  transform: translateY(-2px);
+}
+
+.dialog-button-danger {
+  background: #fff;
+  color: #dc2626;
+  border: 2px solid #dc2626;
+}
+
+.dialog-button-danger:hover {
+  background: #dc2626;
+  color: #fff;
+}
+
+/* Close Final Button */
+.close-final-button {
+  margin: 24px auto 0;
+  padding: 14px 32px;
+  background: #fff;
+  color: #667eea;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: block;
+}
+
+.close-final-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.close-final-button:active {
+  transform: translateY(0);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .close-button {
+    top: 16px;
+    left: 16px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .close-button svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .dialog-content {
+    padding: 24px;
+  }
+
+  .dialog-content h3 {
+    font-size: 20px;
+  }
+
+  .dialog-content p {
+    font-size: 14px;
+  }
+
+  .dialog-button {
+    padding: 12px 20px;
+    font-size: 15px;
+  }
+}
