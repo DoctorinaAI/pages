@@ -49,7 +49,7 @@ declare global {
 }
 
 // Configuration
-const VIDEO_ID = 'Dyth2OnlD-o'; // https://www.youtube.com/watch?v=Dyth2OnlD-o
+const VIDEO_ID = '8fy94RQnnzw'; // https://www.youtube.com/watch?v=8fy94RQnnzw
 const CALLBACK_URL = 'http://localhost:3000/callback';
 
 // Get session from URL
