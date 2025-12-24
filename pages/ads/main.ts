@@ -4,6 +4,8 @@ import './style.css';
 // Internationalization (i18n) - Inline translations
 const translations = {
   en: {
+    // Language: English
+    lang: 'en',
     // Page
     pageTitle: 'Watch Ad - Doctorina',
     // Progress
@@ -25,11 +27,18 @@ const translations = {
     noSessionId: 'No session ID provided. Callback not sent.',
     closeAndReturn: 'Close and return',
     canCloseManually: 'You can now close this tab manually.',
+    // Loading
+    loadingVideo: 'Loading video...',
+    videoLoadError: 'Failed to load video. Please refresh the page.',
     // Tooltips & Aria
     closeButtonLabel: 'Close',
     closeButtonTooltip: 'Close and return to app',
+    videoPlayerLabel: 'Advertisement video player',
+    progressBarLabel: 'Video progress',
   },
   ru: {
+    // Язык: Русский
+    lang: 'ru',
     // Страница
     pageTitle: 'Просмотр рекламы - Doctorina',
     // Прогресс
@@ -51,11 +60,18 @@ const translations = {
     noSessionId: 'ID сессии не указан. Подтверждение не отправлено.',
     closeAndReturn: 'Закрыть и вернуться',
     canCloseManually: 'Вы можете закрыть эту вкладку вручную.',
+    // Загрузка
+    loadingVideo: 'Загрузка видео...',
+    videoLoadError: 'Не удалось загрузить видео. Пожалуйста, обновите страницу.',
     // Подсказки и Aria
     closeButtonLabel: 'Закрыть',
     closeButtonTooltip: 'Закрыть и вернуться в приложение',
+    videoPlayerLabel: 'Видеоплеер рекламы',
+    progressBarLabel: 'Прогресс видео',
   },
   es: {
+    // Idioma: Español
+    lang: 'es',
     // Página
     pageTitle: 'Ver anuncio - Doctorina',
     // Progreso
@@ -77,11 +93,18 @@ const translations = {
     noSessionId: 'No se proporcionó ID de sesión. Confirmación no enviada.',
     closeAndReturn: 'Cerrar y volver',
     canCloseManually: 'Ahora puedes cerrar esta pestaña manualmente.',
+    // Carga
+    loadingVideo: 'Cargando vídeo...',
+    videoLoadError: 'Error al cargar el vídeo. Por favor, actualiza la página.',
     // Tooltips y Aria
     closeButtonLabel: 'Cerrar',
     closeButtonTooltip: 'Cerrar y volver a la aplicación',
+    videoPlayerLabel: 'Reproductor de vídeo publicitario',
+    progressBarLabel: 'Progreso del vídeo',
   },
   de: {
+    // Sprache: Deutsch
+    lang: 'de',
     // Seite
     pageTitle: 'Werbung ansehen - Doctorina',
     // Fortschritt
@@ -103,9 +126,14 @@ const translations = {
     noSessionId: 'Keine Sitzungs-ID angegeben. Bestätigung nicht gesendet.',
     closeAndReturn: 'Schließen und zurückkehren',
     canCloseManually: 'Sie können diesen Tab jetzt manuell schließen.',
+    // Laden
+    loadingVideo: 'Video wird geladen...',
+    videoLoadError: 'Video konnte nicht geladen werden. Bitte aktualisieren Sie die Seite.',
     // Tooltips und Aria
     closeButtonLabel: 'Schließen',
     closeButtonTooltip: 'Schließen und zur App zurückkehren',
+    videoPlayerLabel: 'Werbevideoplayer',
+    progressBarLabel: 'Videofortschritt',
   },
 };
 
@@ -135,6 +163,8 @@ interface YTPlayer {
   getPlayerState: () => number;
   unMute: () => void;
   isMuted: () => boolean;
+  setVolume: (volume: number) => void;
+  getVolume: () => number;
 }
 
 interface YTPlayerClass {
@@ -146,6 +176,7 @@ interface YTPlayerClass {
       events?: {
         onReady?: (event: { target: YTPlayer }) => void;
         onStateChange?: (event: { target: YTPlayer; data: number }) => void;
+        onError?: (event: { target: YTPlayer; data: number }) => void;
       };
     }
   ): YTPlayer;
@@ -170,12 +201,14 @@ declare global {
   }
 }
 
-// Configuration
-const VIDEO_ID = '8fy94RQnnzw'; // https://www.youtube.com/watch?v=8fy94RQnnzw
-const CALLBACK_URL = 'http://localhost:3000/callback';
+// Configuration from ENV and URL params
+const urlParams = new URLSearchParams(window.location.search);
+const VIDEO_ID = urlParams.get('video') || import.meta.env.VITE_DEFAULT_VIDEO_ID || '8fy94RQnnzw';
+const CALLBACK_URL = import.meta.env.VITE_CALLBACK_URL || 'http://localhost:3000/callback';
+const MAX_CALLBACK_RETRIES = 3;
+const RETRY_DELAY_MS = 2000;
 
 // Get parameters from URL
-const urlParams = new URLSearchParams(window.location.search);
 const sessionId = urlParams.get('session');
 const referrer = urlParams.get('referrer'); // 'web' or 'app'
 
@@ -187,6 +220,12 @@ let seekAttempts = 0;
 let pauseCount = 0;
 let wasTabActive = true;
 let videoStartTime = Date.now();
+let fullscreenCount = 0;
+let callbackSent = false;
+
+// Analytics milestones
+const milestones = [0.25, 0.5, 0.75];
+const reachedMilestones = new Set<number>();
 
 // Metadata collection
 const metadata = {
@@ -206,9 +245,13 @@ const app = document.getElementById('app');
 if (!app) throw new Error('App element not found');
 
 app.innerHTML = `
-  <div class="video-container">
+  <div class="loading-screen" id="loadingScreen" aria-live="polite" aria-busy="true">
+    <div class="loading-spinner"></div>
+    <p>${t.loadingVideo}</p>
+  </div>
+  <div class="video-container" role="region" aria-label="${t.videoPlayerLabel}">
     <button class="close-button" id="closeButton" aria-label="${t.closeButtonLabel}" title="${t.closeButtonTooltip}">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <line x1="18" y1="6" x2="6" y2="18"></line>
         <line x1="6" y1="6" x2="18" y2="18"></line>
       </svg>
@@ -216,24 +259,25 @@ app.innerHTML = `
     <div id="player"></div>
     <div class="overlay" id="overlay">
       <div class="controls-info">
-        <div class="progress-container">
-          <div class="progress-bar">
+        <div class="progress-container" role="region" aria-label="${t.progressBarLabel}">
+          <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
             <div class="progress-fill" id="progressFill"></div>
           </div>
           <div class="time-info">
             <span class="time-label">${t.remaining}</span>
-            <span class="time-countdown" id="countdown">--:--</span>
+            <span class="time-countdown" id="countdown" aria-live="polite">--:--</span>
+            <span class="progress-percentage" id="progressPercentage" aria-live="polite">0%</span>
           </div>
         </div>
       </div>
-      <div class="warning-message" id="warningMessage">
+      <div class="warning-message" id="warningMessage" role="alert" aria-live="assertive">
         ${t.watchToEnd}
       </div>
     </div>
   </div>
-  <div class="confirmation-dialog" id="confirmationDialog">
+  <div class="confirmation-dialog" id="confirmationDialog" role="dialog" aria-modal="true" aria-labelledby="dialogTitle">
     <div class="dialog-content">
-      <h3>${t.confirmLeaveTitle}</h3>
+      <h3 id="dialogTitle">${t.confirmLeaveTitle}</h3>
       <p>${t.confirmLeaveText}</p>
       <div class="dialog-buttons">
         <button class="dialog-button dialog-button-secondary" id="dialogStay" title="${t.stayAndWatch}">${t.stayAndWatch}</button>
@@ -241,9 +285,9 @@ app.innerHTML = `
       </div>
     </div>
   </div>
-  <div class="completion-screen" id="completionScreen">
+  <div class="completion-screen" id="completionScreen" role="status" aria-live="polite">
     <div class="completion-content">
-      <svg class="checkmark" viewBox="0 0 52 52">
+      <svg class="checkmark" viewBox="0 0 52 52" aria-hidden="true">
         <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
         <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
       </svg>
@@ -278,11 +322,21 @@ window.onYouTubeIframeAPIReady = () => {
     events: {
       onReady: onPlayerReady,
       onStateChange: onPlayerStateChange,
+      onError: onPlayerError,
     },
   });
 };
 
 function onPlayerReady(event: { target: YTPlayer }) {
+  // Hide loading screen
+  const loadingScreen = document.getElementById('loadingScreen');
+  if (loadingScreen) {
+    loadingScreen.style.opacity = '0';
+    setTimeout(() => {
+      loadingScreen.style.display = 'none';
+    }, 300);
+  }
+
   // Unmute after autoplay starts (was muted for autoplay policy)
   event.target.unMute();
   event.target.playVideo();
@@ -299,6 +353,17 @@ function onPlayerStateChange(event: { target: YTPlayer; data: number }) {
   if (event.data === YT.PlayerState.ENDED && !isVideoCompleted) {
     isVideoCompleted = true;
     onVideoComplete();
+  }
+}
+
+function onPlayerError(event: { target: YTPlayer; data: number }) {
+  console.error('YouTube Player Error:', event.data);
+  const loadingScreen = document.getElementById('loadingScreen');
+  if (loadingScreen) {
+    loadingScreen.innerHTML = `
+      <div class="error-icon">⚠️</div>
+      <p>${t.videoLoadError}</p>
+    `;
   }
 }
 
@@ -336,16 +401,37 @@ function startProgressTracking() {
 function updateProgress(currentTime: number, duration: number) {
   const progressFill = document.getElementById('progressFill');
   const countdown = document.getElementById('countdown');
+  const progressPercentage = document.getElementById('progressPercentage');
+  const progressBar = document.querySelector('.progress-bar');
 
   if (!progressFill || !countdown) return;
 
   const percentage = (currentTime / duration) * 100;
   progressFill.style.width = `${percentage}%`;
 
+  // Update ARIA attributes
+  if (progressBar) {
+    progressBar.setAttribute('aria-valuenow', Math.round(percentage).toString());
+  }
+
   const remaining = duration - currentTime;
   const minutes = Math.floor(remaining / 60);
   const seconds = Math.floor(remaining % 60);
   countdown.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+  // Update percentage display
+  if (progressPercentage) {
+    progressPercentage.textContent = `${Math.round(percentage)}%`;
+  }
+
+  // Track analytics milestones
+  const progress = currentTime / duration;
+  milestones.forEach((milestone) => {
+    if (progress >= milestone && !reachedMilestones.has(milestone)) {
+      reachedMilestones.add(milestone);
+      console.log(`Milestone reached: ${milestone * 100}%`);
+    }
+  });
 }
 
 function showWarning(message: string) {
@@ -392,58 +478,83 @@ async function onVideoComplete() {
 }
 
 async function sendCallback() {
+  // Rate limiting: prevent duplicate sends
+  if (callbackSent) {
+    console.warn('Callback already sent, skipping duplicate request');
+    return;
+  }
+
   const completionMessage = document.getElementById('completionMessage');
 
-  try {
-    const watchDuration = (Date.now() - videoStartTime) / 1000; // in seconds
+  // Retry mechanism with exponential backoff
+  for (let attempt = 1; attempt <= MAX_CALLBACK_RETRIES; attempt++) {
+    try {
+      const watchDuration = (Date.now() - videoStartTime) / 1000; // in seconds
 
-    const payload = {
-      session: sessionId,
-      videoId: VIDEO_ID,
-      page: 'ads',
-      videoUrl: `https://www.youtube.com/watch?v=${VIDEO_ID}`,
-      completedAt: new Date().toISOString(),
+      const payload = {
+        session: sessionId,
+        videoId: VIDEO_ID,
+        page: 'ads',
+        videoUrl: `https://www.youtube.com/watch?v=${VIDEO_ID}`,
+        completedAt: new Date().toISOString(),
 
-      // Basic metadata
-      userAgent: metadata.userAgent,
-      platform: metadata.platform,
-      language: metadata.language,
+        // Basic metadata
+        userAgent: metadata.userAgent,
+        platform: metadata.platform,
+        language: metadata.language,
 
-      // Extended metadata
-      screenResolution: metadata.screenResolution,
-      viewportSize: metadata.viewportSize,
-      timezone: metadata.timezone,
-      referrer: metadata.referrer,
-      deviceMemory: metadata.deviceMemory,
-      hardwareConcurrency: metadata.hardwareConcurrency,
+        // Extended metadata
+        screenResolution: metadata.screenResolution,
+        viewportSize: metadata.viewportSize,
+        timezone: metadata.timezone,
+        referrer: metadata.referrer,
+        deviceMemory: metadata.deviceMemory,
+        hardwareConcurrency: metadata.hardwareConcurrency,
 
-      // Behavioral metadata
-      watchDuration: Math.round(watchDuration),
-      seekAttempts,
-      pauseCount,
-      wasTabActive,
-      maxWatchedTime: Math.round(maxWatchedTime),
-    };
+        // Behavioral metadata
+        watchDuration: Math.round(watchDuration),
+        seekAttempts,
+        pauseCount,
+        wasTabActive,
+        maxWatchedTime: Math.round(maxWatchedTime),
+        fullscreenCount,
 
-    const response = await fetch(CALLBACK_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload),
-    });
+        // Analytics milestones
+        milestonesReached: Array.from(reachedMilestones),
+      };
 
-    if (response.ok) {
-      if (completionMessage) {
-        completionMessage.textContent = t.confirmationSent;
+      const response = await fetch(CALLBACK_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (response.ok) {
+        callbackSent = true;
+        if (completionMessage) {
+          completionMessage.textContent = t.confirmationSent;
+        }
+        console.log('Callback sent successfully');
+        return; // Success, exit retry loop
+      } else {
+        throw new Error(`Server responded with ${response.status}`);
       }
-    } else {
-      throw new Error(`Server responded with ${response.status}`);
-    }
-  } catch (error) {
-    console.error('Failed to send callback:', error);
-    if (completionMessage) {
-      completionMessage.textContent = t.confirmationFailed;
+    } catch (error) {
+      console.error(`Callback attempt ${attempt}/${MAX_CALLBACK_RETRIES} failed:`, error);
+
+      if (attempt === MAX_CALLBACK_RETRIES) {
+        // Final attempt failed
+        if (completionMessage) {
+          completionMessage.textContent = t.confirmationFailed;
+        }
+      } else {
+        // Wait before retrying (exponential backoff)
+        const delay = RETRY_DELAY_MS * attempt;
+        console.log(`Retrying in ${delay}ms...`);
+        await new Promise(resolve => setTimeout(resolve, delay));
+      }
     }
   }
 }
@@ -468,9 +579,30 @@ document.addEventListener('keydown', (e) => {
     return false;
   }
 
+  // Volume control with arrow up/down
+  if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    e.stopPropagation();
+    const currentVolume = player.getVolume();
+    const newVolume = Math.min(100, currentVolume + 10);
+    player.setVolume(newVolume);
+    console.log(`Volume: ${newVolume}%`);
+    return false;
+  }
+
+  if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    e.stopPropagation();
+    const currentVolume = player.getVolume();
+    const newVolume = Math.max(0, currentVolume - 10);
+    player.setVolume(newVolume);
+    console.log(`Volume: ${newVolume}%`);
+    return false;
+  }
+
   // Block all other video control keys
   const blockedKeys = [
-    'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown',
+    'ArrowLeft', 'ArrowRight',
     'Home', 'End',
     'PageUp', 'PageDown',
     'j', 'l', 'm', 'f', 'c',
@@ -489,6 +621,24 @@ document.addEventListener('keydown', (e) => {
 document.getElementById('player')?.addEventListener('contextmenu', (e) => {
   e.preventDefault();
   return false;
+});
+
+// Block Picture-in-Picture
+document.addEventListener('enterpictureinpicture', (e) => {
+  e.preventDefault();
+  if (document.pictureInPictureElement) {
+    document.exitPictureInPicture().catch((err) => {
+      console.error('Failed to exit PiP:', err);
+    });
+  }
+});
+
+// Track fullscreen changes
+document.addEventListener('fullscreenchange', () => {
+  if (document.fullscreenElement) {
+    fullscreenCount++;
+    console.log(`Fullscreen entered (count: ${fullscreenCount})`);
+  }
 });
 
 // Track tab visibility and auto pause/resume
@@ -526,6 +676,11 @@ function handleCloseAttempt() {
     const confirmationDialog = document.getElementById('confirmationDialog');
     if (confirmationDialog) {
       confirmationDialog.classList.add('show');
+      // Focus first button for accessibility
+      const dialogStay = document.getElementById('dialogStay');
+      if (dialogStay) {
+        setTimeout(() => dialogStay.focus(), 100);
+      }
     }
   }
 }
@@ -543,6 +698,30 @@ dialogStay?.addEventListener('click', () => {
 
 dialogLeave?.addEventListener('click', () => {
   closeAndReturn();
+});
+
+// Keyboard navigation for dialog
+document.addEventListener('keydown', (e) => {
+  const confirmationDialog = document.getElementById('confirmationDialog');
+  if (confirmationDialog && confirmationDialog.classList.contains('show')) {
+    if (e.key === 'Escape') {
+      confirmationDialog.classList.remove('show');
+    }
+    // Tab trap within dialog
+    if (e.key === 'Tab') {
+      const focusableElements = confirmationDialog.querySelectorAll('button');
+      const firstElement = focusableElements[0] as HTMLElement;
+      const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement;
+
+      if (e.shiftKey && document.activeElement === firstElement) {
+        e.preventDefault();
+        lastElement.focus();
+      } else if (!e.shiftKey && document.activeElement === lastElement) {
+        e.preventDefault();
+        firstElement.focus();
+      }
+    }
+  }
 });
 
 // Close and return logic
