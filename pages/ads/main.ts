@@ -253,6 +253,17 @@ let videoStartTime = Date.now();
 let fullscreenCount = 0;
 let callbackSent = false;
 
+// Advanced analytics tracking
+let totalPauseDuration = 0;
+let lastPauseTime = 0;
+let volumeChanges = 0;
+let lastVolume = 100;
+let tabSwitchCount = 0;
+let playerErrorCount = 0;
+let bufferingEvents = 0;
+let lastBufferingTime = 0;
+let totalBufferingDuration = 0;
+
 // Analytics milestones
 const milestones = [0.25, 0.5, 0.75];
 const reachedMilestones = new Set<number>();
@@ -378,6 +389,25 @@ function onPlayerStateChange(event: { target: YTPlayer; data: number }) {
 
   if (event.data === YT.PlayerState.PAUSED) {
     pauseCount++;
+    lastPauseTime = Date.now();
+  }
+
+  if (event.data === YT.PlayerState.PLAYING) {
+    // Calculate pause duration if coming from pause
+    if (lastPauseTime > 0) {
+      totalPauseDuration += (Date.now() - lastPauseTime) / 1000;
+      lastPauseTime = 0;
+    }
+    // End buffering tracking if was buffering
+    if (lastBufferingTime > 0) {
+      totalBufferingDuration += (Date.now() - lastBufferingTime) / 1000;
+      lastBufferingTime = 0;
+    }
+  }
+
+  if (event.data === YT.PlayerState.BUFFERING) {
+    bufferingEvents++;
+    lastBufferingTime = Date.now();
   }
 
   if (event.data === YT.PlayerState.ENDED && !isVideoCompleted) {
@@ -387,6 +417,7 @@ function onPlayerStateChange(event: { target: YTPlayer; data: number }) {
 }
 
 function onPlayerError(event: { target: YTPlayer; data: number }) {
+  playerErrorCount++;
   console.error('YouTube Player Error:', event.data);
   const loadingScreen = document.getElementById('loadingScreen');
   if (loadingScreen) {
@@ -523,34 +554,53 @@ async function sendCallback() {
 
       const payload = {
         session: sessionId,
-        videoId: VIDEO_ID,
+        video_id: VIDEO_ID,
         page: 'ads',
-        videoUrl: `https://www.youtube.com/watch?v=${VIDEO_ID}`,
-        completedAt: new Date().toISOString(),
+        video_url: `https://www.youtube.com/watch?v=${VIDEO_ID}`,
+        completed_at: new Date().toISOString(),
 
         // Basic metadata
-        userAgent: metadata.userAgent,
+        user_agent: metadata.userAgent,
         platform: metadata.platform,
         language: metadata.language,
 
         // Extended metadata
-        screenResolution: metadata.screenResolution,
-        viewportSize: metadata.viewportSize,
+        screen_resolution: metadata.screenResolution,
+        viewport_size: metadata.viewportSize,
         timezone: metadata.timezone,
         referrer: metadata.referrer,
-        deviceMemory: metadata.deviceMemory,
-        hardwareConcurrency: metadata.hardwareConcurrency,
+        device_memory: metadata.deviceMemory,
+        hardware_concurrency: metadata.hardwareConcurrency,
 
         // Behavioral metadata
-        watchDuration: Math.round(watchDuration),
-        seekAttempts,
-        pauseCount,
-        wasTabActive,
-        maxWatchedTime: Math.round(maxWatchedTime),
-        fullscreenCount,
+        watch_duration: Math.round(watchDuration),
+        seek_attempts: seekAttempts,
+        pause_count: pauseCount,
+        was_tab_active: wasTabActive,
+        max_watched_time: Math.round(maxWatchedTime),
+        fullscreen_count: fullscreenCount,
+
+        // Advanced engagement metrics
+        total_pause_duration: Math.round(totalPauseDuration),
+        average_pause_duration: pauseCount > 0 ? Math.round(totalPauseDuration / pauseCount) : 0,
+        volume_changes: volumeChanges,
+        tab_switch_count: tabSwitchCount,
+        player_error_count: playerErrorCount,
+        buffering_events: bufferingEvents,
+        total_buffering_duration: Math.round(totalBufferingDuration),
+
+        // Quality metrics
+        engagement_rate: Math.round((maxWatchedTime / (player?.getDuration() || 1)) * 100),
+        completion_quality: seekAttempts === 0 && pauseCount <= 2 ? 'high' : pauseCount <= 5 ? 'medium' : 'low',
+        viewer_behavior: tabSwitchCount === 0 ? 'focused' : tabSwitchCount <= 2 ? 'normal' : 'distracted',
+
+        // Network quality indicators
+        connection_quality: bufferingEvents === 0 ? 'excellent' : bufferingEvents <= 2 ? 'good' : bufferingEvents <= 5 ? 'fair' : 'poor',
+        buffering_ratio: Math.round((totalBufferingDuration / watchDuration) * 100),
 
         // Analytics milestones
-        milestonesReached: Array.from(reachedMilestones),
+        milestones_reached: Array.from(reachedMilestones),
+        milestones_completion_rate: (reachedMilestones.size / milestones.length) * 100,
       };
 
       const response = await fetch(CALLBACK_URL, {
@@ -616,6 +666,10 @@ document.addEventListener('keydown', (e) => {
     const currentVolume = player.getVolume();
     const newVolume = Math.min(100, currentVolume + 10);
     player.setVolume(newVolume);
+    if (Math.abs(newVolume - lastVolume) > 5) {
+      volumeChanges++;
+      lastVolume = newVolume;
+    }
     console.log(`Volume: ${newVolume}%`);
     return false;
   }
@@ -626,6 +680,10 @@ document.addEventListener('keydown', (e) => {
     const currentVolume = player.getVolume();
     const newVolume = Math.max(0, currentVolume - 10);
     player.setVolume(newVolume);
+    if (Math.abs(newVolume - lastVolume) > 5) {
+      volumeChanges++;
+      lastVolume = newVolume;
+    }
     console.log(`Volume: ${newVolume}%`);
     return false;
   }
@@ -677,6 +735,7 @@ document.addEventListener('visibilitychange', () => {
 
   if (document.hidden) {
     // Tab lost focus - pause video
+    tabSwitchCount++;
     wasTabActive = false;
     player.pauseVideo();
   } else {
