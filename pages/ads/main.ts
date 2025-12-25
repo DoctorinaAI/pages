@@ -203,14 +203,44 @@ declare global {
 
 // Configuration from ENV and URL params
 const urlParams = new URLSearchParams(window.location.search);
-const VIDEO_ID = urlParams.get('video') || import.meta.env.VITE_DEFAULT_VIDEO_ID || '8fy94RQnnzw';
-const CALLBACK_URL = import.meta.env.VITE_CALLBACK_URL || 'http://localhost:3000/callback';
+const VIDEO_ID = urlParams.get('v') || urlParams.get('video') || import.meta.env.VITE_DEFAULT_VIDEO_ID || '8fy94RQnnzw';
+
+// Normalize and validate callback URL
+function normalizeCallbackUrl(url: string | null): string {
+  if (!url) {
+    return import.meta.env.VITE_CALLBACK_URL || 'https://live.api.doctorina.com/v1/chats/events/ads-completed';
+  }
+
+  // Decode URL if encoded
+  try {
+    url = decodeURIComponent(url);
+  } catch (e) {
+    console.error('Failed to decode callback URL:', e);
+  }
+
+  // Validate URL starts with http:// or https://
+  if (!url.startsWith('http://') && !url.startsWith('https://')) {
+    console.error('Invalid callback URL (must start with http:// or https://):', url);
+    return import.meta.env.VITE_CALLBACK_URL || 'https://live.api.doctorina.com/v1/chats/events/ads-completed';
+  }
+
+  // Additional validation: check if it's a valid URL
+  try {
+    new URL(url);
+    return url;
+  } catch (e) {
+    console.error('Invalid callback URL format:', e);
+    return import.meta.env.VITE_CALLBACK_URL || 'https://live.api.doctorina.com/v1/chats/events/ads-completed';
+  }
+}
+
+const CALLBACK_URL = normalizeCallbackUrl(urlParams.get('c') || urlParams.get('callback'));
 const MAX_CALLBACK_RETRIES = 3;
 const RETRY_DELAY_MS = 2000;
 
 // Get parameters from URL
-const sessionId = urlParams.get('session');
-const referrer = urlParams.get('referrer'); // 'web' or 'app'
+const sessionId = urlParams.get('s') || urlParams.get('session');
+const referrer = urlParams.get('r') || urlParams.get('referrer'); // 'web' or 'app'
 
 // State management
 let player: YTPlayer | null = null;
