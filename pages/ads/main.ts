@@ -378,10 +378,33 @@ function onPlayerReady(event: { target: YTPlayer }) {
     }, 300);
   }
 
-  // Unmute after autoplay starts (was muted for autoplay policy)
+  // Unmute and start playing
   event.target.unMute();
   event.target.playVideo();
   startProgressTracking();
+
+  // Ensure video actually starts playing with retry mechanism
+  const ensurePlayback = (retryCount = 0, maxRetries = 3) => {
+    setTimeout(() => {
+      if (!player || isVideoCompleted) return;
+
+      const { YT } = window;
+      const currentState = player.getPlayerState();
+
+      // If video is not playing, try to start it
+      if (currentState !== YT.PlayerState.PLAYING && currentState !== YT.PlayerState.BUFFERING) {
+        console.log(`Retry autoplay attempt ${retryCount + 1}/${maxRetries}`);
+        player.playVideo();
+
+        // Retry if we haven't exceeded max retries
+        if (retryCount < maxRetries - 1) {
+          ensurePlayback(retryCount + 1, maxRetries);
+        }
+      }
+    }, 500 + retryCount * 500); // Increasing delay: 500ms, 1000ms, 1500ms
+  };
+
+  ensurePlayback();
 }
 
 function onPlayerStateChange(event: { target: YTPlayer; data: number }) {
