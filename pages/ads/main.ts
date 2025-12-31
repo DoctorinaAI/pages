@@ -489,7 +489,6 @@ function onPlayerStateChange(event: { target: YTPlayer; data: number }) {
     sendPostMessage('video-ended', {
       duration: event.target.getDuration(),
       watchDuration: (Date.now() - videoStartTime) / 1000,
-      ...buildCallbackPayload(),
     });
     onVideoComplete();
   }
@@ -610,6 +609,7 @@ async function onVideoComplete() {
     maxWatchedTime,
     seekAttempts,
     pauseCount,
+    ...buildCallbackPayload(),
   });
 
   // Wait 1.5 seconds before showing completion screen for smoother UX
