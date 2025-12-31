@@ -489,6 +489,7 @@ function onPlayerStateChange(event: { target: YTPlayer; data: number }) {
     sendPostMessage('video-ended', {
       duration: event.target.getDuration(),
       watchDuration: (Date.now() - videoStartTime) / 1000,
+      ...buildCallbackPayload(),
     });
     onVideoComplete();
   }
@@ -641,6 +642,61 @@ async function onVideoComplete() {
   }
 }
 
+// Build callback payload
+function buildCallbackPayload() {
+  const watchDuration = (Date.now() - videoStartTime) / 1000; // in seconds
+  return {
+    session: sessionId,
+    video_id: VIDEO_ID,
+    page: 'ads',
+    video_url: `https://www.youtube.com/watch?v=${VIDEO_ID}`,
+    completed_at: new Date().toISOString(),
+
+    // Basic metadata
+    user_agent: metadata.userAgent,
+    platform: metadata.platform,
+    language: metadata.language,
+
+    // Extended metadata
+    screen_resolution: metadata.screenResolution,
+    viewport_size: metadata.viewportSize,
+    timezone: metadata.timezone,
+    referrer: metadata.referrer,
+    device_memory: metadata.deviceMemory,
+    hardware_concurrency: metadata.hardwareConcurrency,
+
+    // Behavioral metadata
+    watch_duration: Math.round(watchDuration),
+    seek_attempts: seekAttempts,
+    pause_count: pauseCount,
+    was_tab_active: wasTabActive,
+    max_watched_time: Math.round(maxWatchedTime),
+    fullscreen_count: fullscreenCount,
+
+    // Advanced engagement metrics
+    total_pause_duration: Math.round(totalPauseDuration),
+    average_pause_duration: pauseCount > 0 ? Math.round(totalPauseDuration / pauseCount) : 0,
+    volume_changes: volumeChanges,
+    tab_switch_count: tabSwitchCount,
+    player_error_count: playerErrorCount,
+    buffering_events: bufferingEvents,
+    total_buffering_duration: Math.round(totalBufferingDuration),
+
+    // Quality metrics
+    engagement_rate: Math.round((maxWatchedTime / (player?.getDuration() || 1)) * 100),
+    completion_quality: seekAttempts === 0 && pauseCount <= 2 ? 'high' : pauseCount <= 5 ? 'medium' : 'low',
+    viewer_behavior: tabSwitchCount === 0 ? 'focused' : tabSwitchCount <= 2 ? 'normal' : 'distracted',
+
+    // Network quality indicators
+    connection_quality: bufferingEvents === 0 ? 'excellent' : bufferingEvents <= 2 ? 'good' : bufferingEvents <= 5 ? 'fair' : 'poor',
+    buffering_ratio: Math.round((totalBufferingDuration / watchDuration) * 100),
+
+    // Analytics milestones
+    milestones_reached: Array.from(reachedMilestones),
+    milestones_completion_rate: (reachedMilestones.size / milestones.length) * 100,
+  };
+}
+
 async function sendCallback() {
   // Rate limiting: prevent duplicate sends
   if (callbackSent) {
@@ -653,59 +709,7 @@ async function sendCallback() {
   // Retry mechanism with exponential backoff
   for (let attempt = 1; attempt <= MAX_CALLBACK_RETRIES; attempt++) {
     try {
-      const watchDuration = (Date.now() - videoStartTime) / 1000; // in seconds
-
-      const payload = {
-        session: sessionId,
-        video_id: VIDEO_ID,
-        page: 'ads',
-        video_url: `https://www.youtube.com/watch?v=${VIDEO_ID}`,
-        completed_at: new Date().toISOString(),
-
-        // Basic metadata
-        user_agent: metadata.userAgent,
-        platform: metadata.platform,
-        language: metadata.language,
-
-        // Extended metadata
-        screen_resolution: metadata.screenResolution,
-        viewport_size: metadata.viewportSize,
-        timezone: metadata.timezone,
-        referrer: metadata.referrer,
-        device_memory: metadata.deviceMemory,
-        hardware_concurrency: metadata.hardwareConcurrency,
-
-        // Behavioral metadata
-        watch_duration: Math.round(watchDuration),
-        seek_attempts: seekAttempts,
-        pause_count: pauseCount,
-        was_tab_active: wasTabActive,
-        max_watched_time: Math.round(maxWatchedTime),
-        fullscreen_count: fullscreenCount,
-
-        // Advanced engagement metrics
-        total_pause_duration: Math.round(totalPauseDuration),
-        average_pause_duration: pauseCount > 0 ? Math.round(totalPauseDuration / pauseCount) : 0,
-        volume_changes: volumeChanges,
-        tab_switch_count: tabSwitchCount,
-        player_error_count: playerErrorCount,
-        buffering_events: bufferingEvents,
-        total_buffering_duration: Math.round(totalBufferingDuration),
-
-        // Quality metrics
-        engagement_rate: Math.round((maxWatchedTime / (player?.getDuration() || 1)) * 100),
-        completion_quality: seekAttempts === 0 && pauseCount <= 2 ? 'high' : pauseCount <= 5 ? 'medium' : 'low',
-        viewer_behavior: tabSwitchCount === 0 ? 'focused' : tabSwitchCount <= 2 ? 'normal' : 'distracted',
-
-        // Network quality indicators
-        connection_quality: bufferingEvents === 0 ? 'excellent' : bufferingEvents <= 2 ? 'good' : bufferingEvents <= 5 ? 'fair' : 'poor',
-        buffering_ratio: Math.round((totalBufferingDuration / watchDuration) * 100),
-
-        // Analytics milestones
-        milestones_reached: Array.from(reachedMilestones),
-        milestones_completion_rate: (reachedMilestones.size / milestones.length) * 100,
-      };
-
+      const payload = buildCallbackPayload();
       const response = await fetch(CALLBACK_URL, {
         method: 'POST',
         headers: {
