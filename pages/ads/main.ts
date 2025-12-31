@@ -268,6 +268,30 @@ let totalBufferingDuration = 0;
 const milestones = [0.25, 0.5, 0.75];
 const reachedMilestones = new Set<number>();
 
+// PostMessage helper for iframe/WebView communication
+function sendPostMessage(event: string, data: Record<string, any> = {}) {
+  const message = {
+    event,
+    timestamp: new Date().toISOString(),
+    ...data,
+  };
+
+  // Send to parent window (for iframe)
+  if (window.parent && window.parent !== window) {
+    window.parent.postMessage(message, '*');
+  }
+
+  // Send to opener (for popup/new tab)
+  if (window.opener) {
+    window.opener.postMessage(message, '*');
+  }
+
+  // For WebView - also post to current window
+  window.postMessage(message, window.location.origin);
+
+  console.log('PostMessage:', event, data);
+}
+
 // Metadata collection
 const metadata = {
   userAgent: navigator.userAgent,
@@ -280,6 +304,14 @@ const metadata = {
   deviceMemory: (navigator as any).deviceMemory || 'unknown',
   hardwareConcurrency: navigator.hardwareConcurrency || 'unknown',
 };
+
+// Send page loaded event
+sendPostMessage('page-loaded', {
+  videoId: VIDEO_ID,
+  sessionId,
+  referrer,
+  language: currentLang,
+});
 
 // Initialize the page
 const app = document.getElementById('app');
@@ -378,6 +410,12 @@ function onPlayerReady(event: { target: YTPlayer }) {
     }, 300);
   }
 
+  // Send player ready event
+  sendPostMessage('player-ready', {
+    videoId: VIDEO_ID,
+    duration: event.target.getDuration(),
+  });
+
   // Unmute and start playing
   event.target.unMute();
   event.target.playVideo();
@@ -413,6 +451,10 @@ function onPlayerStateChange(event: { target: YTPlayer; data: number }) {
   if (event.data === YT.PlayerState.PAUSED) {
     pauseCount++;
     lastPauseTime = Date.now();
+    sendPostMessage('video-paused', {
+      currentTime: event.target.getCurrentTime(),
+      pauseCount,
+    });
   }
 
   if (event.data === YT.PlayerState.PLAYING) {
@@ -426,15 +468,26 @@ function onPlayerStateChange(event: { target: YTPlayer; data: number }) {
       totalBufferingDuration += (Date.now() - lastBufferingTime) / 1000;
       lastBufferingTime = 0;
     }
+    sendPostMessage('video-playing', {
+      currentTime: event.target.getCurrentTime(),
+    });
   }
 
   if (event.data === YT.PlayerState.BUFFERING) {
     bufferingEvents++;
     lastBufferingTime = Date.now();
+    sendPostMessage('video-buffering', {
+      currentTime: event.target.getCurrentTime(),
+      bufferingEvents,
+    });
   }
 
   if (event.data === YT.PlayerState.ENDED && !isVideoCompleted) {
     isVideoCompleted = true;
+    sendPostMessage('video-ended', {
+      duration: event.target.getDuration(),
+      watchDuration: (Date.now() - videoStartTime) / 1000,
+    });
     onVideoComplete();
   }
 }
@@ -442,6 +495,12 @@ function onPlayerStateChange(event: { target: YTPlayer; data: number }) {
 function onPlayerError(event: { target: YTPlayer; data: number }) {
   playerErrorCount++;
   console.error('YouTube Player Error:', event.data);
+
+  sendPostMessage('video-error', {
+    errorCode: event.data,
+    playerErrorCount,
+  });
+
   const loadingScreen = document.getElementById('loadingScreen');
   if (loadingScreen) {
     loadingScreen.innerHTML = `
@@ -461,6 +520,11 @@ function startProgressTracking() {
     // Detect seek attempts (forward seeking)
     if (currentTime > maxWatchedTime + 1) {
       seekAttempts++;
+      sendPostMessage('seek-attempt-blocked', {
+        attemptedTime: currentTime,
+        maxWatchedTime,
+        seekAttempts,
+      });
       showWarning(t.doNotSkip);
       player.seekTo(maxWatchedTime, true);
       return;
@@ -514,6 +578,11 @@ function updateProgress(currentTime: number, duration: number) {
     if (progress >= milestone && !reachedMilestones.has(milestone)) {
       reachedMilestones.add(milestone);
       console.log(`Milestone reached: ${milestone * 100}%`);
+      sendPostMessage('milestone-reached', {
+        milestone: milestone * 100,
+        currentTime,
+        duration,
+      });
     }
   });
 }
@@ -531,6 +600,15 @@ function showWarning(message: string) {
 }
 
 async function onVideoComplete() {
+  sendPostMessage('video-complete', {
+    sessionId,
+    videoId: VIDEO_ID,
+    watchDuration: (Date.now() - videoStartTime) / 1000,
+    maxWatchedTime,
+    seekAttempts,
+    pauseCount,
+  });
+
   // Wait 1.5 seconds before showing completion screen for smoother UX
   await new Promise(resolve => setTimeout(resolve, 1500));
 
@@ -640,6 +718,10 @@ async function sendCallback() {
           completionMessage.textContent = t.confirmationSent;
         }
         console.log('Callback sent successfully');
+        sendPostMessage('callback-success', {
+          sessionId,
+          attempt,
+        });
         return; // Success, exit retry loop
       } else {
         throw new Error(`Server responded with ${response.status}`);
@@ -652,10 +734,20 @@ async function sendCallback() {
         if (completionMessage) {
           completionMessage.textContent = t.confirmationFailed;
         }
+        sendPostMessage('callback-failed', {
+          sessionId,
+          error: error instanceof Error ? error.message : 'Unknown error',
+          attempts: MAX_CALLBACK_RETRIES,
+        });
       } else {
         // Wait before retrying (exponential backoff)
         const delay = RETRY_DELAY_MS * attempt;
         console.log(`Retrying in ${delay}ms...`);
+        sendPostMessage('callback-retry', {
+          sessionId,
+          attempt,
+          nextDelay: delay,
+        });
         await new Promise(resolve => setTimeout(resolve, delay));
       }
     }
@@ -761,10 +853,18 @@ document.addEventListener('visibilitychange', () => {
     tabSwitchCount++;
     wasTabActive = false;
     player.pauseVideo();
+    sendPostMessage('tab-hidden', {
+      tabSwitchCount,
+      currentTime: player.getCurrentTime(),
+    });
   } else {
     // Tab gained focus - resume video if it was playing
     const currentState = player.getPlayerState();
     const { YT } = window;
+
+    sendPostMessage('tab-visible', {
+      currentTime: player.getCurrentTime(),
+    });
 
     // Resume only if paused (not ended or unstarted)
     if (currentState === YT.PlayerState.PAUSED) {
@@ -782,9 +882,17 @@ closeButton?.addEventListener('click', handleCloseAttempt);
 function handleCloseAttempt() {
   if (isVideoCompleted) {
     // Video completed - close immediately
+    sendPostMessage('close-attempt', {
+      isCompleted: true,
+    });
     closeAndReturn();
   } else {
     // Video not completed - show confirmation dialog
+    sendPostMessage('close-attempt', {
+      isCompleted: false,
+      currentTime: player?.getCurrentTime(),
+      duration: player?.getDuration(),
+    });
     const confirmationDialog = document.getElementById('confirmationDialog');
     if (confirmationDialog) {
       confirmationDialog.classList.add('show');
@@ -802,6 +910,9 @@ const dialogStay = document.getElementById('dialogStay');
 const dialogLeave = document.getElementById('dialogLeave');
 
 dialogStay?.addEventListener('click', () => {
+  sendPostMessage('dialog-stay', {
+    currentTime: player?.getCurrentTime(),
+  });
   const confirmationDialog = document.getElementById('confirmationDialog');
   if (confirmationDialog) {
     confirmationDialog.classList.remove('show');
@@ -809,6 +920,10 @@ dialogStay?.addEventListener('click', () => {
 });
 
 dialogLeave?.addEventListener('click', () => {
+  sendPostMessage('dialog-leave', {
+    currentTime: player?.getCurrentTime(),
+    duration: player?.getDuration(),
+  });
   closeAndReturn();
 });
 
@@ -838,6 +953,11 @@ document.addEventListener('keydown', (e) => {
 
 // Close and return logic
 async function closeAndReturn() {
+  sendPostMessage('closing', {
+    referrer,
+    isCompleted: isVideoCompleted,
+  });
+
   try {
     if (referrer === 'web') {
       // Try to switch to web app tab
