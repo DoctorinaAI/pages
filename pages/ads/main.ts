@@ -241,6 +241,7 @@ const RETRY_DELAY_MS = 2000;
 // Get parameters from URL
 const sessionId = urlParams.get('s') || urlParams.get('session');
 const referrer = urlParams.get('r') || urlParams.get('referrer'); // 'web' or 'app'
+const locale = urlParams.get('l') || urlParams.get('lang') || navigator.language?.split('-')[0].toLowerCase() || 'en';
 
 // State management
 let player: YTPlayer | null = null;
@@ -709,6 +710,7 @@ async function sendCallback() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept-Language': locale,
         },
         body: JSON.stringify(payload),
       });
