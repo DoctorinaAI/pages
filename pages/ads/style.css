@@ -103,7 +103,7 @@ body {
 .time-info {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   color: #fff;
   font-size: 14px;
   font-weight: 500;
@@ -117,10 +117,13 @@ body {
   font-variant-numeric: tabular-nums;
   font-size: 16px;
   color: #fff;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 4px 12px;
-  border-radius: 4px;
-  backdrop-filter: blur(10px);
+  font-weight: 600;
+}
+
+.time-separator {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 16px;
+  font-weight: 300;
 }
 
 /* Warning Message */
@@ -241,11 +244,19 @@ body {
 
   .time-info {
     font-size: 12px;
+    gap: 8px;
   }
 
   .time-countdown {
     font-size: 14px;
-    padding: 3px 10px;
+  }
+
+  .time-separator {
+    font-size: 14px;
+  }
+
+  .progress-percentage {
+    font-size: 12px;
   }
 
   .warning-message {
@@ -323,14 +334,10 @@ body {
 .progress-percentage {
   font-variant-numeric: tabular-nums;
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.9);
-  margin-left: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 2px 8px;
-  border-radius: 4px;
-  backdrop-filter: blur(10px);
-  min-width: 42px;
-  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+  min-width: 36px;
+  text-align: left;
 }
 
 /* Loading state for iframe */

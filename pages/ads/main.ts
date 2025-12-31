@@ -339,6 +339,7 @@ app.innerHTML = `
           <div class="time-info">
             <span class="time-label">${t.remaining}</span>
             <span class="time-countdown" id="countdown" aria-live="polite">--:--</span>
+            <span class="time-separator">·</span>
             <span class="progress-percentage" id="progressPercentage" aria-live="polite">0%</span>
           </div>
         </div>
