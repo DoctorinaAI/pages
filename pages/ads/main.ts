@@ -308,8 +308,8 @@ const metadata = {
 
 // Send page loaded event
 sendPostMessage('page-loaded', {
-  videoId: VIDEO_ID,
-  sessionId,
+  video_id: VIDEO_ID,
+  session: sessionId,
   referrer,
   language: currentLang,
 });
@@ -414,7 +414,7 @@ function onPlayerReady(event: { target: YTPlayer }) {
 
   // Send player ready event
   sendPostMessage('player-ready', {
-    videoId: VIDEO_ID,
+    video_id: VIDEO_ID,
     duration: event.target.getDuration(),
   });
 
@@ -454,8 +454,8 @@ function onPlayerStateChange(event: { target: YTPlayer; data: number }) {
     pauseCount++;
     lastPauseTime = Date.now();
     sendPostMessage('video-paused', {
-      currentTime: event.target.getCurrentTime(),
-      pauseCount,
+      current_time: event.target.getCurrentTime(),
+      pause_count: pauseCount,
     });
   }
 
@@ -471,7 +471,7 @@ function onPlayerStateChange(event: { target: YTPlayer; data: number }) {
       lastBufferingTime = 0;
     }
     sendPostMessage('video-playing', {
-      currentTime: event.target.getCurrentTime(),
+      current_time: event.target.getCurrentTime(),
     });
   }
 
@@ -479,8 +479,8 @@ function onPlayerStateChange(event: { target: YTPlayer; data: number }) {
     bufferingEvents++;
     lastBufferingTime = Date.now();
     sendPostMessage('video-buffering', {
-      currentTime: event.target.getCurrentTime(),
-      bufferingEvents,
+      current_time: event.target.getCurrentTime(),
+      buffering_events: bufferingEvents,
     });
   }
 
@@ -488,7 +488,7 @@ function onPlayerStateChange(event: { target: YTPlayer; data: number }) {
     isVideoCompleted = true;
     sendPostMessage('video-ended', {
       duration: event.target.getDuration(),
-      watchDuration: (Date.now() - videoStartTime) / 1000,
+      watch_duration: (Date.now() - videoStartTime) / 1000,
     });
     onVideoComplete();
   }
@@ -499,8 +499,8 @@ function onPlayerError(event: { target: YTPlayer; data: number }) {
   console.error('YouTube Player Error:', event.data);
 
   sendPostMessage('video-error', {
-    errorCode: event.data,
-    playerErrorCount,
+    error_code: event.data,
+    player_error_count: playerErrorCount,
   });
 
   const loadingScreen = document.getElementById('loadingScreen');
@@ -523,9 +523,9 @@ function startProgressTracking() {
     if (currentTime > maxWatchedTime + 1) {
       seekAttempts++;
       sendPostMessage('seek-attempt-blocked', {
-        attemptedTime: currentTime,
-        maxWatchedTime,
-        seekAttempts,
+        attempted_time: currentTime,
+        max_watched_time: maxWatchedTime,
+        seek_attempts: seekAttempts,
       });
       showWarning(t.doNotSkip);
       player.seekTo(maxWatchedTime, true);
@@ -582,7 +582,7 @@ function updateProgress(currentTime: number, duration: number) {
       console.log(`Milestone reached: ${milestone * 100}%`);
       sendPostMessage('milestone-reached', {
         milestone: milestone * 100,
-        currentTime,
+        current_time: currentTime,
         duration,
       });
     }
@@ -603,12 +603,6 @@ function showWarning(message: string) {
 
 async function onVideoComplete() {
   sendPostMessage('video-complete', {
-    sessionId,
-    videoId: VIDEO_ID,
-    watchDuration: (Date.now() - videoStartTime) / 1000,
-    maxWatchedTime,
-    seekAttempts,
-    pauseCount,
     ...buildCallbackPayload(),
   });
 
@@ -726,8 +720,8 @@ async function sendCallback() {
         }
         console.log('Callback sent successfully');
         sendPostMessage('callback-success', {
-          sessionId,
-          attempt,
+            session: sessionId,
+            attempt,
         });
         return; // Success, exit retry loop
       } else {
@@ -742,7 +736,7 @@ async function sendCallback() {
           completionMessage.textContent = t.confirmationFailed;
         }
         sendPostMessage('callback-failed', {
-          sessionId,
+          session: sessionId,
           error: error instanceof Error ? error.message : 'Unknown error',
           attempts: MAX_CALLBACK_RETRIES,
         });
@@ -751,9 +745,9 @@ async function sendCallback() {
         const delay = RETRY_DELAY_MS * attempt;
         console.log(`Retrying in ${delay}ms...`);
         sendPostMessage('callback-retry', {
-          sessionId,
+          session: sessionId,
           attempt,
-          nextDelay: delay,
+          next_delay: delay,
         });
         await new Promise(resolve => setTimeout(resolve, delay));
       }
@@ -861,8 +855,8 @@ document.addEventListener('visibilitychange', () => {
     wasTabActive = false;
     player.pauseVideo();
     sendPostMessage('tab-hidden', {
-      tabSwitchCount,
-      currentTime: player.getCurrentTime(),
+      tab_switch_count: tabSwitchCount,
+      current_time: player.getCurrentTime(),
     });
   } else {
     // Tab gained focus - resume video if it was playing
@@ -870,7 +864,7 @@ document.addEventListener('visibilitychange', () => {
     const { YT } = window;
 
     sendPostMessage('tab-visible', {
-      currentTime: player.getCurrentTime(),
+      current_time: player.getCurrentTime(),
     });
 
     // Resume only if paused (not ended or unstarted)
@@ -890,14 +884,14 @@ function handleCloseAttempt() {
   if (isVideoCompleted) {
     // Video completed - close immediately
     sendPostMessage('close-attempt', {
-      isCompleted: true,
+      is_completed: true,
     });
     closeAndReturn();
   } else {
     // Video not completed - show confirmation dialog
     sendPostMessage('close-attempt', {
-      isCompleted: false,
-      currentTime: player?.getCurrentTime(),
+      is_completed: false,
+      current_time: player?.getCurrentTime(),
       duration: player?.getDuration(),
     });
     const confirmationDialog = document.getElementById('confirmationDialog');
@@ -918,7 +912,7 @@ const dialogLeave = document.getElementById('dialogLeave');
 
 dialogStay?.addEventListener('click', () => {
   sendPostMessage('dialog-stay', {
-    currentTime: player?.getCurrentTime(),
+    current_time: player?.getCurrentTime(),
   });
   const confirmationDialog = document.getElementById('confirmationDialog');
   if (confirmationDialog) {
@@ -928,7 +922,7 @@ dialogStay?.addEventListener('click', () => {
 
 dialogLeave?.addEventListener('click', () => {
   sendPostMessage('dialog-leave', {
-    currentTime: player?.getCurrentTime(),
+    current_time: player?.getCurrentTime(),
     duration: player?.getDuration(),
   });
   closeAndReturn();
@@ -962,7 +956,7 @@ document.addEventListener('keydown', (e) => {
 async function closeAndReturn() {
   sendPostMessage('closing', {
     referrer,
-    isCompleted: isVideoCompleted,
+    is_completed: isVideoCompleted,
   });
 
   try {
