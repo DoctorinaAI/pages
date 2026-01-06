@@ -623,12 +623,14 @@ async function onVideoComplete() {
   // Send callback if session exists
   if (sessionId) {
     await sendCallback();
-  } else {
+  }
+
+  /* if (!sessionId) {
     const completionMessage = document.getElementById('completionMessage');
     if (completionMessage) {
       completionMessage.textContent = t.noSessionId;
     }
-  }
+  } */
 
   // Show close button after completion
   if (closeFinalButton) {
