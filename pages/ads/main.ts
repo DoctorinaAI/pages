@@ -1,3 +1,7 @@
+// TODO(plugfox): Display ads from list of videos instead of single video ID, e.g. multiple youtube shorts
+// TODO(plugfox): Close this iframe / webview automatically after all videos are watched rather than showing "You can close manually" message
+// TODO(plugfox): Fix Firebase Hosting cache issues, when index.html tries to load old script-abc123.ts.js files after new deploys
+
 import { initPage } from '~/shared/utils/page-init';
 import './style.css';
 
