@@ -789,7 +789,7 @@ async function closeAndReturn() {
   }
 
   // Try to close the tab
-  tryCloseTab();
+  //tryCloseTab();
 }
 
 async function redirectToWebApp() {
