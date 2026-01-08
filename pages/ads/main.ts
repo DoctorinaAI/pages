@@ -2,7 +2,7 @@
 // [ ] Display ads from list of videos instead of single video ID, e.g. multiple youtube shorts
 // [x] Close this iframe / webview automatically after all videos are watched rather than showing "You can close manually" message
 // [x] Fix Firebase Hosting cache issues, when index.html tries to load old script-abc123.ts.js files after new deploys
-// [ ] Auto start youTube video
+// [x] Auto start YouTube video (muted for reliable autoplay)
 
 import { initPage } from '~/shared/utils/page-init';
 import './style.css';
@@ -337,8 +337,7 @@ function onPlayerReady(event: { target: YTPlayer }) {
     duration: event.target.getDuration(),
   });
 
-  // Unmute and start playing
-  event.target.unMute();
+  // Start playing (muted for reliable autoplay)
   event.target.playVideo();
   startProgressTracking();
 
