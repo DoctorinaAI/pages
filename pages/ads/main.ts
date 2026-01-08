@@ -1,6 +1,6 @@
 // TODO(plugfox):
 // [ ] Display ads from list of videos instead of single video ID, e.g. multiple youtube shorts
-// [ ] Close this iframe / webview automatically after all videos are watched rather than showing "You can close manually" message
+// [x] Close this iframe / webview automatically after all videos are watched rather than showing "You can close manually" message
 // [x] Fix Firebase Hosting cache issues, when index.html tries to load old script-abc123.ts.js files after new deploys
 // [ ] Auto start youTube video
 
@@ -611,7 +611,6 @@ async function onVideoComplete() {
 
   const completionScreen = document.getElementById('completionScreen');
   const overlay = document.getElementById('overlay');
-  const closeFinalButton = document.getElementById('closeFinalButton');
   const closeButton = document.getElementById('closeButton');
 
   if (completionScreen) completionScreen.classList.add('show');
@@ -632,10 +631,11 @@ async function onVideoComplete() {
     }
   } */
 
-  // Show close button after completion
-  if (closeFinalButton) {
-    closeFinalButton.style.display = 'block';
-  }
+  // Wait a short pause (1 seconds) before auto-closing
+  await new Promise(resolve => setTimeout(resolve, 1000));
+
+  // Automatically close and return without user interaction
+  closeAndReturn();
 }
 
 // Build callback payload
