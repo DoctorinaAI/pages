@@ -20,25 +20,10 @@ const translations = {
     watchToEnd: 'Please watch the video to the end without skipping',
     doNotSkip: 'Do not skip ahead! Video will restart.',
     keyboardDisabled: 'Keyboard controls are disabled',
-    // Dialog
-    confirmLeaveTitle: 'Are you sure you want to leave?',
-    confirmLeaveText: 'The video is not finished yet. If you leave now, the ad view will not be counted.',
-    stayAndWatch: 'Stay and watch',
-    leaveAnyway: 'Leave anyway',
-    // Completion
-    thankYou: 'Thank you for watching!',
-    sendingConfirmation: 'Sending confirmation...',
-    confirmationSent: 'Confirmation sent successfully!',
-    confirmationFailed: 'Failed to send confirmation. Please check your connection.',
-    noSessionId: 'No session ID provided. Callback not sent.',
-    closeAndReturn: 'Close and return',
-    canCloseManually: 'You can now close this tab manually.',
     // Loading
     loadingVideo: 'Loading video...',
     videoLoadError: 'Failed to load video. Please refresh the page.',
     // Tooltips & Aria
-    closeButtonLabel: 'Close',
-    closeButtonTooltip: 'Close and return to app',
     videoPlayerLabel: 'Advertisement video player',
     progressBarLabel: 'Video progress',
   },
@@ -53,25 +38,10 @@ const translations = {
     watchToEnd: 'Пожалуйста, посмотрите видео до конца без пропусков',
     doNotSkip: 'Не перематывайте! Видео начнется сначала.',
     keyboardDisabled: 'Управление с клавиатуры отключено',
-    // Диалог
-    confirmLeaveTitle: 'Вы уверены, что хотите уйти?',
-    confirmLeaveText: 'Видео еще не закончилось. Если вы уйдете сейчас, просмотр рекламы не будет засчитан.',
-    stayAndWatch: 'Остаться и смотреть',
-    leaveAnyway: 'Все равно уйти',
-    // Завершение
-    thankYou: 'Спасибо за просмотр!',
-    sendingConfirmation: 'Отправка подтверждения...',
-    confirmationSent: 'Подтверждение успешно отправлено!',
-    confirmationFailed: 'Не удалось отправить подтверждение. Проверьте соединение.',
-    noSessionId: 'ID сессии не указан. Подтверждение не отправлено.',
-    closeAndReturn: 'Закрыть и вернуться',
-    canCloseManually: 'Вы можете закрыть эту вкладку вручную.',
     // Загрузка
     loadingVideo: 'Загрузка видео...',
     videoLoadError: 'Не удалось загрузить видео. Пожалуйста, обновите страницу.',
     // Подсказки и Aria
-    closeButtonLabel: 'Закрыть',
-    closeButtonTooltip: 'Закрыть и вернуться в приложение',
     videoPlayerLabel: 'Видеоплеер рекламы',
     progressBarLabel: 'Прогресс видео',
   },
@@ -86,25 +56,10 @@ const translations = {
     watchToEnd: 'Por favor, mira el vídeo hasta el final sin saltarlo',
     doNotSkip: '¡No adelantes! El vídeo se reiniciará.',
     keyboardDisabled: 'Los controles del teclado están deshabilitados',
-    // Diálogo
-    confirmLeaveTitle: '¿Estás seguro de que quieres salir?',
-    confirmLeaveText: 'El vídeo aún no ha terminado. Si sales ahora, la visualización del anuncio no se contará.',
-    stayAndWatch: 'Quedarse y ver',
-    leaveAnyway: 'Salir de todos modos',
-    // Finalización
-    thankYou: '¡Gracias por ver!',
-    sendingConfirmation: 'Enviando confirmación...',
-    confirmationSent: '¡Confirmación enviada con éxito!',
-    confirmationFailed: 'Error al enviar la confirmación. Comprueba tu conexión.',
-    noSessionId: 'No se proporcionó ID de sesión. Confirmación no enviada.',
-    closeAndReturn: 'Cerrar y volver',
-    canCloseManually: 'Ahora puedes cerrar esta pestaña manualmente.',
     // Carga
     loadingVideo: 'Cargando vídeo...',
     videoLoadError: 'Error al cargar el vídeo. Por favor, actualiza la página.',
     // Tooltips y Aria
-    closeButtonLabel: 'Cerrar',
-    closeButtonTooltip: 'Cerrar y volver a la aplicación',
     videoPlayerLabel: 'Reproductor de vídeo publicitario',
     progressBarLabel: 'Progreso del vídeo',
   },
@@ -119,25 +74,10 @@ const translations = {
     watchToEnd: 'Bitte schauen Sie das Video bis zum Ende ohne zu überspringen',
     doNotSkip: 'Nicht vorspulen! Video wird neu gestartet.',
     keyboardDisabled: 'Tastatursteuerung ist deaktiviert',
-    // Dialog
-    confirmLeaveTitle: 'Bist du sicher, dass du gehen möchtest?',
-    confirmLeaveText: 'Das Video ist noch nicht zu Ende. Wenn Sie jetzt gehen, wird die Anzeige nicht gezählt.',
-    stayAndWatch: 'Bleiben und ansehen',
-    leaveAnyway: 'Trotzdem verlassen',
-    // Abschluss
-    thankYou: 'Vielen Dank fürs Ansehen!',
-    sendingConfirmation: 'Bestätigung wird gesendet...',
-    confirmationSent: 'Bestätigung erfolgreich gesendet!',
-    confirmationFailed: 'Bestätigung konnte nicht gesendet werden. Überprüfen Sie Ihre Verbindung.',
-    noSessionId: 'Keine Sitzungs-ID angegeben. Bestätigung nicht gesendet.',
-    closeAndReturn: 'Schließen und zurückkehren',
-    canCloseManually: 'Sie können diesen Tab jetzt manuell schließen.',
     // Laden
     loadingVideo: 'Video wird geladen...',
     videoLoadError: 'Video konnte nicht geladen werden. Bitte aktualisieren Sie die Seite.',
     // Tooltips und Aria
-    closeButtonLabel: 'Schließen',
-    closeButtonTooltip: 'Schließen und zur App zurückkehren',
     videoPlayerLabel: 'Werbevideoplayer',
     progressBarLabel: 'Videofortschritt',
   },
@@ -348,27 +288,6 @@ app.innerHTML = `
       <div class="warning-message" id="warningMessage" role="alert" aria-live="assertive">
         ${t.watchToEnd}
       </div>
-    </div>
-  </div>
-  <div class="confirmation-dialog" id="confirmationDialog" role="dialog" aria-modal="true" aria-labelledby="dialogTitle">
-    <div class="dialog-content">
-      <h3 id="dialogTitle">${t.confirmLeaveTitle}</h3>
-      <p>${t.confirmLeaveText}</p>
-      <div class="dialog-buttons">
-        <button class="dialog-button dialog-button-secondary" id="dialogStay" title="${t.stayAndWatch}">${t.stayAndWatch}</button>
-        <button class="dialog-button dialog-button-danger" id="dialogLeave" title="${t.leaveAnyway}">${t.leaveAnyway}</button>
-      </div>
-    </div>
-  </div>
-  <div class="completion-screen" id="completionScreen" role="status" aria-live="polite">
-    <div class="completion-content">
-      <svg class="checkmark" viewBox="0 0 52 52" aria-hidden="true">
-        <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
-        <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-      </svg>
-      <h2>${t.thankYou}</h2>
-      <p id="completionMessage">${t.sendingConfirmation}</p>
-      <button class="close-final-button" id="closeFinalButton" style="display: none;" title="${t.closeButtonTooltip}">${t.closeAndReturn}</button>
     </div>
   </div>
 `;
@@ -606,33 +525,13 @@ async function onVideoComplete() {
     ...buildCallbackPayload(),
   });
 
-  // Wait 1.5 seconds before showing completion screen for smoother UX
-  await new Promise(resolve => setTimeout(resolve, 1500));
-
-  const completionScreen = document.getElementById('completionScreen');
-  const overlay = document.getElementById('overlay');
-  const closeButton = document.getElementById('closeButton');
-
-  if (completionScreen) completionScreen.classList.add('show');
-  if (overlay) overlay.style.display = 'none';
-
-  // Hide the X button in top-left corner
-  if (closeButton) closeButton.classList.add('hidden');
-
   // Send callback if session exists
   if (sessionId) {
     await sendCallback();
   }
 
-  /* if (!sessionId) {
-    const completionMessage = document.getElementById('completionMessage');
-    if (completionMessage) {
-      completionMessage.textContent = t.noSessionId;
-    }
-  } */
-
-  // Wait a short pause (1 seconds) before auto-closing
-  await new Promise(resolve => setTimeout(resolve, 1000));
+  // Wait a short pause before auto-closing
+  await new Promise(resolve => setTimeout(resolve, 500));
 
   // Automatically close and return without user interaction
   closeAndReturn();
@@ -700,8 +599,6 @@ async function sendCallback() {
     return;
   }
 
-  const completionMessage = document.getElementById('completionMessage');
-
   // Retry mechanism with exponential backoff
   for (let attempt = 1; attempt <= MAX_CALLBACK_RETRIES; attempt++) {
     try {
@@ -717,9 +614,6 @@ async function sendCallback() {
 
       if (response.ok) {
         callbackSent = true;
-        if (completionMessage) {
-          completionMessage.textContent = t.confirmationSent;
-        }
         console.log('Callback sent successfully');
         sendPostMessage('callback-success', {
             session: sessionId,
@@ -734,9 +628,6 @@ async function sendCallback() {
 
       if (attempt === MAX_CALLBACK_RETRIES) {
         // Final attempt failed
-        if (completionMessage) {
-          completionMessage.textContent = t.confirmationFailed;
-        }
         sendPostMessage('callback-failed', {
           session: sessionId,
           error: error instanceof Error ? error.message : 'Unknown error',
@@ -876,83 +767,7 @@ document.addEventListener('visibilitychange', () => {
   }
 });
 
-// No beforeunload warning - we handle closing with custom dialog
-
-// Close button handler
-const closeButton = document.getElementById('closeButton');
-closeButton?.addEventListener('click', handleCloseAttempt);
-
-function handleCloseAttempt() {
-  if (isVideoCompleted) {
-    // Video completed - close immediately
-    sendPostMessage('close-attempt', {
-      is_completed: true,
-    });
-    closeAndReturn();
-  } else {
-    // Video not completed - show confirmation dialog
-    sendPostMessage('close-attempt', {
-      is_completed: false,
-      current_time: player?.getCurrentTime(),
-      duration: player?.getDuration(),
-    });
-    const confirmationDialog = document.getElementById('confirmationDialog');
-    if (confirmationDialog) {
-      confirmationDialog.classList.add('show');
-      // Focus first button for accessibility
-      const dialogStay = document.getElementById('dialogStay');
-      if (dialogStay) {
-        setTimeout(() => dialogStay.focus(), 100);
-      }
-    }
-  }
-}
-
-// Dialog button handlers
-const dialogStay = document.getElementById('dialogStay');
-const dialogLeave = document.getElementById('dialogLeave');
-
-dialogStay?.addEventListener('click', () => {
-  sendPostMessage('dialog-stay', {
-    current_time: player?.getCurrentTime(),
-  });
-  const confirmationDialog = document.getElementById('confirmationDialog');
-  if (confirmationDialog) {
-    confirmationDialog.classList.remove('show');
-  }
-});
-
-dialogLeave?.addEventListener('click', () => {
-  sendPostMessage('dialog-leave', {
-    current_time: player?.getCurrentTime(),
-    duration: player?.getDuration(),
-  });
-  closeAndReturn();
-});
-
-// Keyboard navigation for dialog
-document.addEventListener('keydown', (e) => {
-  const confirmationDialog = document.getElementById('confirmationDialog');
-  if (confirmationDialog && confirmationDialog.classList.contains('show')) {
-    if (e.key === 'Escape') {
-      confirmationDialog.classList.remove('show');
-    }
-    // Tab trap within dialog
-    if (e.key === 'Tab') {
-      const focusableElements = confirmationDialog.querySelectorAll('button');
-      const firstElement = focusableElements[0] as HTMLElement;
-      const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement;
-
-      if (e.shiftKey && document.activeElement === firstElement) {
-        e.preventDefault();
-        lastElement.focus();
-      } else if (!e.shiftKey && document.activeElement === lastElement) {
-        e.preventDefault();
-        firstElement.focus();
-      }
-    }
-  }
-});
+// No beforeunload warning and no manual close button
 
 // Close and return logic
 async function closeAndReturn() {
@@ -1033,35 +848,7 @@ function tryCloseTab() {
   try {
     // Try to close the window (will only work if opened via window.open)
     window.close();
-
-    // Check if window is still open after close attempt
-    setTimeout(() => {
-      // If we're still here, window.close() didn't work
-      // Only show message if video was completed
-      if (isVideoCompleted) {
-        const completionScreen = document.getElementById('completionScreen');
-        const completionMessage = document.getElementById('completionMessage');
-
-        if (completionScreen && !completionScreen.classList.contains('show')) {
-          completionScreen.classList.add('show');
-        }
-
-        if (completionMessage) {
-          completionMessage.textContent = t.canCloseManually;
-        }
-
-        // Hide the close button since we're showing the message
-        const closeFinalButton = document.getElementById('closeFinalButton');
-        if (closeFinalButton) {
-          closeFinalButton.style.display = 'none';
-        }
-      }
-    }, 100);
   } catch (error) {
     console.error('Failed to close tab:', error);
   }
 }
-
-// Final close button handler (after completion)
-const closeFinalButton = document.getElementById('closeFinalButton');
-closeFinalButton?.addEventListener('click', closeAndReturn);
