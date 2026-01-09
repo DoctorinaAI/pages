@@ -110,6 +110,13 @@ function detectLanguage(): keyof typeof translations {
     return supportedLanguages.includes(browserLang as any) ? (browserLang as keyof typeof translations) : 'en';
 }
 
+// Detect iOS devices
+function isIOSDevice(): boolean {
+    const userAgent = navigator.userAgent.toLowerCase();
+    return /iphone|ipad|ipod/.test(userAgent) ||
+           (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1); // iPad on iOS 13+
+}
+
 // Get current language and translations
 const currentLang = detectLanguage();
 const t = translations[currentLang];
@@ -590,137 +597,177 @@ function showWarning(message: string) {
 function initializeAudioControls() {
     if (!player) return;
 
+    const isIOS = isIOSDevice();
     const unmuteOverlay = document.getElementById('unmuteOverlay');
     const unmuteButton = document.getElementById('unmuteButton');
+    const volumeControl = document.getElementById('volumeControl');
     const volumeButton = document.getElementById('volumeButton');
     const volumeSlider = document.getElementById('volumeSlider') as HTMLInputElement;
     const volumePercentage = document.getElementById('volumePercentage');
     const volumeIconHigh = document.querySelector('.volume-icon-high') as HTMLElement;
     const volumeIconMuted = document.querySelector('.volume-icon-muted') as HTMLElement;
 
+    // Hide volume controls on iOS (YouTube API doesn't support volume control on iOS)
+    if (isIOS && volumeControl) {
+        volumeControl.style.display = 'none';
+        console.log('iOS detected - volume controls hidden (not supported by YouTube API)');
+    }
+
     // Unmute button click handler
     unmuteButton?.addEventListener('click', () => {
         if (!player) return;
 
-        // Unmute and set volume
-        player.unMute();
-        player.setVolume(100);
+        // Unmute and set volume (with safety checks for iOS)
+        try {
+            if (typeof player.unMute === 'function') {
+                player.unMute();
+            }
+            if (typeof player.setVolume === 'function') {
+                player.setVolume(100);
+            }
+        } catch (error) {
+            console.warn('Error unmuting video:', error);
+        }
 
         // Hide unmute overlay
         unmuteOverlay?.classList.add('hidden');
 
-        // Update volume slider
-        if (volumeSlider) {
-            volumeSlider.value = '100';
+        // Update volume slider (only if not iOS)
+        if (!isIOS) {
+            if (volumeSlider) {
+                volumeSlider.value = '100';
+            }
+            if (volumePercentage) {
+                volumePercentage.textContent = '100%';
+            }
+            updateVolumeIcon(100);
         }
-        if (volumePercentage) {
-            volumePercentage.textContent = '100%';
-        }
-
-        // Update volume icon
-        updateVolumeIcon(100);
 
         // Track unmute event
         volumeChanges++;
         sendPostMessage('video-unmuted', {
             current_time: player.getCurrentTime(),
-            volume: 100,
+            volume: isIOS ? 'N/A (iOS)' : 100,
         });
 
-        console.log('Video unmuted, volume set to 100%');
+        console.log('Video unmuted' + (isIOS ? ' (iOS - volume control unavailable)' : ', volume set to 100%'));
     });
 
-    // Volume button (mute/unmute toggle)
-    volumeButton?.addEventListener('click', () => {
-        if (!player) return;
+    // Volume button (mute/unmute toggle) - Skip on iOS
+    if (!isIOS) {
+        volumeButton?.addEventListener('click', () => {
+            if (!player) return;
 
-        const currentVolume = player.getVolume();
+            try {
+                const currentVolume = typeof player.getVolume === 'function' ? player.getVolume() : 100;
+                const isMuted = typeof player.isMuted === 'function' ? player.isMuted() : false;
 
-        if (currentVolume === 0 || player.isMuted()) {
-            // Unmute - restore previous volume
-            const volumeToRestore = savedVolumeBeforeMute > 0 ? savedVolumeBeforeMute : 100;
-            player.unMute();
-            player.setVolume(volumeToRestore);
+                if (currentVolume === 0 || isMuted) {
+                    // Unmute - restore previous volume
+                    const volumeToRestore = savedVolumeBeforeMute > 0 ? savedVolumeBeforeMute : 100;
 
-            if (volumeSlider) {
-                volumeSlider.value = volumeToRestore.toString();
+                    if (typeof player.unMute === 'function') {
+                        player.unMute();
+                    }
+                    if (typeof player.setVolume === 'function') {
+                        player.setVolume(volumeToRestore);
+                    }
+
+                    if (volumeSlider) {
+                        volumeSlider.value = volumeToRestore.toString();
+                    }
+                    if (volumePercentage) {
+                        volumePercentage.textContent = `${volumeToRestore}%`;
+                    }
+
+                    updateVolumeIcon(volumeToRestore);
+
+                    sendPostMessage('volume-unmuted', {
+                        current_time: player.getCurrentTime(),
+                        volume: volumeToRestore,
+                    });
+
+                    console.log(`Unmuted - Volume restored to: ${volumeToRestore}%`);
+                } else {
+                    // Mute - save current volume first
+                    savedVolumeBeforeMute = currentVolume;
+
+                    if (typeof player.setVolume === 'function') {
+                        player.setVolume(0);
+                    }
+
+                    if (volumeSlider) {
+                        volumeSlider.value = '0';
+                    }
+                    if (volumePercentage) {
+                        volumePercentage.textContent = '0%';
+                    }
+
+                    updateVolumeIcon(0);
+
+                    sendPostMessage('volume-muted', {
+                        current_time: player.getCurrentTime(),
+                        saved_volume: savedVolumeBeforeMute,
+                    });
+
+                    console.log(`Muted - Saved volume: ${savedVolumeBeforeMute}%`);
+                }
+
+                volumeChanges++;
+            } catch (error) {
+                console.warn('Error toggling mute:', error);
             }
-            if (volumePercentage) {
-                volumePercentage.textContent = `${volumeToRestore}%`;
+        });
+    }
+
+    // Volume slider change handler - Skip on iOS
+    if (!isIOS) {
+        volumeSlider?.addEventListener('input', (e) => {
+            if (!player) return;
+
+            try {
+                const target = e.target as HTMLInputElement;
+                const volume = parseInt(target.value, 10);
+
+                // Set volume
+                if (typeof player.setVolume === 'function') {
+                    player.setVolume(volume);
+                }
+
+                // Unmute if muted and volume > 0
+                const isMuted = typeof player.isMuted === 'function' ? player.isMuted() : false;
+                if (isMuted && volume > 0 && typeof player.unMute === 'function') {
+                    player.unMute();
+                }
+
+                // Save volume for unmute (only if > 0)
+                if (volume > 0) {
+                    savedVolumeBeforeMute = volume;
+                }
+
+                // Update percentage display
+                if (volumePercentage) {
+                    volumePercentage.textContent = `${volume}%`;
+                }
+
+                // Update volume icon
+                updateVolumeIcon(volume);
+
+                // Track volume changes (only significant changes)
+                if (Math.abs(volume - lastVolume) > 5) {
+                    volumeChanges++;
+                    lastVolume = volume;
+
+                    sendPostMessage('volume-changed', {
+                        current_time: player.getCurrentTime(),
+                        volume,
+                    });
+                }
+            } catch (error) {
+                console.warn('Error changing volume:', error);
             }
-
-            updateVolumeIcon(volumeToRestore);
-
-            sendPostMessage('volume-unmuted', {
-                current_time: player.getCurrentTime(),
-                volume: volumeToRestore,
-            });
-
-            console.log(`Unmuted - Volume restored to: ${volumeToRestore}%`);
-        } else {
-            // Mute - save current volume first
-            savedVolumeBeforeMute = currentVolume;
-            player.setVolume(0);
-
-            if (volumeSlider) {
-                volumeSlider.value = '0';
-            }
-            if (volumePercentage) {
-                volumePercentage.textContent = '0%';
-            }
-
-            updateVolumeIcon(0);
-
-            sendPostMessage('volume-muted', {
-                current_time: player.getCurrentTime(),
-                saved_volume: savedVolumeBeforeMute,
-            });
-
-            console.log(`Muted - Saved volume: ${savedVolumeBeforeMute}%`);
-        }
-
-        volumeChanges++;
-    });
-
-    // Volume slider change handler
-    volumeSlider?.addEventListener('input', (e) => {
-        if (!player) return;
-
-        const target = e.target as HTMLInputElement;
-        const volume = parseInt(target.value, 10);
-
-        // Set volume
-        player.setVolume(volume);
-
-        // Unmute if muted and volume > 0
-        if (player.isMuted() && volume > 0) {
-            player.unMute();
-        }
-
-        // Save volume for unmute (only if > 0)
-        if (volume > 0) {
-            savedVolumeBeforeMute = volume;
-        }
-
-        // Update percentage display
-        if (volumePercentage) {
-            volumePercentage.textContent = `${volume}%`;
-        }
-
-        // Update volume icon
-        updateVolumeIcon(volume);
-
-        // Track volume changes (only significant changes)
-        if (Math.abs(volume - lastVolume) > 5) {
-            volumeChanges++;
-            lastVolume = volume;
-
-            sendPostMessage('volume-changed', {
-                current_time: player.getCurrentTime(),
-                volume,
-            });
-        }
-    });
+        });
+    }
 
     // Update volume icon based on current volume
     function updateVolumeIcon(volume: number) {
@@ -891,86 +938,120 @@ document.addEventListener('keydown', (e) => {
         return false;
     }
 
-    // Mute/Unmute with M key
+    // Mute/Unmute with M key - Skip on iOS
     if (e.key === 'm' || e.key === 'M') {
         e.preventDefault();
         e.stopPropagation();
 
-        const volumeSlider = document.getElementById('volumeSlider') as HTMLInputElement;
-        const volumePercentage = document.getElementById('volumePercentage');
-        const currentVolume = player.getVolume();
-
-        if (currentVolume === 0 || player.isMuted()) {
-            // Unmute - restore previous volume
-            const volumeToRestore = savedVolumeBeforeMute > 0 ? savedVolumeBeforeMute : 100;
-            player.unMute();
-            player.setVolume(volumeToRestore);
-
-            if (volumeSlider) {
-                volumeSlider.value = volumeToRestore.toString();
-            }
-            if (volumePercentage) {
-                volumePercentage.textContent = `${volumeToRestore}%`;
-            }
-
-            updateVolumeIconState(volumeToRestore);
-            console.log(`Unmuted - Volume restored to: ${volumeToRestore}%`);
-        } else {
-            // Mute - save current volume first
-            savedVolumeBeforeMute = currentVolume;
-            player.setVolume(0);
-
-            if (volumeSlider) {
-                volumeSlider.value = '0';
-            }
-            if (volumePercentage) {
-                volumePercentage.textContent = '0%';
-            }
-
-            updateVolumeIconState(0);
-            console.log(`Muted - Saved volume: ${savedVolumeBeforeMute}%`);
+        // iOS doesn't support volume control via YouTube API
+        if (isIOSDevice()) {
+            console.log('Volume control not available on iOS');
+            return false;
         }
 
-        volumeChanges++;
+        try {
+            const volumeSlider = document.getElementById('volumeSlider') as HTMLInputElement;
+            const volumePercentage = document.getElementById('volumePercentage');
+            const currentVolume = typeof player.getVolume === 'function' ? player.getVolume() : 100;
+            const isMuted = typeof player.isMuted === 'function' ? player.isMuted() : false;
+
+            if (currentVolume === 0 || isMuted) {
+                // Unmute - restore previous volume
+                const volumeToRestore = savedVolumeBeforeMute > 0 ? savedVolumeBeforeMute : 100;
+
+                if (typeof player.unMute === 'function') {
+                    player.unMute();
+                }
+                if (typeof player.setVolume === 'function') {
+                    player.setVolume(volumeToRestore);
+                }
+
+                if (volumeSlider) {
+                    volumeSlider.value = volumeToRestore.toString();
+                }
+                if (volumePercentage) {
+                    volumePercentage.textContent = `${volumeToRestore}%`;
+                }
+
+                updateVolumeIconState(volumeToRestore);
+                console.log(`Unmuted - Volume restored to: ${volumeToRestore}%`);
+            } else {
+                // Mute - save current volume first
+                savedVolumeBeforeMute = currentVolume;
+
+                if (typeof player.setVolume === 'function') {
+                    player.setVolume(0);
+                }
+
+                if (volumeSlider) {
+                    volumeSlider.value = '0';
+                }
+                if (volumePercentage) {
+                    volumePercentage.textContent = '0%';
+                }
+
+                updateVolumeIconState(0);
+                console.log(`Muted - Saved volume: ${savedVolumeBeforeMute}%`);
+            }
+
+            volumeChanges++;
+        } catch (error) {
+            console.warn('Error toggling mute with keyboard:', error);
+        }
+
         return false;
     }
 
-    // Volume control with arrow up/down
+    // Volume control with arrow up/down - Skip on iOS
     if (e.key === 'ArrowUp') {
         e.preventDefault();
         e.stopPropagation();
 
-        const volumeSlider = document.getElementById('volumeSlider') as HTMLInputElement;
-        const volumePercentage = document.getElementById('volumePercentage');
-        const currentVolume = player.getVolume();
-        const newVolume = Math.min(100, currentVolume + 10);
-
-        player.setVolume(newVolume);
-
-        // Unmute if muted and volume > 0
-        if (player.isMuted() && newVolume > 0) {
-            player.unMute();
+        // iOS doesn't support volume control via YouTube API
+        if (isIOSDevice()) {
+            console.log('Volume control not available on iOS');
+            return false;
         }
 
-        // Save volume for unmute (only if > 0)
-        if (newVolume > 0) {
-            savedVolumeBeforeMute = newVolume;
+        try {
+            const volumeSlider = document.getElementById('volumeSlider') as HTMLInputElement;
+            const volumePercentage = document.getElementById('volumePercentage');
+            const currentVolume = typeof player.getVolume === 'function' ? player.getVolume() : 100;
+            const newVolume = Math.min(100, currentVolume + 10);
+
+            if (typeof player.setVolume === 'function') {
+                player.setVolume(newVolume);
+            }
+
+            // Unmute if muted and volume > 0
+            const isMuted = typeof player.isMuted === 'function' ? player.isMuted() : false;
+            if (isMuted && newVolume > 0 && typeof player.unMute === 'function') {
+                player.unMute();
+            }
+
+            // Save volume for unmute (only if > 0)
+            if (newVolume > 0) {
+                savedVolumeBeforeMute = newVolume;
+            }
+
+            if (volumeSlider) {
+                volumeSlider.value = newVolume.toString();
+            }
+            if (volumePercentage) {
+                volumePercentage.textContent = `${newVolume}%`;
+            }
+
+            updateVolumeIconState(newVolume);
+
+            if (Math.abs(newVolume - lastVolume) > 5) {
+                volumeChanges++;
+                lastVolume = newVolume;
+            }
+            console.log(`Volume: ${newVolume}%`);
+        } catch (error) {
+            console.warn('Error changing volume with keyboard:', error);
         }
 
-        if (volumeSlider) {
-            volumeSlider.value = newVolume.toString();
-        }
-        if (volumePercentage) {
-            volumePercentage.textContent = `${newVolume}%`;
-        }
-
-        updateVolumeIconState(newVolume);
-
-        if (Math.abs(newVolume - lastVolume) > 5) {
-            volumeChanges++;
-            lastVolume = newVolume;
-        }
-        console.log(`Volume: ${newVolume}%`);
         return false;
     }
 
@@ -978,32 +1059,45 @@ document.addEventListener('keydown', (e) => {
         e.preventDefault();
         e.stopPropagation();
 
-        const volumeSlider = document.getElementById('volumeSlider') as HTMLInputElement;
-        const volumePercentage = document.getElementById('volumePercentage');
-        const currentVolume = player.getVolume();
-        const newVolume = Math.max(0, currentVolume - 10);
-
-        player.setVolume(newVolume);
-
-        // Save volume for unmute (only if > 0)
-        if (newVolume > 0) {
-            savedVolumeBeforeMute = newVolume;
+        // iOS doesn't support volume control via YouTube API
+        if (isIOSDevice()) {
+            console.log('Volume control not available on iOS');
+            return false;
         }
 
-        if (volumeSlider) {
-            volumeSlider.value = newVolume.toString();
-        }
-        if (volumePercentage) {
-            volumePercentage.textContent = `${newVolume}%`;
+        try {
+            const volumeSlider = document.getElementById('volumeSlider') as HTMLInputElement;
+            const volumePercentage = document.getElementById('volumePercentage');
+            const currentVolume = typeof player.getVolume === 'function' ? player.getVolume() : 100;
+            const newVolume = Math.max(0, currentVolume - 10);
+
+            if (typeof player.setVolume === 'function') {
+                player.setVolume(newVolume);
+            }
+
+            // Save volume for unmute (only if > 0)
+            if (newVolume > 0) {
+                savedVolumeBeforeMute = newVolume;
+            }
+
+            if (volumeSlider) {
+                volumeSlider.value = newVolume.toString();
+            }
+            if (volumePercentage) {
+                volumePercentage.textContent = `${newVolume}%`;
+            }
+
+            updateVolumeIconState(newVolume);
+
+            if (Math.abs(newVolume - lastVolume) > 5) {
+                volumeChanges++;
+                lastVolume = newVolume;
+            }
+            console.log(`Volume: ${newVolume}%`);
+        } catch (error) {
+            console.warn('Error changing volume with keyboard:', error);
         }
 
-        updateVolumeIconState(newVolume);
-
-        if (Math.abs(newVolume - lastVolume) > 5) {
-            volumeChanges++;
-            lastVolume = newVolume;
-        }
-        console.log(`Volume: ${newVolume}%`);
         return false;
     }
 
