@@ -1,4 +1,5 @@
 import { initPage } from '~/shared/utils/page-init';
+import { extractStripeSuccessParams, formatStripeSuccessLog } from './utils';
 import './style.css';
 
 // Internationalization (i18n) - Inline translations
@@ -180,21 +181,13 @@ const app = document.getElementById('app');
 if (app) {
     // Get session from URL if present
     const urlParams = new URLSearchParams(window.location.search);
-    // Checkout Stripe Session ID, stripe add it as a `{CHECKOUT_SESSION_ID}`
-    const checkoutId = urlParams.get('c') || urlParams.get('checkout_id');
-    // Purchase ID, e.g. for subscriptions or one-time payments
-    const purchaseId = urlParams.get('p') || urlParams.get('purchase_id');
-    // e.g. "subscription" or "one-time"
-    const type = urlParams.get('t') || urlParams.get('type');
-    console.log(
-        `Stripe Success Page\n`,
-        `Type: ${type || 'N/A'}\n`,
-        `Checkout ID: ${checkoutId || 'N/A'}\n`,
-        `Purchase ID: ${purchaseId || 'N/A'}`
-    );
+    const params = extractStripeSuccessParams(urlParams);
+
+    // Log extracted parameters
+    console.log(formatStripeSuccessLog(params));
 
     // Safely decode and validate redirect URL
-    const redirectParam = urlParams.get('r') || urlParams.get('redirect');
+    const redirectParam = params.redirectUrl;
     let redirectUrl = 'https://app.doctorina.com';
 
     if (redirectParam) {
