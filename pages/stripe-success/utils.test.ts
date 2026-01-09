@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { extractStripeSuccessParams, formatStripeSuccessLog } from './utils';
 
 describe('extractStripeSuccessParams', () => {
@@ -24,6 +24,19 @@ describe('extractStripeSuccessParams', () => {
                 type: 'subscription',
                 purchaseId: '019ba22b-e088-7a70-bae3-caeefe9c9aa5',
                 checkoutId: '{CHECKOUT_SESSION_ID}',
+                redirectUrl: 'https://doctorina-development.web.app/',
+            });
+        });
+
+        it('check url encoded real case', () => {
+            const url = 'https://pages.doctorina.com/stripe-success?t=subscription&p=019ba249-294b-76d3-b229-3f28471cd8e3&r=https%3A%2F%2Fdoctorina-development.web.app%2F&c=cs_test_a1cOsk4fVc9ZiVcXpYNBdJEfs8iN0KUTQsIM3JxwRbVxpSyxmfERa8IZDD';
+            const searchParams = new URLSearchParams(new URL(url).search);
+            const result = extractStripeSuccessParams(searchParams);
+
+            expect(result).toEqual({
+                type: 'subscription',
+                purchaseId: '019ba249-294b-76d3-b229-3f28471cd8e3',
+                checkoutId: 'cs_test_a1cOsk4fVc9ZiVcXpYNBdJEfs8iN0KUTQsIM3JxwRbVxpSyxmfERa8IZDD',
                 redirectUrl: 'https://doctorina-development.web.app/',
             });
         });
