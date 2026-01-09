@@ -26,6 +26,11 @@ const translations = {
         // Tooltips & Aria
         videoPlayerLabel: 'Advertisement video player',
         progressBarLabel: 'Video progress',
+        // Audio controls
+        unmuteVideo: 'Tap to enable sound',
+        volumeLabel: 'Volume',
+        muteButton: 'Mute',
+        unmuteButton: 'Unmute',
     },
     ru: {
         // Язык: Русский
@@ -44,6 +49,11 @@ const translations = {
         // Подсказки и Aria
         videoPlayerLabel: 'Видеоплеер рекламы',
         progressBarLabel: 'Прогресс видео',
+        // Управление звуком
+        unmuteVideo: 'Нажмите для включения звука',
+        volumeLabel: 'Громкость',
+        muteButton: 'Выключить звук',
+        unmuteButton: 'Включить звук',
     },
     es: {
         // Idioma: Español
@@ -62,6 +72,11 @@ const translations = {
         // Tooltips y Aria
         videoPlayerLabel: 'Reproductor de vídeo publicitario',
         progressBarLabel: 'Progreso del vídeo',
+        // Controles de audio
+        unmuteVideo: 'Toca para activar el sonido',
+        volumeLabel: 'Volumen',
+        muteButton: 'Silenciar',
+        unmuteButton: 'Activar sonido',
     },
     de: {
         // Sprache: Deutsch
@@ -80,6 +95,11 @@ const translations = {
         // Tooltips und Aria
         videoPlayerLabel: 'Werbevideoplayer',
         progressBarLabel: 'Videofortschritt',
+        // Audiosteuerung
+        unmuteVideo: 'Tippen Sie, um den Ton zu aktivieren',
+        volumeLabel: 'Lautstärke',
+        muteButton: 'Stumm schalten',
+        unmuteButton: 'Ton aktivieren',
     },
 };
 
@@ -205,6 +225,7 @@ let totalPauseDuration = 0;
 let lastPauseTime = 0;
 let volumeChanges = 0;
 let lastVolume = 100;
+let savedVolumeBeforeMute = 100; // Save volume before muting
 let tabSwitchCount = 0;
 let playerErrorCount = 0;
 let bufferingEvents = 0;
@@ -271,17 +292,59 @@ app.innerHTML = `
   </div>
   <div class="video-container" role="region" aria-label="${t.videoPlayerLabel}">
     <div id="player"></div>
+
+    <!-- Unmute Button Overlay -->
+    <div class="unmute-overlay" id="unmuteOverlay">
+      <button class="unmute-button" id="unmuteButton" aria-label="${t.unmuteButton}">
+        <svg class="unmute-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+          <path d="M15.54 8.46a5 5 0 010 7.07"/>
+          <path d="M19.07 4.93a10 10 0 010 14.14"/>
+        </svg>
+        <span class="unmute-text">${t.unmuteVideo}</span>
+      </button>
+    </div>
+
     <div class="overlay" id="overlay">
       <div class="controls-info">
         <div class="progress-container" role="region" aria-label="${t.progressBarLabel}">
           <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
             <div class="progress-fill" id="progressFill"></div>
           </div>
-          <div class="time-info">
-            <span class="time-label">${t.remaining}</span>
-            <span class="time-countdown" id="countdown" aria-live="polite">--:--</span>
-            <span class="time-separator">·</span>
-            <span class="progress-percentage" id="progressPercentage" aria-live="polite">0%</span>
+          <div class="controls-row">
+            <!-- Volume Control (Left Side) -->
+            <div class="volume-control" id="volumeControl">
+              <button class="volume-button" id="volumeButton" aria-label="${t.muteButton}">
+                <svg class="volume-icon volume-icon-high" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+                  <path d="M15.54 8.46a5 5 0 010 7.07"/>
+                  <path d="M19.07 4.93a10 10 0 010 14.14"/>
+                </svg>
+                <svg class="volume-icon volume-icon-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
+                  <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+                  <line x1="23" y1="9" x2="17" y2="15"/>
+                  <line x1="17" y1="9" x2="23" y2="15"/>
+                </svg>
+              </button>
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value="100"
+                class="volume-slider"
+                id="volumeSlider"
+                aria-label="${t.volumeLabel}"
+              />
+              <span class="volume-percentage" id="volumePercentage">100%</span>
+            </div>
+
+            <!-- Time Info (Right Side) -->
+            <div class="time-info">
+              <span class="time-label">${t.remaining}</span>
+              <span class="time-countdown" id="countdown" aria-live="polite">--:--</span>
+              <span class="time-separator">·</span>
+              <span class="progress-percentage" id="progressPercentage" aria-live="polite">0%</span>
+            </div>
           </div>
         </div>
       </div>
@@ -340,6 +403,9 @@ function onPlayerReady(event: { target: YTPlayer }) {
     // Start playing (muted for reliable autoplay)
     event.target.playVideo();
     startProgressTracking();
+
+    // Initialize audio controls
+    initializeAudioControls();
 
     // Ensure video actually starts playing with retry mechanism
     const ensurePlayback = (retryCount = 0, maxRetries = 3) => {
@@ -519,6 +585,164 @@ function showWarning(message: string) {
     }, 3000);
 }
 
+// ===== AUDIO CONTROLS =====
+
+function initializeAudioControls() {
+    if (!player) return;
+
+    const unmuteOverlay = document.getElementById('unmuteOverlay');
+    const unmuteButton = document.getElementById('unmuteButton');
+    const volumeButton = document.getElementById('volumeButton');
+    const volumeSlider = document.getElementById('volumeSlider') as HTMLInputElement;
+    const volumePercentage = document.getElementById('volumePercentage');
+    const volumeIconHigh = document.querySelector('.volume-icon-high') as HTMLElement;
+    const volumeIconMuted = document.querySelector('.volume-icon-muted') as HTMLElement;
+
+    // Unmute button click handler
+    unmuteButton?.addEventListener('click', () => {
+        if (!player) return;
+
+        // Unmute and set volume
+        player.unMute();
+        player.setVolume(100);
+
+        // Hide unmute overlay
+        unmuteOverlay?.classList.add('hidden');
+
+        // Update volume slider
+        if (volumeSlider) {
+            volumeSlider.value = '100';
+        }
+        if (volumePercentage) {
+            volumePercentage.textContent = '100%';
+        }
+
+        // Update volume icon
+        updateVolumeIcon(100);
+
+        // Track unmute event
+        volumeChanges++;
+        sendPostMessage('video-unmuted', {
+            current_time: player.getCurrentTime(),
+            volume: 100,
+        });
+
+        console.log('Video unmuted, volume set to 100%');
+    });
+
+    // Volume button (mute/unmute toggle)
+    volumeButton?.addEventListener('click', () => {
+        if (!player) return;
+
+        const currentVolume = player.getVolume();
+
+        if (currentVolume === 0 || player.isMuted()) {
+            // Unmute - restore previous volume
+            const volumeToRestore = savedVolumeBeforeMute > 0 ? savedVolumeBeforeMute : 100;
+            player.unMute();
+            player.setVolume(volumeToRestore);
+
+            if (volumeSlider) {
+                volumeSlider.value = volumeToRestore.toString();
+            }
+            if (volumePercentage) {
+                volumePercentage.textContent = `${volumeToRestore}%`;
+            }
+
+            updateVolumeIcon(volumeToRestore);
+
+            sendPostMessage('volume-unmuted', {
+                current_time: player.getCurrentTime(),
+                volume: volumeToRestore,
+            });
+
+            console.log(`Unmuted - Volume restored to: ${volumeToRestore}%`);
+        } else {
+            // Mute - save current volume first
+            savedVolumeBeforeMute = currentVolume;
+            player.setVolume(0);
+
+            if (volumeSlider) {
+                volumeSlider.value = '0';
+            }
+            if (volumePercentage) {
+                volumePercentage.textContent = '0%';
+            }
+
+            updateVolumeIcon(0);
+
+            sendPostMessage('volume-muted', {
+                current_time: player.getCurrentTime(),
+                saved_volume: savedVolumeBeforeMute,
+            });
+
+            console.log(`Muted - Saved volume: ${savedVolumeBeforeMute}%`);
+        }
+
+        volumeChanges++;
+    });
+
+    // Volume slider change handler
+    volumeSlider?.addEventListener('input', (e) => {
+        if (!player) return;
+
+        const target = e.target as HTMLInputElement;
+        const volume = parseInt(target.value, 10);
+
+        // Set volume
+        player.setVolume(volume);
+
+        // Unmute if muted and volume > 0
+        if (player.isMuted() && volume > 0) {
+            player.unMute();
+        }
+
+        // Save volume for unmute (only if > 0)
+        if (volume > 0) {
+            savedVolumeBeforeMute = volume;
+        }
+
+        // Update percentage display
+        if (volumePercentage) {
+            volumePercentage.textContent = `${volume}%`;
+        }
+
+        // Update volume icon
+        updateVolumeIcon(volume);
+
+        // Track volume changes (only significant changes)
+        if (Math.abs(volume - lastVolume) > 5) {
+            volumeChanges++;
+            lastVolume = volume;
+
+            sendPostMessage('volume-changed', {
+                current_time: player.getCurrentTime(),
+                volume,
+            });
+        }
+    });
+
+    // Update volume icon based on current volume
+    function updateVolumeIcon(volume: number) {
+        if (!volumeIconHigh || !volumeIconMuted) return;
+
+        if (volume === 0) {
+            volumeIconHigh.style.display = 'none';
+            volumeIconMuted.style.display = 'block';
+        } else {
+            volumeIconHigh.style.display = 'block';
+            volumeIconMuted.style.display = 'none';
+        }
+    }
+
+    // Initial state: show unmute overlay since video starts muted
+    if (unmuteOverlay) {
+        unmuteOverlay.classList.remove('hidden');
+    }
+
+    console.log('Audio controls initialized');
+}
+
 async function onVideoComplete() {
     sendPostMessage('video-complete', {
         ...buildCallbackPayload(),
@@ -667,13 +891,81 @@ document.addEventListener('keydown', (e) => {
         return false;
     }
 
+    // Mute/Unmute with M key
+    if (e.key === 'm' || e.key === 'M') {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const volumeSlider = document.getElementById('volumeSlider') as HTMLInputElement;
+        const volumePercentage = document.getElementById('volumePercentage');
+        const currentVolume = player.getVolume();
+
+        if (currentVolume === 0 || player.isMuted()) {
+            // Unmute - restore previous volume
+            const volumeToRestore = savedVolumeBeforeMute > 0 ? savedVolumeBeforeMute : 100;
+            player.unMute();
+            player.setVolume(volumeToRestore);
+
+            if (volumeSlider) {
+                volumeSlider.value = volumeToRestore.toString();
+            }
+            if (volumePercentage) {
+                volumePercentage.textContent = `${volumeToRestore}%`;
+            }
+
+            updateVolumeIconState(volumeToRestore);
+            console.log(`Unmuted - Volume restored to: ${volumeToRestore}%`);
+        } else {
+            // Mute - save current volume first
+            savedVolumeBeforeMute = currentVolume;
+            player.setVolume(0);
+
+            if (volumeSlider) {
+                volumeSlider.value = '0';
+            }
+            if (volumePercentage) {
+                volumePercentage.textContent = '0%';
+            }
+
+            updateVolumeIconState(0);
+            console.log(`Muted - Saved volume: ${savedVolumeBeforeMute}%`);
+        }
+
+        volumeChanges++;
+        return false;
+    }
+
     // Volume control with arrow up/down
     if (e.key === 'ArrowUp') {
         e.preventDefault();
         e.stopPropagation();
+
+        const volumeSlider = document.getElementById('volumeSlider') as HTMLInputElement;
+        const volumePercentage = document.getElementById('volumePercentage');
         const currentVolume = player.getVolume();
         const newVolume = Math.min(100, currentVolume + 10);
+
         player.setVolume(newVolume);
+
+        // Unmute if muted and volume > 0
+        if (player.isMuted() && newVolume > 0) {
+            player.unMute();
+        }
+
+        // Save volume for unmute (only if > 0)
+        if (newVolume > 0) {
+            savedVolumeBeforeMute = newVolume;
+        }
+
+        if (volumeSlider) {
+            volumeSlider.value = newVolume.toString();
+        }
+        if (volumePercentage) {
+            volumePercentage.textContent = `${newVolume}%`;
+        }
+
+        updateVolumeIconState(newVolume);
+
         if (Math.abs(newVolume - lastVolume) > 5) {
             volumeChanges++;
             lastVolume = newVolume;
@@ -685,9 +977,28 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowDown') {
         e.preventDefault();
         e.stopPropagation();
+
+        const volumeSlider = document.getElementById('volumeSlider') as HTMLInputElement;
+        const volumePercentage = document.getElementById('volumePercentage');
         const currentVolume = player.getVolume();
         const newVolume = Math.max(0, currentVolume - 10);
+
         player.setVolume(newVolume);
+
+        // Save volume for unmute (only if > 0)
+        if (newVolume > 0) {
+            savedVolumeBeforeMute = newVolume;
+        }
+
+        if (volumeSlider) {
+            volumeSlider.value = newVolume.toString();
+        }
+        if (volumePercentage) {
+            volumePercentage.textContent = `${newVolume}%`;
+        }
+
+        updateVolumeIconState(newVolume);
+
         if (Math.abs(newVolume - lastVolume) > 5) {
             volumeChanges++;
             lastVolume = newVolume;
@@ -701,7 +1012,7 @@ document.addEventListener('keydown', (e) => {
         'ArrowLeft', 'ArrowRight',
         'Home', 'End',
         'PageUp', 'PageDown',
-        'j', 'l', 'm', 'f', 'c',
+        'j', 'l', 'f', 'c',
         '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
     ];
 
@@ -712,6 +1023,22 @@ document.addEventListener('keydown', (e) => {
         return false;
     }
 });
+
+// Helper function to update volume icon state (for keyboard controls)
+function updateVolumeIconState(volume: number) {
+    const volumeIconHigh = document.querySelector('.volume-icon-high') as HTMLElement;
+    const volumeIconMuted = document.querySelector('.volume-icon-muted') as HTMLElement;
+
+    if (!volumeIconHigh || !volumeIconMuted) return;
+
+    if (volume === 0) {
+        volumeIconHigh.style.display = 'none';
+        volumeIconMuted.style.display = 'block';
+    } else {
+        volumeIconHigh.style.display = 'block';
+        volumeIconMuted.style.display = 'none';
+    }
+}
 
 // Prevent context menu on video
 document.getElementById('player')?.addEventListener('contextmenu', (e) => {
