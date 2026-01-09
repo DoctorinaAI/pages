@@ -13,7 +13,7 @@ const translations = {
         // Language: English
         lang: 'en',
         // Page
-        pageTitle: 'Watch Ad - Doctorina',
+        pageTitle: 'Doctorina | Watch Ad',
         // Progress
         remaining: 'Remaining:',
         // Warnings
@@ -36,7 +36,7 @@ const translations = {
         // Язык: Русский
         lang: 'ru',
         // Страница
-        pageTitle: 'Просмотр рекламы - Doctorina',
+        pageTitle: 'Doctorina | Просмотр рекламы',
         // Прогресс
         remaining: 'Осталось:',
         // Предупреждения
@@ -59,7 +59,7 @@ const translations = {
         // Idioma: Español
         lang: 'es',
         // Página
-        pageTitle: 'Ver anuncio - Doctorina',
+        pageTitle: 'Doctorina | Ver anuncio',
         // Progreso
         remaining: 'Restante:',
         // Advertencias
@@ -82,7 +82,7 @@ const translations = {
         // Sprache: Deutsch
         lang: 'de',
         // Seite
-        pageTitle: 'Werbung ansehen - Doctorina',
+        pageTitle: 'Doctorina | Werbung ansehen',
         // Fortschritt
         remaining: 'Verbleibend:',
         // Warnungen
@@ -114,7 +114,7 @@ function detectLanguage(): keyof typeof translations {
 function isIOSDevice(): boolean {
     const userAgent = navigator.userAgent.toLowerCase();
     return /iphone|ipad|ipod/.test(userAgent) ||
-           (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1); // iPad on iOS 13+
+        (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1); // iPad on iOS 13+
 }
 
 // Get current language and translations
