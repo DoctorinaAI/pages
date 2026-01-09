@@ -614,7 +614,11 @@ function initializeAudioControls() {
     }
 
     // Unmute button click handler
-    unmuteButton?.addEventListener('click', () => {
+    unmuteButton?.addEventListener('click', (e) => {
+        // Prevent event from bubbling up and affecting video player
+        e.preventDefault();
+        e.stopPropagation();
+
         if (!player) return;
 
         // Unmute and set volume (with safety checks for iOS)
