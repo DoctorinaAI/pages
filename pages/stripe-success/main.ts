@@ -212,13 +212,13 @@ if (app) {
             return;
         }
 
-        const body: { checkout_id?: string; status?: string; source: string } = {
+        const body: { source: string; status?: string; type?: string; checkout_id?: string; } = {
             source: 'stripe',
             status: 'success'
         };
 
         if (params.type)
-            body.status = params.type;
+            body.type = params.type;
 
         if (params.checkoutId)
             body.checkout_id = params.checkoutId;
