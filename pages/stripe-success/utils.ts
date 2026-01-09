@@ -10,6 +10,8 @@ export interface StripeSuccessParams {
     type: string | null;
     /** Redirect URL after success */
     redirectUrl: string | null;
+    /** Environment (e.g. "production" or "development") */
+    environment: string | null;
 }
 
 /**
@@ -20,6 +22,7 @@ export interface StripeSuccessParams {
  * - p / purchase_id: Purchase ID
  * - t / type: Payment type
  * - r / redirect: Redirect URL
+ * - e / environment: Environment
  *
  * @param searchParams - URLSearchParams object to parse
  * @returns Object containing extracted parameters
@@ -33,7 +36,8 @@ export interface StripeSuccessParams {
  * //   checkoutId: '{CHECKOUT_SESSION_ID}',
  * //   purchaseId: '019ba22b-e088-7a70-bae3-caeefe9c9aa5',
  * //   type: 'subscription',
- * //   redirectUrl: 'https://doctorina-development.web.app/'
+ * //   redirectUrl: 'https://doctorina-development.web.app/',
+ * //   environment: 'production'
  * // }
  * ```
  */
@@ -47,6 +51,8 @@ export function extractStripeSuccessParams(searchParams: URLSearchParams): Strip
         type: searchParams.get('t') || searchParams.get('type'),
         // Redirect URL
         redirectUrl: searchParams.get('r') || searchParams.get('redirect'),
+        // Environment
+        environment: searchParams.get('e') || searchParams.get('environment'),
     };
 }
 
@@ -61,5 +67,6 @@ export function formatStripeSuccessLog(params: StripeSuccessParams): string {
     buffer.push(`Type: ${params.type || 'N/A'}`);
     buffer.push(`Checkout ID: ${params.checkoutId || 'N/A'}`);
     buffer.push(`Purchase ID: ${params.purchaseId || 'N/A'}`);
+    buffer.push(`Environment: ${params.environment || 'N/A'}`);
     return buffer.join('\n');
 }

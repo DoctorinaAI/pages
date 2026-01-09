@@ -1,6 +1,6 @@
 import { initPage } from '~/shared/utils/page-init';
-import { extractStripeSuccessParams, formatStripeSuccessLog } from './utils';
 import './style.css';
+import { extractStripeSuccessParams, formatStripeSuccessLog } from './utils';
 
 // Internationalization (i18n) - Inline translations
 const translations = {
@@ -185,6 +185,64 @@ if (app) {
 
     // Log extracted parameters
     console.log(formatStripeSuccessLog(params));
+
+    // Send POST callback with payment status
+    async function sendCallback() {
+        // Determine callback URL based on environment and purchase ID
+        function getCallbackUrl(): string | undefined {
+            let purchaseId = params.purchaseId;
+            if (!purchaseId) return undefined;
+            switch (params.environment) {
+                case 'stg':
+                case 'stage':
+                case 'staging':
+                    return `https://staging.api.doctorina.com/v1/subscriptions/${purchaseId}/sync`;
+                case 'prod':
+                case 'live':
+                case 'production':
+                    return `https://live.api.doctorina.com/v1/subscriptions/${purchaseId}/sync`;
+                default:
+                    return undefined;
+            }
+        }
+
+        const callbackUrl = getCallbackUrl();
+        if (!callbackUrl) {
+            console.log('Callback URL not determined, skipping callback');
+            return;
+        }
+
+        const body: { checkout_id?: string; status?: string; source: string } = {
+            source: 'stripe',
+            status: 'success'
+        };
+
+        if (params.checkoutId)
+            body.checkout_id = params.checkoutId;
+
+        if (params.type)
+            body.status = params.type;
+
+        try {
+            const response = await fetch(callbackUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(body),
+            });
+
+            if (response.ok) {
+                console.log('Callback sent successfully');
+            } else {
+                console.error('Callback failed with status:', response.status);
+            }
+        } catch (error) {
+            console.error('Error sending callback:', error);
+        }
+    }
+
+    sendCallback();
 
     // Safely decode and validate redirect URL
     const redirectParam = params.redirectUrl;
