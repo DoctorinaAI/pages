@@ -189,22 +189,36 @@ if (app) {
   if (redirectParam) {
     try {
       // Decode URL-encoded parameter
-      const decodedUrl = decodeURIComponent(redirectParam);
+      let decodedUrl = decodeURIComponent(redirectParam);
+
+      // Auto-prepend https:// if no scheme is specified
+      if (!/^https?:\/\//i.test(decodedUrl)) {
+        decodedUrl = 'https://' + decodedUrl;
+      }
 
       // Validate that URL is safe (same origin or whitelisted domain)
       const url = new URL(decodedUrl, window.location.origin);
 
-      // Whitelist of allowed domains for redirect
+      // Whitelist of allowed domains for redirect (supports wildcards)
+      // E.g.
+      // http://localhost:3000/stripe-success?r=doctorina-development.web.app
       const allowedDomains = [
-        'doctorina.com',
-        'app.doctorina.com',
+        '*.doctorina.com',
+        '*.web.app',
         'localhost'
       ];
 
       const hostname = url.hostname.toLowerCase();
-      const isAllowed = allowedDomains.some(domain =>
-        hostname === domain || hostname.endsWith('.' + domain)
-      );
+      const isAllowed = allowedDomains.some(pattern => {
+        if (pattern.startsWith('*.')) {
+          // Wildcard pattern: *.example.com matches subdomain.example.com and example.com
+          const domain = pattern.slice(2);
+          return hostname === domain || hostname.endsWith('.' + domain);
+        } else {
+          // Exact match
+          return hostname === pattern;
+        }
+      });
 
       if (isAllowed) {
         redirectUrl = decodedUrl;
