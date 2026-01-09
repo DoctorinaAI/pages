@@ -217,11 +217,11 @@ if (app) {
             status: 'success'
         };
 
-        if (params.checkoutId)
-            body.checkout_id = params.checkoutId;
-
         if (params.type)
             body.status = params.type;
+
+        if (params.checkoutId)
+            body.checkout_id = params.checkoutId;
 
         try {
             const response = await fetch(callbackUrl, {

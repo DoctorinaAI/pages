@@ -176,7 +176,7 @@ declare global {
 
 // Configuration from ENV and URL params
 const urlParams = new URLSearchParams(window.location.search);
-const VIDEO_ID = urlParams.get('v') || urlParams.get('video') || import.meta.env.VITE_DEFAULT_VIDEO_ID || '8fy94RQnnzw';
+const VIDEO_ID = urlParams.get('v') || urlParams.get('video') || import.meta.env.VITE_DEFAULT_VIDEO_ID || 'oE0DHbq-CJQ';
 
 // Normalize and validate callback URL
 function normalizeCallbackUrl(url: string | null): string {

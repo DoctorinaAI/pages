@@ -4,13 +4,13 @@
 export interface StripeSuccessParams {
     /** Checkout Stripe Session ID */
     checkoutId: string | null;
-    /** Purchase ID (e.g. for subscriptions or one-time payments) */
+    /** Purchase ID (e.g. for subscriptions or donation payments) */
     purchaseId: string | null;
-    /** Payment type (e.g. "subscription" or "one-time") */
+    /** Payment type (e.g. "subscription" or "donation") */
     type: string | null;
     /** Redirect URL after success */
     redirectUrl: string | null;
-    /** Environment (e.g. "production" or "development") */
+    /** Environment (e.g. "live" or "stage") */
     environment: string | null;
 }
 
@@ -37,7 +37,7 @@ export interface StripeSuccessParams {
  * //   purchaseId: '019ba22b-e088-7a70-bae3-caeefe9c9aa5',
  * //   type: 'subscription',
  * //   redirectUrl: 'https://doctorina-development.web.app/',
- * //   environment: 'production'
+ * //   environment: 'live'
  * // }
  * ```
  */
