@@ -613,11 +613,19 @@ function initializeAudioControls() {
         console.log('iOS detected - volume controls hidden (not supported by YouTube API)');
     }
 
+    // Prevent any clicks on unmute overlay from affecting the video player
+    unmuteOverlay?.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+    }, true); // Use capture phase
+
     // Unmute button click handler
     unmuteButton?.addEventListener('click', (e) => {
         // Prevent event from bubbling up and affecting video player
         e.preventDefault();
         e.stopPropagation();
+        e.stopImmediatePropagation();
 
         if (!player) return;
 
@@ -655,7 +663,7 @@ function initializeAudioControls() {
         });
 
         console.log('Video unmuted' + (isIOS ? ' (iOS - volume control unavailable)' : ', volume set to 100%'));
-    });
+    }, true); // Use capture phase
 
     // Volume button (mute/unmute toggle) - Skip on iOS
     if (!isIOS) {
