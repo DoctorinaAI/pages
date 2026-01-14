@@ -613,15 +613,8 @@ function initializeAudioControls() {
         console.log('iOS detected - volume controls hidden (not supported by YouTube API)');
     }
 
-    // Prevent any clicks on unmute overlay from affecting the video player
-    unmuteOverlay?.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        e.stopImmediatePropagation();
-    }, true); // Use capture phase
-
     // Unmute button click handler
-    unmuteButton?.addEventListener('click', (e) => {
+    const handleUnmuteClick = (e: MouseEvent | TouchEvent) => {
         // Prevent event from bubbling up and affecting video player
         e.preventDefault();
         e.stopPropagation();
@@ -663,7 +656,19 @@ function initializeAudioControls() {
         });
 
         console.log('Video unmuted' + (isIOS ? ' (iOS - volume control unavailable)' : ', volume set to 100%'));
-    }, true); // Use capture phase
+    };
+
+    // Add click handler for unmute button (both click and touch events)
+    unmuteButton?.addEventListener('click', handleUnmuteClick, true);
+    unmuteButton?.addEventListener('touchend', handleUnmuteClick, true);
+
+    // Prevent clicks on overlay itself from reaching video player
+    unmuteOverlay?.addEventListener('mousedown', (e) => {
+        e.stopPropagation();
+    }, true);
+    unmuteOverlay?.addEventListener('touchstart', (e) => {
+        e.stopPropagation();
+    }, true);
 
     // Volume button (mute/unmute toggle) - Skip on iOS
     if (!isIOS) {
