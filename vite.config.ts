@@ -61,16 +61,36 @@ export default defineConfig(({ mode }) => {
           server.middlewares.use((req: any, res: any, next: any) => {
             const url = req.url || '';
 
-            // Match patterns like /pagename, /group/pagename, or *.html (with optional query params)
-            const cleanMatch = url.match(/^\/([a-zA-Z0-9-]+(?:\/[a-zA-Z0-9-]+)*)(\/?(\?.*)?)?$/);
+            // Rewrite /pagename/file → /pages/pagename/file (for assets like main.ts loaded from HTML)
+            const assetMatch = url.match(/^\/([a-zA-Z0-9-]+(?:\/[a-zA-Z0-9-]+)*)\/([^?]+\.[a-z]+)(\?.*)?$/);
+            if (assetMatch) {
+              const pageName = assetMatch[1];
+              const file = assetMatch[2];
+              const pageDir = resolve(__dirname, 'pages', pageName);
+              if (existsSync(resolve(pageDir, 'index.html')) && existsSync(resolve(pageDir, file))) {
+                req.url = `/pages/${pageName}/${file}${assetMatch[3] || ''}`;
+                return next();
+              }
+            }
+
+            // Match patterns like /pagename or /group/pagename (with optional query params)
+            const cleanMatch = url.match(/^\/([a-zA-Z0-9-]+(?:\/[a-zA-Z0-9-]+)*)(\/?)(\?.*)?$/);
             const htmlMatch = url.match(/^\/([a-zA-Z0-9-/]+)\.html(\?.*)?$/);
 
             const match = cleanMatch || htmlMatch;
             if (match) {
               const pageName = match[1];
-              const queryString = match[2] || match[3] || '';
+              const hasTrailingSlash = cleanMatch ? match[2] === '/' : false;
+              const queryString = cleanMatch ? (match[3] || '') : (match[2] || '');
               const fullPath = resolve(__dirname, 'pages', pageName, 'index.html');
+
               if (existsSync(fullPath)) {
+                // Redirect to trailing slash so relative imports (./main.ts) resolve correctly
+                if (cleanMatch && !hasTrailingSlash) {
+                  res.writeHead(302, { Location: `/${pageName}/${queryString}` });
+                  res.end();
+                  return;
+                }
                 req.url = `/pages/${pageName}/index.html${queryString}`;
               }
             }
