@@ -49,6 +49,7 @@ npm run dev:tools     # Tools page
 ```
 
 Or open in browser:
+
 - `http://localhost:3000/pages/index/index.html`
 - `http://localhost:3000/pages/tools/index.html`
 
@@ -98,30 +99,41 @@ pages/my-new-page/
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="My New Page - Doctorina">
-    <meta name="theme-color" content="#667eea">
-    <title>My New Page - Doctorina</title>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Doctorina</title>
+    <meta name="description" content="Doctorina" />
+    <meta name="theme-color" content="#25D366" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.ico" />
+
+    <!-- iOS meta tags & icons -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="white" />
+    <meta name="apple-mobile-web-app-title" content="Doctorina" />
+    <link rel="apple-touch-icon" href="icons/web-app-manifest-192x192.png" />
+  </head>
+
+  <body>
     <div id="app"></div>
     <script type="module" src="/pages/my-new-page/main.ts"></script>
-</body>
+  </body>
 </html>
 ```
 
 4. **main.ts** - page code:
 
 ```typescript
-import { initPage } from '~/shared/utils/page-init';
-import './style.css';
+import { initPage } from "~/shared/utils/page-init";
+import "./style.css";
 
-initPage('My New Page - Doctorina');
+initPage("My New Page - Doctorina");
 
-const app = document.getElementById('app');
+const app = document.getElementById("app");
 if (app) {
   app.innerHTML = `
     <div class="container">
@@ -145,24 +157,28 @@ if (app) {
 Ready-to-use utilities are available in `src/shared/utils/`:
 
 ```typescript
-import { initPage } from '~/shared/utils/page-init';
-import { copyToClipboard } from '~/shared/utils/clipboard';
-import { formatDate, getRelativeTime } from '~/shared/utils/date';
-import { isValidEmail, isValidUrl } from '~/shared/utils/validation';
+import { initPage } from "~/shared/utils/page-init";
+import { copyToClipboard } from "~/shared/utils/clipboard";
+import { formatDate, getRelativeTime } from "~/shared/utils/date";
+import { isValidEmail, isValidUrl } from "~/shared/utils/validation";
 
 // Initialize page
-initPage('Page Title');
+initPage("Page Title");
 
 // Clipboard operations
-await copyToClipboard('Text to copy');
+await copyToClipboard("Text to copy");
 
 // Date formatting
 const formatted = formatDate(new Date());
 const relative = getRelativeTime(new Date());
 
 // Validation
-if (isValidEmail(email)) { /* ... */ }
-if (isValidUrl(url)) { /* ... */ }
+if (isValidEmail(email)) {
+  /* ... */
+}
+if (isValidUrl(url)) {
+  /* ... */
+}
 ```
 
 ## 🎨 Shared Styles
@@ -170,7 +186,7 @@ if (isValidUrl(url)) { /* ... */ }
 Import shared CSS variables and utilities:
 
 ```typescript
-import '~/shared/styles/common.css';
+import "~/shared/styles/common.css";
 ```
 
 Available CSS variables:

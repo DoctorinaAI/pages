@@ -52,16 +52,17 @@ export default defineConfig(({ mode }) => {
           server.middlewares.use((req: any, res: any, next: any) => {
             const url = req.url || '';
 
-            // Match patterns like /pagename or /pagename/ or /pagename.html
-            const cleanMatch = url.match(/^\/([a-zA-Z0-9-]+)\/?$/);
-            const htmlMatch = url.match(/^\/([a-zA-Z0-9-]+)\.html$/);
+            // Match patterns like /pagename or /pagename/ or /pagename.html (with optional query params)
+            const cleanMatch = url.match(/^\/([a-zA-Z0-9-]+)(\/?(\?.*)?)?$/);
+            const htmlMatch = url.match(/^\/([a-zA-Z0-9-]+)\.html(\?.*)?$/);
 
             const match = cleanMatch || htmlMatch;
             if (match) {
               const pageName = match[1];
+              const queryString = match[2] || match[3] || '';
               const fullPath = resolve(__dirname, 'pages', pageName, 'index.html');
               if (existsSync(fullPath)) {
-                req.url = `/pages/${pageName}/index.html`;
+                req.url = `/pages/${pageName}/index.html${queryString}`;
               }
             }
 
