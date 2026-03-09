@@ -5,83 +5,45 @@ const locale: LocaleModule = {
   content: () => `
     <h1>Cookies Policy</h1>
 
-    <p>2. Types of Cookies We Use</p>
+    <p>Effective as of 2025-05-29.<br/>Previous versions are available upon request.<br/>This Cookies Policy explains how A.I. Doctor Medical Assist LTD (&quot;Doctorina,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) uses cookies and similar tracking technologies on our website at https://doctorina.com and our web application at https://app.doctorina.com (collectively, the &quot;Services&quot;).<br/>By using our Services, you consent to the use of cookies and similar technologies as described in this policy.</p>
+
+    <h2>1. What Are Cookies?</h2>
+
+    <p>We use cookies and similar technologies to enhance your experience on our website, personalize content and advertisements, analyze traffic, and ensure data security. This Cookie Policy explains what cookies we use, for what purposes, and how you can manage them.</p>
+
+    <h2>2. Types of Cookies We Use</h2>
 
     <p>We use the following categories of cookies:</p>
 
-    <p><strong>Strictly Necessary Cookies</strong>– These cookies are essential for the functioning of the website, including navigation and access to secure areas.</p>
+    <p><strong>Strictly Necessary Cookies</strong> – These cookies are essential for the functioning of the website, including navigation and access to secure areas.</p>
 
-    <p><strong>Functional Cookies</strong>– These cookies remember your preferences and settings (such as language or region) to provide a more personalized experience.</p>
+    <p><strong>Functional Cookies</strong> – These cookies remember your preferences and settings (such as language or region) to provide a more personalized experience.</p>
 
-    <p><strong>Analytical Cookies</strong>– These cookies collect information about how visitors use the site to help us analyze and improve its performance.</p>
+    <p><strong>Analytical Cookies</strong> – These cookies collect information about how visitors use the site to help us analyze and improve its performance.</p>
 
-    <p><strong>Marketing Cookies</strong>– These cookies are used to deliver advertisements that are relevant to you and to evaluate the effectiveness of advertising campaigns.</p>
+    <p><strong>Marketing Cookies</strong> – These cookies are used to deliver advertisements that are relevant to you and to evaluate the effectiveness of advertising campaigns.</p>
 
-    <p>3. Local Storage Technologies</p>
+    <h2>3. Local Storage Technologies</h2>
 
     <p>In addition to cookies, our Services use other local storage technologies:</p>
 
-    <p>3.1 Local Storage and Session Storage.</p>
+    <p>3.1 Local Storage and Session Storage.<br/>Purpose: Purpose: Storing user preferences, application state, and temporary data.<br/>Data: Data: User settings, language preferences, temporary form inputs.<br/>Retention: Retention: Until manually cleared or browser cache is cleared.</p>
 
-    <p>Purpose: Purpose: Storing user preferences, application state, and temporary data.</p>
+    <p>3.2 IndexedDB (Web Application).<br/>Purpose: Purpose: Local database for offline functionality and performance optimization.<br/>Data: Data: Chat messages, user data for offline access, application cache.<br/>Retention: Retention: Until manually cleared or when you delete your account.</p>
 
-    <p>Data: Data: User settings, language preferences, temporary form inputs.</p>
+    <p>3.3 SharedPreferences (Mobile App).<br/>Purpose: Purpose: Storing app preferences and settings.<br/>Data: Data: User preferences, authentication state, app configuration.<br/>Retention: Retention: Until app is uninstalled or data is manually cleared.</p>
 
-    <p>Retention: Retention: Until manually cleared or browser cache is cleared.</p>
+    <h2>4. Third-Party Services</h2>
 
-    <p>3.2 IndexedDB (Web Application).</p>
+    <p>4.1 Firebase Analytics (Mobile App).<br/><strong>Provider:</strong> Provider: Google LLC.<br/><strong>Purpose:</strong> Purpose: Mobile app analytics and performance monitoring.<br/><strong>Data Collected:</strong> Data Collected: App usage patterns, crash reports, performance metrics.<br/><strong>Privacy Policy:</strong> <a href="https://policies.google.com/privacy">Privacy Policy: https://policies.google.com/privacy</a><br/><strong>Opt-out:</strong> Opt-out: Available through app settings.</p>
 
-    <p>Purpose: Purpose: Local database for offline functionality and performance optimization.</p>
+    <p>4.2 YouTube (Embedded Videos).<br/><strong>Provider:</strong> Provider: Google LLC.<br/><strong>Purpose:</strong> Purpose: Video content delivery on our landing page.<br/><strong>Data Collected:</strong> Data Collected: Video viewing behavior, device information.<br/><strong>Privacy Policy:</strong> <a href="https://policies.google.com/privacy">Privacy Policy: https://policies.google.com/privacy</a></p>
 
-    <p>Data: Data: Chat messages, user data for offline access, application cache.</p>
+    <p>4.3 Google Fonts<br/><strong>Provider:</strong> Provider: Google LLC.<br/><strong>Purpose:</strong> Purpose: Web font delivery.<br/><strong>Data Collected:</strong> Data Collected: IP address, browser information.<br/><strong>Privacy Policy:</strong> <a href="https://policies.google.com/privacy">Privacy Policy: https://policies.google.com/privacy</a></p>
 
-    <p>Retention: Retention: Until manually cleared or when you delete your account.</p>
+    <h2>5. Cookie Management and Your Choices</h2>
 
-    <p>3.3 SharedPreferences (Mobile App).</p>
-
-    <p>Purpose: Purpose: Storing app preferences and settings.</p>
-
-    <p>Data: Data: User preferences, authentication state, app configuration.</p>
-
-    <p>Retention: Retention: Until app is uninstalled or data is manually cleared.</p>
-
-    <p>4. Third-Party Services</p>
-
-    <p>4.1 Firebase Analytics (Mobile App).</p>
-
-    <p><strong>Provider:</strong>Provider: Google LLC.</p>
-
-    <p><strong>Purpose:</strong>Purpose: Mobile app analytics and performance monitoring.</p>
-
-    <p><strong>Data Collected:</strong>Data Collected: App usage patterns, crash reports, performance metrics.</p>
-
-    <p><strong>Privacy Policy:</strong><a href="https://policies.google.com/privacy">Privacy Policy: https://policies.google.com/privacy</a></p>
-
-    <p><strong>Opt-out:</strong>Opt-out: Available through app settings.</p>
-
-    <p>4.2 YouTube (Embedded Videos).</p>
-
-    <p><strong>Provider:</strong>Provider: Google LLC.</p>
-
-    <p><strong>Purpose:</strong>Purpose: Video content delivery on our landing page.</p>
-
-    <p><strong>Data Collected:</strong>Data Collected: Video viewing behavior, device information.</p>
-
-    <p><strong>Privacy Policy:</strong><a href="https://policies.google.com/privacy">Privacy Policy: https://policies.google.com/privacy</a></p>
-
-    <p>4.3 Google Fonts<strong>Provider:</strong>Provider: Google LLC.</p>
-
-    <p><strong>Purpose:</strong>Purpose: Web font delivery.</p>
-
-    <p><strong>Data Collected:</strong>Data Collected: IP address, browser information.</p>
-
-    <p><strong>Privacy Policy:</strong><a href="https://policies.google.com/privacy">Privacy Policy: https://policies.google.com/privacy</a></p>
-
-    <p>5. Cookie Management and Your Choices</p>
-
-    <p>5.1 Browser Settings</p>
-
-    <p>You can control cookies through your browser settings:</p>
+    <p>5.1 Browser Settings<br/>You can control cookies through your browser settings:</p>
 
     <ul>
       <li>Chrome: Settings > Privacy and Security > Cookies and other site data</li>
@@ -98,9 +60,7 @@ const locale: LocaleModule = {
       <li>All Analytics: You can disable analytics tracking by contacting us at support@doctorina.com</li>
     </ul>
 
-    <p>5.3 Consequences of Disabling Cookies</p>
-
-    <p>Disabling certain cookies may affect the functionality of our Services:</p>
+    <p>5.3 Consequences of Disabling Cookies<br/>Disabling certain cookies may affect the functionality of our Services:</p>
 
     <ul>
       <li>You may need to re-enter information more frequently</li>
@@ -108,7 +68,7 @@ const locale: LocaleModule = {
       <li>Your user experience may be less personalized</li>
     </ul>
 
-    <p>6. Data Security</p>
+    <h2>6. Data Security</h2>
 
     <p>We implement appropriate technical and organizational measures to protect cookie data:</p>
 
@@ -119,7 +79,7 @@ const locale: LocaleModule = {
       <li><strong>Access controls and authentication</strong></li>
     </ul>
 
-    <p>7. International Data Transfers</p>
+    <h2>7. International Data Transfers</h2>
 
     <p>We believSome of our service providers may be located outside your country. When we transfer cookie data internationally, we ensure appropriate safeguards are in place, including:e privacy is a fundamental human right. Therefore, all our users have the following universal rights:</p>
 
@@ -129,7 +89,7 @@ const locale: LocaleModule = {
       <li>Other appropriate safeguards as required by applicable law</li>
     </ul>
 
-    <p>8. Updates to This Policy</p>
+    <h2>8. Updates to This Policy</h2>
 
     <p>We may update this Cookies Policy from time to time. When we make material changes, we will notify you by:</p>
 
@@ -139,19 +99,11 @@ const locale: LocaleModule = {
       <li>Displaying a notice on our Services</li>
     </ul>
 
-    <p>9. Contact Information</p>
+    <h2>9. Contact Information</h2>
 
-    <p>If you have questions about this Cookies Policy or our use of cookies, please contact us:</p>
+    <p>If you have questions about this Cookies Policy or our use of cookies, please contact us:<br/>Email: support@doctorina.com<br/>Postal Address:13 Myrtiotissis Street, AQUA MANSIONS<br/>Apartment/Office 1 Germasogeia4041, Limassol, Cyprus</p>
 
-    <p>Email: support@doctorina.com</p>
-
-    <p>Postal Address:13 Myrtiotissis Street, AQUA MANSIONS</p>
-
-    <p>Apartment/Office 1 Germasogeia4041, Limassol, Cyprus</p>
-
-    <p>Last Updated: 2025-05-29</p>
-
-    <p>Previous Versions: Available upon request</p>
+    <p>Last Updated: 2025-05-29<br/>Previous Versions: Available upon request</p>
   `,
 };
 

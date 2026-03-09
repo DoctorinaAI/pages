@@ -25,19 +25,34 @@ body {
   padding: 16px;
 }
 
-/* Header with locale dropdown */
+/* Header with logo and locale dropdown */
 #header {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   position: sticky;
   top: 0;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  padding: 8px 0;
+  padding: 10px 0;
   margin-bottom: 16px;
   z-index: 10;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.header-logo svg {
+  height: 28px;
+  width: auto;
+}
+
+.header-logo:hover {
+  opacity: 0.8;
 }
 
 .locale-select {
@@ -84,8 +99,15 @@ h2 {
   font-size: 19px;
   font-weight: 600;
   margin: 32px 0 12px;
+  padding-top: 8px;
+  border-top: 1px solid #f0f0f0;
   line-height: 1.4;
   color: #111;
+}
+
+h2:first-of-type {
+  border-top: none;
+  padding-top: 0;
 }
 
 h3 {
@@ -103,16 +125,30 @@ h4 {
 }
 
 p {
-  margin: 0 0 12px;
+  margin: 0 0 14px;
+}
+
+/* First paragraph after h1 (intro/effective date) */
+h1 + p {
+  color: #555;
+  font-size: 14px;
+  line-height: 1.8;
+  border-left: 3px solid #e0e0e0;
+  padding-left: 14px;
+  margin-bottom: 20px;
 }
 
 ul, ol {
-  margin: 0 0 12px;
+  margin: 0 0 14px;
   padding-left: 24px;
 }
 
 li {
-  margin-bottom: 6px;
+  margin-bottom: 8px;
+}
+
+li:last-child {
+  margin-bottom: 0;
 }
 
 a {

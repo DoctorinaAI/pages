@@ -16,11 +16,11 @@ const locale: LocaleModule = {
       <li>Podemos modificar esta Política de Privacidad ocasionalmente. Si los cambios son relevantes, te lo notificaremos. El uso continuo de los Servicios después de la actualizaciónimplica que aceptas los cambios realizados. Si no aceptas los términos de la Política de Privacidad, por favor no utilices los Servicios.</li>
     </ul>
 
-    <p>1. Introducción</p>
+    <h2>1. Introducción</h2>
 
     <p>Esta Política de Privacidad explica cómo A.I. Doctor Medical Assist LTD ("Doctorina", "nosotros" o "nuestro") analiza, recopila, almacena, utiliza, transfiere y comparte informaciónpersonal de nuestros usuarios ("tú") en relación con https://app.doctorina.com/ ("la App"), incluidos todos los productos y servicios relacionados, disponibles en línea o a través decualquier aplicación (en conjunto, los "Servicios"). Doctorina actúa como el "responsable del tratamiento" según las leyes de protección de datos aplicables, incluido el Reglamento(UE) 2016/679. Podemos modificar esta Política de Privacidad ocasionalmente. Si los cambios son significativos, te lo notificaremos. Si la ley lo permite, el uso continuo de losServicios después de la actualización de esta política implicará tu aceptación de los cambios realizados. Si no estás de acuerdo con los términos de esta Política de Privacidad, porfavor no utilices los Servicios. CONSENTIMIENTO A LA POLÍTICA DE PRIVACIDAD. AL ACEPTAR ESTA POLÍTICA DE PRIVACIDAD DURANTE EL REGISTRO O DE CUALQUIEROTRA FORMA, ESTÁS DANDO TU CONSENTIMIENTO A TODO SU CONTENIDO, INCLUIDAS LAS ACTIVIDADES DE TRATAMIENTO QUE SE BASAN EN ELCONSENTIMIENTO COMO FUNDAMENTO LEGAL. SI NO ACEPTAS ESTA POLÍTICA DE PRIVACIDAD, NO PODRÁS UTILIZAR LOS SERVICIOS, YA QUE NO PODRÍAMOSPRESTARLOS SEGÚN SE DESCRIBE EN ESTA POLÍTICA.</p>
 
-    <p>2. ¿Qué datos personales recopilamos?</p>
+    <h2>2. ¿Qué datos personales recopilamos?</h2>
 
     <p>Podemos recopilar datos personales cuando interactúas con los Servicios. Esta información puede ser proporcionada directamente por ti o recopilada de forma automática.Podemos recopilar directamente de ti los siguientes datos personales:</p>
 
@@ -45,7 +45,7 @@ const locale: LocaleModule = {
       <li>Datos asociados a la<a href="https://doctorina.com/es/cookies">Política de Cookies</a>.</li>
     </ul>
 
-    <p>3. ¿Cómo utilizamos tus datos personales?</p>
+    <h2>3. ¿Cómo utilizamos tus datos personales?</h2>
 
     <p>Dependiendo de las funciones de los Servicios que utilices, procesaremos tus datos personales con base en una o más de las siguientes bases legales:</p>
 
@@ -118,11 +118,11 @@ const locale: LocaleModule = {
 
     <p>Sin decisiones clínicas. La App y los Servicios no toman decisiones clínicas ni recomiendan tratamientos. Toda la información y análisis proporcionados tienen como objetivo ayudarteen tu camino de cuidado personal, informarte sobre lo que está disponible y presentarte los contenidos de manera clara y accesible. No debes basarte únicamente en los resultadosproporcionados por los Servicios.</p>
 
-    <p>4. ¿Durante cuánto tiempo conservaremos tus datos personales?</p>
+    <h2>4. ¿Durante cuánto tiempo conservaremos tus datos personales?</h2>
 
     <p>Tus datos personales se conservarán mientras dure tu relación contractual con nosotros. Sin embargo, ciertos datos de identificación personal y de tráfico se almacenarán por unperíodo máximo de 2 años después de tu última actividad, con el fin de facilitar la reactivación de los Servicios en caso de que decidas regresar. Puedes desactivar tu cuenta ysolicitar la eliminación de tus datos personales en cualquier momento enviando un correo electrónico a support@doctorina.com. Atenderemos tu solicitud de eliminación dentro de unplazo de 30 días desde su recepción. Ten en cuenta que, en algunos casos, puede tomar hasta 90 días eliminar por completo tus datos personales de nuestros sistemas de respaldo.Si decides desactivar tu cuenta, eliminaremos en general todos los datos personales asociados, los cuales no serán recuperables si decides crear una nueva cuenta en el futuro.</p>
 
-    <p>5. ¿Compartiremos tus datos personales?</p>
+    <h2>5. ¿Compartiremos tus datos personales?</h2>
 
     <p>Contratamos a terceros para procesar tus datos personales en nuestro nombre, conforme a las leyes de protección de datos aplicables. Este tipo de colaboración es una prácticaestándar en la industria tecnológica, ya que sería operativamente poco práctico y económicamente inviable para nosotros desarrollar y mantener de forma independiente lainfraestructura necesaria para servicios de alojamiento, análisis de datos, entrega de correos electrónicos y otras funcionalidades similares. A estos terceros se les denomina"encargados del tratamiento" según la legislación vigente. Contractualmente les prohibimos a nuestros encargados del tratamiento utilizar los datos personales para cualquierpropósito distinto al necesario para prestar los Servicios según nuestras instrucciones. Estos proveedores respaldan el funcionamiento de nuestros Servicios, facilitan la comunicacióncon los usuarios y realizan otras funciones esenciales para el correcto funcionamiento y entrega de los Servicios. Seguimos siendo totalmente responsables de las acciones uomisiones de estos proveedores con respecto al tratamiento de datos personales y nos comprometemos a firmar acuerdos jurídicamente vinculantes con ellos, según lo exige lalegislación de protección de datos aplicable, incluyendo (pero sin limitarse a) el Reglamento General de Protección de Datos (RGPD) cuando sea relevante.Algunos de los principales encargados del tratamiento que utilizamos son los siguientes:</p>
 
@@ -134,7 +134,7 @@ const locale: LocaleModule = {
       <li><strong>Amazon Web Services (AWS) AI, Anthropic, Google Cloud AI y OpenAI:</strong>Podemos integrar varias funciones y herramientas de IA para habilitar los Servicios que serían útiles ybeneficiosos para ti</li>
     </ul>
 
-    <p>6. ¿De qué otras formas podemos compartir tus datos personales?</p>
+    <h2>6. ¿De qué otras formas podemos compartir tus datos personales?</h2>
 
     <p><strong>Plataformas de terceros y redes sociales.</strong></p>
 
@@ -156,7 +156,7 @@ const locale: LocaleModule = {
 
     <p>Podemos vernos obligados a utilizar y compartir tus datos personales para cumplir con leyes aplicables, solicitudes legales válidas y procesos judiciales, como responder a citacioneso requerimientos de autoridades gubernamentales.</p>
 
-    <p>7. Tus derechos de privacidad</p>
+    <h2>7. Tus derechos de privacidad</h2>
 
     <p>Creemos que la privacidad es un derecho humano fundamental. Por lo tanto, todos nuestros usuarios cuentan con los siguientes derechos universales:</p>
 
@@ -177,11 +177,11 @@ const locale: LocaleModule = {
 
     <p>Leyes locales: Ten en cuenta que, si las leyes de tu país reconocen derechos adicionales o brindan mayor protección no contemplada en esta Política de Privacidad, noscomprometemos a cumplir con dichos requisitos adicionales en caso de estar legalmente obligados.</p>
 
-    <p>8. Otros sitios, aplicaciones móviles y servicios</p>
+    <h2>8. Otros sitios, aplicaciones móviles y servicios</h2>
 
     <p>Los Servicios pueden contener enlaces a otros sitios web, aplicaciones móviles y servicios en línea operados por terceros. Estos enlaces no constituyen una recomendación niimplican que estemos afiliados con dichos terceros. Además, nuestros contenidos pueden aparecer en páginas web, aplicaciones móviles o servicios en línea que no están asociadoscon nosotros. No controlamos los sitios web, aplicaciones ni servicios de terceros, y no somos responsables de sus acciones. Estos terceros tienen sus propias reglas sobre larecopilación, uso y divulgación de tus datos personales. Te recomendamos leer atentamente sus respectivas políticas de privacidad antes de utilizarlos.</p>
 
-    <p>9. Seguridad y conservación de los datos</p>
+    <h2>9. Seguridad y conservación de los datos</h2>
 
     <p>Implementamos una serie de medidas técnicas y organizativas para proteger los datos personales contra pérdida, robo, uso indebido, acceso no autorizado, divulgación, alteración odestrucción. Estas medidas se diseñan teniendo en cuenta la naturaleza de los datos tratados y los riesgos asociados, especialmente si se trata de categorías especiales de datospersonales. Entre las medidas específicas que aplicamos para proteger tus datos se incluyen:</p>
 
@@ -193,21 +193,21 @@ const locale: LocaleModule = {
       <li><strong>Medidas técnicas:</strong>Monitoreamos y actualizamos regularmente nuestros sistemas informáticos para corregir vulnerabilidades y aplicar parches de seguridad a tiempo. Empleamosautenticación multifactor (MFA) cuando es pertinente, y realizamos evaluaciones periódicas de seguridad y pruebas de penetración para verificar la eficacia de nuestras medidastécnicas.</li>
     </ul>
 
-    <p>10. Transferencias internacionales de datos</p>
+    <h2>10. Transferencias internacionales de datos</h2>
 
     <p>Doctorina tiene su sede en Chipre. Nuestros servidores están ubicados en Alemania, Chipre, Estados Unidos y otros países dentro de la Unión Europea. Si accedes a nuestrosServicios desde fuera de estos lugares, debes saber que tus datos personales pueden ser transferidos, almacenados y tratados en nuestras instalaciones o en las de nuestrosproveedores de servicios de confianza, incluidos ubicaciones dentro de EE. UU., la UE y otras jurisdicciones. Si resides en el Espacio Económico Europeo (EEE), el Reino Unido (RU)o Suiza, ten en cuenta que algunos de estos países pueden no ofrecer el mismo nivel de protección de datos que el que garantiza la legislación de tu país. Sin embargo, tomamostodas las medidas necesarias para garantizar que tus datos personales estén protegidos de acuerdo con este Aviso de Privacidad y con la legislación de protección de datosaplicable, incluyendo la implementación de salvaguardas adecuadas para las transferencias internacionales. Para más información, puedes contactarnos a través de 13 MyrtiotissisStreet, AQUA MANSIONS, Apartment/Office 1 Germasogeia, 4041, Limassol, Cyprus.</p>
 
-    <p>11. Privacidad de los menores</p>
+    <h2>11. Privacidad de los menores</h2>
 
     <p>Los menores de 18 años no pueden aceptar contractualmente los Términos de Uso de los Servicios. Por esta razón, y para proteger a los menores, la aplicación no está dirigida apersonas menores de 18 años, y nuestros Términos de Uso no permiten que menores de esa edad utilicen los Servicios. Si descubrimos que hemos recopilado datos personales deun menor de 18 años, procederemos a eliminarlos. Animamos a los padres que tengan inquietudes a que se pongan en contacto con nosotros. No almacenamos ni tratamos datospersonales de personas menores de 18 años.</p>
 
-    <p>12. Cómo contactarnos</p>
+    <h2>12. Cómo contactarnos</h2>
 
     <p>Si tienes preguntas o comentarios sobre esta Política o sobre nuestras prácticas de privacidad, escríbenos a support@doctorina.com. También puedes enviarnos correspondenciapostal a: 13 Myrtiotissis Street, AQUA MANSIONS, Apartment/Office 1 Germasogeia, 4041, Limassol, Cyprus.</p>
   ` : `
     <h1>Política de Privacidad</h1>
 
-    <p>1. Introducción</p>
+    <h2>1. Introducción</h2>
 
     <p>Esta Política de Privacidad explica cómo A.I. Doctor Medical Assist LTD ("Doctorina", "nosotros" o "nuestro") analiza, recopila, almacena, utiliza, transfiere y comparte información personal de nuestros usuarios ("tú") en relación con https://app.doctorina.com/ ("la App"), incluidos todos los productos y servicios relacionados, disponibles en línea o a través de cualquier aplicación (en conjunto, los "Servicios").</p>
 
@@ -217,7 +217,7 @@ const locale: LocaleModule = {
 
     <p><strong>CONSENTIMIENTO A LA POLÍTICA DE PRIVACIDAD.</strong>AL ACEPTAR ESTA POLÍTICA DE PRIVACIDAD DURANTE EL REGISTRO O DE CUALQUIER OTRA FORMA, ESTÁS DANDO TU CONSENTIMIENTO A TODO SU CONTENIDO, INCLUIDAS LAS ACTIVIDADES DE TRATAMIENTO QUE SE BASAN EN EL CONSENTIMIENTO COMO FUNDAMENTO LEGAL. SI NO ACEPTAS ESTA POLÍTICA DE PRIVACIDAD, NO PODRÁS UTILIZAR LOS SERVICIOS, YA QUE NO PODRÍAMOS PRESTARLOS SEGÚN SE DESCRIBE EN ESTA POLÍTICA.</p>
 
-    <p>2. ¿Qué datos personales recopilamos?</p>
+    <h2>2. ¿Qué datos personales recopilamos?</h2>
 
     <p>Podemos recopilar datos personales cuando interactúas con los Servicios. Esta información puede ser proporcionada directamente por ti o recopilada de forma automática.</p>
 
@@ -242,7 +242,7 @@ const locale: LocaleModule = {
       <li>Datos asociados a la<a href="https://doctorina.com/es/cookies">Política de Cookies</a></li>
     </ul>
 
-    <p>3. ¿Cómo utilizamos tus datos personales?</p>
+    <h2>3. ¿Cómo utilizamos tus datos personales?</h2>
 
     <p>Dependiendo de las funciones de los Servicios que utilices, procesaremos tus datos personales con base en una o más de las siguientes bases legales:</p>
 
@@ -319,7 +319,7 @@ const locale: LocaleModule = {
 
     <p>La App y los Servicios no toman decisiones clínicas ni recomiendan tratamientos. Toda la información y análisis proporcionados tienen como objetivo ayudarte en tu camino de cuidado personal, informarte sobre lo que está disponible y presentarte los contenidos de manera clara y accesible. No debes basarte únicamente en los resultados proporcionados por los Servicios.</p>
 
-    <p>4. ¿Durante cuánto tiempo conservaremos tus datos personales?</p>
+    <h2>4. ¿Durante cuánto tiempo conservaremos tus datos personales?</h2>
 
     <p>Tus datos personales se conservarán mientras dure tu relación contractual con nosotros.</p>
 
@@ -329,7 +329,7 @@ const locale: LocaleModule = {
 
     <p>Ten en cuenta que, en algunos casos, puede tomar hasta 90 días eliminar por completo tus datos personales de nuestros sistemas de respaldo. Si decides desactivar tu cuenta, eliminaremos en general todos los datos personales asociados, los cuales no serán recuperables si decides crear una nueva cuenta en el futuro.</p>
 
-    <p>5. ¿Compartiremos tus datos personales?</p>
+    <h2>5. ¿Compartiremos tus datos personales?</h2>
 
     <p>Contratamos entidades externas para procesar sus datos personales en nuestro nombre, de conformidad con las leyes de protección de datos aplicables.</p>
 
@@ -368,7 +368,7 @@ const locale: LocaleModule = {
     </tr>
     </table>
 
-    <p>6. ¿De qué otras formas podemos compartir tus datos personales?</p>
+    <h2>6. ¿De qué otras formas podemos compartir tus datos personales?</h2>
 
     <p><strong>Plataformas de terceros y redes sociales.</strong></p>
 
@@ -382,7 +382,7 @@ const locale: LocaleModule = {
 
     <p><strong>Cumplimiento legal.</strong>Podemos vernos obligados a utilizar y compartir tus datos personales para cumplir con leyes aplicables, solicitudes legales válidas y procesos judiciales, como responder a citaciones o requerimientos de autoridades gubernamentales.</p>
 
-    <p>7. Tus derechos de privacidad</p>
+    <h2>7. Tus derechos de privacidad</h2>
 
     <p>Creemos que la privacidad es un derecho humano fundamental.</p>
 
@@ -407,11 +407,11 @@ const locale: LocaleModule = {
 
     <p><strong>Leyes nacionales.</strong>Tenga en cuenta que, si sus leyes locales otorgan derechos y protecciones adicionales que no se especifican en esta Política de Privacidad, nos comprometemos a cumplir con dichos requisitos adicionales, siempre que estemos obligados a hacerlo de acuerdo con las leyes aplicables.</p>
 
-    <p>8. Otros sitios, aplicaciones móviles y servicios</p>
+    <h2>8. Otros sitios, aplicaciones móviles y servicios</h2>
 
     <p>Los Servicios pueden contener enlaces a otros sitios web, aplicaciones móviles y servicios en línea operados por terceros. Estos enlaces no constituyen una aprobación ni indican que estemos afiliados a ningún tercero.Además, nuestro contenido puede aparecer en páginas web, aplicaciones móviles o servicios en línea que no estén asociados con nosotros. No controlamos los sitios web, aplicaciones móviles o servicios en línea de terceros y no somos responsables de sus acciones.Otros sitios web, aplicaciones móviles y servicios en línea siguen normas diferentes respecto a la recopilación, uso y compartición de sus datos personales. Le recomendamos que lea las políticas de privacidad de los otros sitios web, aplicaciones móviles y servicios en línea que utilice.</p>
 
-    <p>9. Seguridad y conservación de los datos</p>
+    <h2>9. Seguridad y conservación de los datos</h2>
 
     <p>Implementamos una serie de medidas técnicas y organizativas para proteger los datos personales contra pérdida, robo, uso indebido, acceso no autorizado, divulgación, alteración o destrucción. Estas medidas se diseñan teniendo en cuenta la naturaleza de los datos tratados y los riesgos asociados, especialmente si se trata de categorías especiales de datos personales. Entre las medidas específicas que aplicamos para proteger tus datos se incluyen:</p>
 
@@ -425,7 +425,7 @@ const locale: LocaleModule = {
       <li><strong>Medidas técnicas:</strong>Monitoreamos y actualizamos regularmente nuestros sistemas informáticos para corregir vulnerabilidades y aplicar parches de seguridad a tiempo. Empleamos autenticación multifactor (MFA) cuando es pertinente, y realizamos evaluaciones periódicas de seguridad y pruebas de penetración para verificar la eficacia de nuestras medidas técnicas.</li>
     </ul>
 
-    <p>10. Transferencias internacionales de datos</p>
+    <h2>10. Transferencias internacionales de datos</h2>
 
     <p>Doctorina tiene su sede en Chipre.</p>
 
@@ -435,11 +435,11 @@ const locale: LocaleModule = {
 
     <p>Para más información, por favor contáctenos en support@doctorina.com</p>
 
-    <p>11. Privacidad de los menores</p>
+    <h2>11. Privacidad de los menores</h2>
 
     <p>Los menores de 18 años no pueden aceptar contractualmente los Términos de Uso de los Servicios. Por esta razón, y para proteger a los menores, la aplicación no está dirigida a personas menores de 18 años, y nuestros Términos de Uso no permiten que menores de esa edad utilicen los Servicios. Si descubrimos que hemos recopilado datos personales de un menor de 18 años, procederemos a eliminarlos. Animamos a los padres que tengan inquietudes a que se pongan en contacto con nosotros. No almacenamos ni tratamos datos personales de personas menores de 18 años.</p>
 
-    <p>12. Cómo contactarnos</p>
+    <h2>12. Cómo contactarnos</h2>
 
     <p>Si tienes preguntas o comentarios sobre esta Política o sobre nuestras prácticas de privacidad, escríbenos a support@doctorina.com.</p>
 

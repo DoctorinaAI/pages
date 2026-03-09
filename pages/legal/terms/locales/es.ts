@@ -2,265 +2,14 @@ import type { LocaleModule } from '~/shared/legal/locale-resolver';
 
 const locale: LocaleModule = {
   title: 'Términos y Condiciones - Doctorina',
-  content: ({ isApple }) => isApple ? `
-    <h1>Términos y Condiciones</h1>
-
-    <p>Última actualización: 02-09-2024</p>
-
-    <p>Previous versions are available here: Version 1 (2024-09-02)</p>
-
-    <p>These Terms of Use apply to your access and use of the website, any associated mobile and web applications, and any other free or paid online products and services (collectively, our"Services") provided by Doctorina ("Doctorina", "Company", or "we").</p>
-
-    <p>By accessing or using any of our Services, you agree to be bound by these terms and conditions and Doctorina's Privacy Policy, incorporated herein by reference (together, the"Agreement"). Your use of the Services is expressly conditioned upon your consent to all terms and conditions of this Agreement, including the arbitration clause and class actionwaiver to resolve any disputes with Doctorina. If you do not agree to any of these terms of use, please do not use our Services.</p>
-
-    <p>DOCTORINA IS CURRENTLY OFFERED AS AN EXPERIMENTAL, BETA-STAGE SERVICE AND IS MADE AVAILABLE ON AN "AS-IS" AND "AS-AVAILABLE" BASIS.The platform remains under active development, and as such, may contain defects, errors, bugs, or other functional limitations. The Company reserves the right, at its sole discretionand without prior notice, to modify, suspend, or remove any features, content, functionalities, or outputs of the platform at any time. By accessing and using Doctorina during this betaphase, you expressly acknowledge and agree that the service is not a final product, may undergo substantial changes, and may not operate without interruption or free of errors. Youfurther accept all risks associated with the use of this beta-stage service and waive any claims against the Company arising from its experimental nature.</p>
-
-    <h2>1. CONDICIONES GENERALES Y ACEPTACIÓN</h2>
-
-    <p>1.1. Por favor, lee detenidamente este Acuerdo antes de usar los Servicios. Si no estás de acuerdo con todas o algunas de las cláusulas, no deberías utilizar los Servicios. Laaceptación de este Acuerdo IMPLICA QUE:</p>
-
-    <ul>
-      <li>Has leído y comprendido su contenido, incluida la Política de Privacidad disponible en [ENLACE];</li>
-      <li>Tienes al menos 18 años de edad y la capacidad legal para contratar los Servicios;</li>
-      <li>Asumes todas las obligaciones establecidas en el presente documento.</li>
-    </ul>
-
-    <p>1.2. Este Acuerdo será válido por tiempo indefinido y aplicará a todos los contratos de uso de los Servicios aquí descritos, salvo lo dispuesto en las cláusulas de terminación.</p>
-
-    <p>1.3. Constituye un contrato legalmente vinculante entre tú y Doctorina, con domicilio en 13 Myrtiotissis Street, AQUA MANSIONS, Apartment/Office 1 Germasogeia, 4041, Limassol,Cyprus..</p>
-
-    <h2>2. EL ACUERDO</h2>
-
-    <p>2.1. Doctorina es tu asistente personal de información médica. Es una plataforma digital impulsada por inteligencia artificial, diseñada para ayudarte a comprender mejor temas desalud, organizar tu información médica y explorar posibles caminos para profundizar en tus condiciones de salud. También podemos ayudarte a descubrir y comparar proveedores deservicios médicos, clínicas y especialistas relevantes según tus necesidades y preferencias personales. Con la información que proporciones, podemos sugerirte actividades debienestar, opciones de atención preventiva y ajustes saludables en tu estilo de vida. También podemos identificar, a partir de tus síntomas y datos registrados, posibles condiciones desalud que luego puedes comentar con tu médico. Nuestras recomendaciones tienen como objetivo empoderarte para tomar decisiones informadas sobre tu salud y bienestar.2.2. Algunos de los Servicios pueden ofrecerse de forma pagada.2.3. Los Servicios se brindan a nuestra entera discreción y están sujetos a tu cumplimiento del Acuerdo. Están destinados únicamente a tu uso personal y no comercial, salvo queacordemos expresamente lo contrario por escrito en relación con una funcionalidad específica, y solo deben utilizarse conforme a estos Términos.</p>
-
-    <h2>3. LOS SERVICIOS NO ESTÁN DESTINADOS A PROPORCIONAR ASESORAMIENTO MÉDICO, DIAGNÓSTICO NITRATAMIENTO</h2>
-
-    <p>3.1. DOCTORINA NO ES UN PROVEEDOR DE SALUD AUTORIZADO NI UN DISPOSITIVO MÉDICO, Y LOS SERVICIOS NO TIENEN COMO OBJETIVO PROPORCIONARDIAGNÓSTICOS, PLANES DE TRATAMIENTO NI GESTIÓN DE CONDICIONES MÉDICAS. TODO EL CONTENIDO Y LAS RECOMENDACIONES DISPONIBLES A TRAVÉS DELOS SERVICIOS SON EXCLUSIVAMENTE INFORMATIVOS Y NO DEBEN CONSIDERARSE UN SUSTITUTO DE ASESORAMIENTO, DIAGNÓSTICO O TRATAMIENTO MÉDICOPROFESIONAL. SIEMPRE DEBES CONSULTAR A UN MÉDICO O PROFESIONAL SANITARIO CALIFICADO ANTES DE TOMAR DECISIONES RELACIONADAS CON TU SALUDO BIENESTAR. NUNCA IGNORES NI RETRASES LA BÚSQUEDA DE ATENCIÓN MÉDICA PROFESIONAL POR INFORMACIÓN OBTENIDA A TRAVÉS DE LOS SERVICIOS. ENCASO DE UNA EMERGENCIA MÉDICA, CONTACTA A LOS SERVICIOS DE EMERGENCIA O ACUDE INMEDIATAMENTE AL CENTRO MÉDICO MÁS CERCANO.3.2. Doctorina no se hace responsable por errores, omisiones, inexactitudes técnicas o errores tipográficos en los materiales proporcionados a través de los Servicios. También sedeslinda de toda responsabilidad respecto a la aplicabilidad o idoneidad de la información para tus circunstancias personales de salud.3.3. Parte del contenido, incluidas las sugerencias relacionadas con la salud, puede ser generado mediante tecnologías de aprendizaje automático e inteligencia artificial, ya seadesarrolladas por terceros o por nosotros. Doctorina no ofrece garantías, explícitas ni implícitas, respecto a la precisión, integridad o fiabilidad de dicho contenido, incluyendogarantías implícitas de idoneidad para un propósito específico o de no infracción. Toda la información generada por IA debe ser verificada de forma independiente con profesionalessanitarios calificados antes de ser utilizada como base de decisiones.3.4. Como norma general, el mayor valor de los Servicios se obtiene cuando proporcionas información lo más precisa y completa posible sobre lo que deseas consultar. Eresresponsable de que el contenido que ingreses, tal como se define más adelante, cumpla con estos estándares.</p>
-
-    <h2>4. REGISTRO Y ELEGIBILIDAD</h2>
-
-    <p>4.1. Para utilizar la App, puede que se te solicite crear una cuenta ("Cuenta") y proporcionar cierta información personal, la cual puede incluir tu nombre y dirección de correoelectrónico. Deberás aceptar los términos de uso y la política de privacidad al descargar la App.4.2. Debes tener la mayoría de edad legal (al menos 18 años) para registrarte y utilizar nuestros Servicios. Al utilizar nuestros Servicios, confirmas que tienes la edad legal requerida.4.3. Si en algún momento detectamos o sospechamos que un perfil pertenece a un menor de edad, nos reservamos el derecho de solicitar pruebas que acrediten tu edad legal. Si noproporcionas pruebas suficientes, procederemos a la terminación inmediata de tu Cuenta y la eliminación de tus datos.4.4. No debes utilizar una Cuenta que pertenezca a otra persona. Cada individuo puede tener una sola Cuenta. Debes proporcionarnos información de registro precisa, completa yactualizada. Eres responsable de mantener la confidencialidad de tu contraseña o de las credenciales utilizadas si decides iniciar sesión a través de una plataforma de terceros (porejemplo, una cuenta de Google). El incumplimiento de esta disposición puede resultar en la terminación inmediata de tu Cuenta. Nos reservamos el derecho de rechazar el registro decualquier persona o cancelar un registro a nuestra entera discreción.</p>
-
-    <h2>5. CONTENIDO DEL USUARIO</h2>
-
-    <p>5.1. Nuestros Servicios pueden permitirte subir, almacenar y compartir contenido, incluidos textos, imágenes, documentos y otros elementos (en conjunto, el "Contenido del Usuario").Sujeto a este Acuerdo, conservas todos los derechos sobre tu Contenido del Usuario. No reclamamos la propiedad de ningún Contenido del Usuario que subas o proceses a través delos Servicios.</p>
-
-    <p>5.2. Al proporcionar tu Contenido del Usuario cuando utilizas los Servicios, (a) nos concedes una licencia no exclusiva, transferible, sublicenciable, mundial y libre de regalías parausar, copiar, explotar, modificar, mostrar públicamente, interpretar públicamente, crear obras derivadas, incorporarlo en otras obras, cambiarlo, reformatearlo y distribuirlo en relacióncon la prestación, funcionamiento y mejora de los Servicios, incluidos fines promocionales de la Compañía, sujeto a las limitaciones establecidas en nuestra Política de Privacidad; y(b) aceptas indemnizarnos y eximirnos a nosotros, nuestras afiliadas, directores, funcionarios y empleados de cualquier reclamación y gasto, incluidos honorarios legales, que surjandel Contenido del Usuario y/o del incumplimiento de este Acuerdo.</p>
-
-    <p>5.3. Reconoces que algunos de los Servicios están financiados mediante ingresos por publicidad y pueden incluir anuncios y promociones. Aceptas que podamos colocar dichapublicidad, referencias y promociones en los Servicios o sobre, alrededor o en conjunto con tu Contenido del Usuario. La forma, modalidad y alcance de dicha publicidad, referencias ypromociones están sujetas a cambio sin aviso específico. Reconoces que es posible que no siempre identifiquemos los servicios pagados, contenido patrocinado o comunicacionescomerciales como tales.</p>
-
-    <p>5.4. Declaras y garantizas que: (i) eres el titular o de otro modo tienes el derecho de usar el Contenido del Usuario modificado por ti a través de los Servicios, de acuerdo con losderechos y licencias establecidos en este Acuerdo; (ii) aceptas pagar todas las regalías, tarifas y cualquier otro monto que se deba en relación con el Contenido del Usuario que subaso proceses a través de los Servicios; y (iii) tienes el derecho y la capacidad legal para celebrar este Acuerdo conforme a las leyes de tu jurisdicción.</p>
-
-    <p>5.5. No puedes crear, publicar, almacenar ni compartir Contenido del Usuario que viole este Acuerdo o respecto del cual no tengas todos los derechos necesarios para otorgarnos lalicencia descrita anteriormente. Aunque no tenemos la obligación de revisar, editar o supervisar el Contenido del Usuario, podemos eliminarlo en cualquier momento y por cualquiermotivo.</p>
-
-    <p>5.6. Sin perjuicio de lo anterior, nos reservamos el derecho de cancelar, retirar o no publicar, en cualquier momento y sin previo aviso, cualquier Contenido del Usuario queconsideremos, a nuestra entera discreción, inapropiado o que infrinja este Acuerdo, la ley o los derechos de terceros.</p>
-
-    <p>5.7. Solo puedes publicar o compartir Contenido del Usuario que no sea confidencial y sobre el cual tengas todos los derechos necesarios para divulgarlo. No puedes crear, publicar,almacenar ni compartir Contenido del Usuario que:</p>
-
-    <ul>
-      <li>Sea ilegal, calumnioso, difamatorio, obsceno, pornográfico, indecente, lascivo, sugerente, acosador, amenazante, invasivo de la privacidad o derechos de imagen, abusivo,incendiario o fraudulento;</li>
-      <li>Constituya, fomente o proporcione instrucciones para cometer un delito, infrinja los derechos de cualquier parte o genere responsabilidad legal o viole cualquier ley local, estatal,nacional o internacional;</li>
-      <li>Infrinja alguna patente, marca registrada, secreto comercial, derecho de autor, derecho de publicidad u otro derecho de propiedad intelectual de cualquier parte;</li>
-      <li>Contenga o muestre afirmaciones, declaraciones o comentarios que no reflejen tus opiniones y experiencias genuinas;</li>
-      <li>Suplante o tergiverse tu afiliación con cualquier persona o entidad;</li>
-      <li>Contenga promociones no solicitadas, propaganda política, publicidad o solicitudes;</li>
-      <li>Incluya información privada o personal de un tercero sin su consentimiento;</li>
-      <li>Contenga virus, datos corruptos u otros archivos o contenidos dañinos, disruptivos o destructivos; o</li>
-      <li>Sea, a nuestro exclusivo juicio, objetable o que restrinja o impida que otras personas utilicen o disfruten de nuestros Servicios, o que pueda exponer al Servicio o a otros acualquier tipo de daño o responsabilidad.</li>
-    </ul>
-
-    <p>5.8. Además, aunque no tenemos la obligación de revisar, editar o supervisar el Contenido del Usuario, podemos eliminar o remover dicho contenido en cualquier momento y porcualquier motivo.</p>
-
-    <h2>6. USO DE LOS SERVICIOS</h2>
-
-    <p>6.1. Cualquier contenido que envíes a través de los Servicios se rige por nuestra Política de Privacidad [enlace]. Si envías una pregunta o respuesta, eres el único responsable de tuscomunicaciones, de las consecuencias de publicarlas y de la confianza que deposites en cualquier comunicación que se encuentre en áreas públicas. La Compañía no se haceresponsable de las consecuencias de dichas comunicaciones. COMO CONDICIÓN PARA UTILIZAR LOS SERVICIOS, ACEPTAS NO UTILIZARLOS PARA NINGÚN PROPÓSITOPROHIBIDO O NO ESPECÍFICAMENTE AUTORIZADO POR ESTE ACUERDO, INCLUYENDO EL DIAGNÓSTICO MÉDICO O AUTODIAGNÓSTICO. Eres responsable de todas tusactividades en relación con los Servicios y deberás cumplir con todas las leyes locales, estatales, nacionales e internacionales aplicables.</p>
-
-    <p>6.2. Aceptas que, si realizas cualquiera de las siguientes acciones, estarás incumpliendo gravemente este Acuerdo, y por lo tanto, te COMPROMETES A NO:</p>
-
-    <ul>
-      <li>revender, alquilar, arrendar, prestar, sublicenciar, distribuir o transferir de cualquier otro modo los derechos sobre los Servicios;</li>
-      <li>modificar, aplicar ingeniería inversa, descompilar o desensamblar cualquier parte de los Servicios, incluida la aplicación, el sitio web o cualquier otro componente;</li>
-      <li>copiar, adaptar, alterar, modificar, traducir o crear obras derivadas de los Servicios sin autorización escrita de la Compañía;</li>
-      <li>permitir que otras personas utilicen los Servicios, incluyendo pero no limitándose a compartir el uso a través de una conexión de red, salvo conforme a lo establecido en esteAcuerdo;</li>
-      <li>eludir o desactivar cualquier función tecnológica o medida de seguridad en los componentes de los Servicios;</li>
-      <li>utilizar los Servicios en combinación con cualquier dispositivo, programa o servicio diseñado para eludir medidas tecnológicas que controlan el acceso a archivos de contenido uotras obras protegidas por derechos de autor en cualquier jurisdicción;</li>
-      <li>usar o acceder a los Servicios para recopilar datos que puedan ser utilizados por un producto o servicio competidor;</li>
-      <li>utilizar tu Cuenta para anunciar, solicitar o transmitir publicidad comercial, incluyendo correos en cadena, correos basura o mensajes repetitivos;</li>
-      <li>usar tu Cuenta para llevar a cabo actividades ilegales;</li>
-      <li>subir o transmitir comunicaciones que infrinjan o violen los derechos de cualquier parte;</li>
-      <li>subir o publicar cualquier contenido multimedia que incluya expresiones de odio, abuso, imágenes ofensivas, obscenidad, pornografía, contenido sexual explícito o cualquiermaterial que pueda generar responsabilidad civil o penal conforme a la legislación aplicable o que de otro modo pueda entrar en conflicto con este Acuerdo;</li>
-      <li>usar los Servicios para diagnosticar cualquier condición médica, sea aguda o no, así como para cualquier otro fin no autorizado por este Acuerdo;</li>
-      <li>subir cualquier material que contenga virus informáticos o cualquier otro código, archivo o programa malicioso, tecnológicamente dañino o diseñado para interrumpir, destruir olimitar la funcionalidad de cualquier software o de los propios Servicios;</li>
-      <li>realizar cualquier otra acción que sea inconsistente con este Acuerdo y las leyes aplicables.</li>
-    </ul>
-
-    <p>6.3. Cualquier uso prohibido de los Servicios resultará en la terminación inmediata de tu licencia de uso.</p>
-
-    <p>6.4. Eres el único responsable del acceso y uso adecuado de tu Cuenta y del contenido dentro de los Servicios, sujeto a la legislación nacional o internacional, así como a losprincipios de buena fe, moral, buenas costumbres y orden público.</p>
-
-    <h2>7. CONTROLES DE EXPORTACIÓN</h2>
-
-    <p>7.1. El software que respalda los Servicios puede estar sujeto a leyes y regulaciones de control de exportación y reexportación, incluidas las Regulaciones de Administración deExportaciones ("EAR") del Departamento de Comercio de los EE. UU., las sanciones comerciales y económicas mantenidas por la Oficina de Control de Activos Extranjeros delDepartamento del Tesoro ("OFAC"), y las Regulaciones sobre el Tráfico Internacional de Armas ("ITAR") del Departamento de Estado.7.2. Declaras y garantizas que (1) no te encuentras ubicado en ningún país o región sujeta a embargo por parte del gobierno, y (2) no figuras en ninguna lista de personas restringidassegún las regulaciones mencionadas anteriormente.7.3. Aceptas cumplir con todas las leyes y regulaciones de exportación para asegurar que ni los Servicios ni ningún dato técnico relacionado, ni ningún producto directo o productosderivados de dicha tecnología que recibas bajo este Acuerdo sean exportados o reexportados, directa o indirectamente, en violación de dichas leyes y regulaciones o para finesprohibidos por las mismas.</p>
-
-    <h2>8. SERVICIOS DE PAGO Y SUSCRIPCIONES</h2>
-
-    <p>8.1. Aunque los Servicios se ofrecen en modalidad "beta", algunos pueden ser de pago: por ejemplo, podemos ofrecerte una suscripción o una compra puntual. El precio de cadaproducto se indicará en la pantalla de pago o en otras secciones de la plataforma de Servicios.</p>
-
-    <p>8.2. Podemos ofrecerte la opción de adquirir suscripciones que den acceso a ciertos Servicios adicionales. Las suscripciones tienen una duración indefinida. Te cobraremosautomáticamente tarifas recurrentes de forma periódica hasta que canceles. Antes de comprar, te informaremos sobre las tarifas, la frecuencia de facturación y cómo cancelar.</p>
-
-    <p>8.3. Algunos Servicios incluidos en la suscripción pueden cambiar con el tiempo, a medida que introducimos nuevas funciones, desarrollamos las actuales o retiramos algunas. Lasfunciones y contenidos pueden variar según el país, el idioma, la tienda correspondiente, la versión o el dispositivo.</p>
-
-    <p>8.4. Podemos modificar ocasionalmente las suscripciones, incluidas las tarifas recurrentes, y te informaremos previamente sobre cualquier cambio de precio. Los nuevos preciosentrarán en vigor al inicio del siguiente periodo de suscripción posterior a la notificación. Al continuar utilizando la suscripción después del cambio, se entenderá que aceptas el nuevoprecio. Si no estás de acuerdo, puedes rechazarlo cancelando la suscripción antes de que el nuevo precio entre en vigor.</p>
-
-    <p>8.5. Aunque intentamos asegurar que todos los precios en los Servicios sean correctos, pueden ocurrir errores. En tal caso, nos pondremos en contacto contigo. Tendrás derecho avolver a adquirir el Servicio una vez resuelto el error. Si no logramos contactarte, tu compra será cancelada automáticamente.</p>
-
-    <p>8.6. Tu suscripción se renovará automáticamente al final del periodo vigente, a menos que la canceles antes de que termine.</p>
-
-    <p>8.7. Debes cancelar tu suscripción o prueba gratuita antes de su renovación para evitar el cobro del siguiente periodo. Puedes escribirnos a support@doctorina.com o gestionarlodesde la sección "gestionar mi suscripción" dentro de los Servicios.</p>
-
-    <p>8.8. Una compra típica se realiza conforme a los siguientes pasos:</p>
-
-    <ul>
-      <li>Deberás elegir el servicio o suscripción que deseas adquirir. Los detalles se describen en la sección correspondiente al utilizar los Servicios.</li>
-      <li>Accederás a la sección de contratación, donde se presentará la información legal requerida, la descripción del servicio, el precio y/o la duración y validez. Puede que tengasvarias opciones para elegir.</li>
-      <li>Confirmarás el servicio seleccionado con su precio total y descripción, y elegirás un método de pago. La confirmación se realizará pulsando un botón como "Proceder al pago" uotro similar, lo cual constituye tu aceptación de los términos de la transacción.</li>
-      <li>Finalmente, deberás introducir la información necesaria para completar el pago según el método elegido.</li>
-    </ul>
-
-    <p>8.9. Podemos enviarte un resumen por correo electrónico sobre la compra realizada, incluyendo descripción, características, duración, precio, método de pago y fecha del contrato. Esposible que no tengas derecho a desistimiento ni a reembolso por esta transacción.</p>
-
-    <p>8.10. En ocasiones, podrás adquirir una suscripción en forma de oferta promocional. Estas ofertas pueden estar limitadas a nuevos usuarios y/o no estar disponibles para todos, y soloestarán vigentes por tiempo limitado. Pueden aplicar otras restricciones. Al finalizar el periodo promocional, la suscripción continuará automáticamente al precio regular vigente (sujetoa cambios), a menos que la canceles, más los impuestos aplicables.</p>
-
-    <p>8.11. También puedes realizar una donación para el desarrollo de los Servicios gratuitos existentes. En caso de donaciones recurrentes, se aplican los mismos principios decancelación que para las suscripciones. Puedes cancelar tu donación recurrente en cualquier momento.</p>
-
-    <h2>9. PRIVACIDAD Y USO DE INTELIGENCIA ARTIFICIAL (IA)</h2>
-
-    <p>9.1. Procesaremos tu información personal conforme a las leyes de privacidad aplicables. Consulta más detalles en nuestra Política de Privacidad, la cual forma parte integral de esteAcuerdo.</p>
-
-    <p>9.2. Doctorina procesa datos personales de acuerdo con las leyes de protección de datos vigentes y con nuestra Política de Privacidad. Aunque nuestra IA se esfuerza por ofrecersugerencias precisas y relevantes, funciona en base a algoritmos y a la información que tú proporcionas. Por lo tanto, las recomendaciones no deben considerarse exhaustivas nilibres de errores. Como se indica en otras secciones de este Acuerdo, te recomendamos encarecidamente que consultes a profesionales médicos calificados antes de tomardecisiones relacionadas con tu salud o tratamientos médicos. Doctorina no asume responsabilidad por decisiones basadas exclusivamente en recomendaciones generadas por IA.</p>
-
-    <p>9.3. Para evitar dudas, el tratamiento de tus datos personales no estará sujeto a decisiones automatizadas que produzcan efectos legales o que te afecten significativamente.</p>
-
-    <p>9.4. Doctorina utiliza tecnologías de inteligencia artificial únicamente para apoyar funciones informativas generales de salud y recomendaciones de servicios. Las funcionalidades deIA integradas en la plataforma NO SE CLASIFICAN COMO SISTEMAS DE ALTO RIESGO conforme a las leyes y regulaciones aplicables, incluyendo, entre otras, la Ley deInteligencia Artificial de la Unión Europea y marcos normativos similares. La plataforma no realiza diagnósticos médicos profesionales, ni reemplaza la toma de decisiones clínicas niintervenciones críticas en salud. Todos los resultados generados por la IA tienen fines exclusivamente informativos y no sustituyen el consejo, diagnóstico o tratamiento médicoprofesional. RECONOCES Y ACEPTAS QUE EL USO DE LA IA DENTRO DE DOCTORINA ESTÁ LIMITADO A FUNCIONES INFORMATIVAS NO CRÍTICAS, Y QUE TODADECISIÓN QUE AFECTE TU SALUD O BIENESTAR DEBE SER TOMADA POR PROFESIONALES MÉDICOS CALIFICADOS.</p>
-
-    <h2>10. LICENCIA LIMITADA DE USO DE LOS SERVICIOS</h2>
-
-    <p>10.1. Nuestros Servicios y el texto, gráficos, imágenes, fotografías, videos, ilustraciones, marcas registradas, nombres comerciales, encabezados de página, íconos de botones,scripts, marcas de servicio, logotipos, eslóganes, filtros, filtros generados por los usuarios y otros contenidos incluidos en ellos (en conjunto, el "Contenido del Servicio") son denuestra propiedad o están licenciados por nosotros y están protegidos por la ley. Salvo que se indique explícitamente en este Acuerdo, los Servicios y nuestros licenciantes sereservan todos los derechos sobre los Servicios y el Contenido del Servicio. Se te otorga una licencia limitada, no exclusiva, intransferible, no sublicenciable y revocable para accedery utilizar nuestros Servicios y el Contenido del Servicio únicamente para fines personales y no comerciales. Esta licencia está sujeta a este Acuerdo y no incluye ningún derecho para:(a) vender, revender o utilizar comercialmente los Servicios o el Contenido del Servicio; (b) copiar, reproducir, distribuir, ejecutar públicamente o mostrar públicamente el Contenido delServicio, salvo lo expresamente permitido por nosotros o por nuestros licenciantes; (c) modificar el Contenido del Servicio, eliminar avisos o marcas de derechos de propiedad, orealizar obras derivadas, salvo lo establecido en este Acuerdo; (d) utilizar técnicas de minería de datos, robots u otros métodos similares de recopilación o extracción de datos; o (e)utilizar los Servicios o el Contenido del Servicio de cualquier forma no expresamente autorizada en este Acuerdo. Cualquier uso de los Servicios o del Contenido del Servicio que noesté específicamente autorizado está estrictamente prohibido y revocará la licencia concedida en virtud de este Acuerdo. No debes eliminar, alterar ni ocultar ningún aviso dederechos de autor, marca registrada, marca de servicio u otros derechos de propiedad incorporados o que acompañen al Contenido del Servicio.</p>
-
-    <p>10.2. Todos los derechos, títulos e intereses sobre los Servicios que no se otorguen expresamente en este Acuerdo son reservados por Doctorina. Si deseas utilizar el software,nombre comercial, marca registrada, marca de servicio, logotipo, nombre de dominio y/o cualquier otra forma de identificación o contenido propiedad de Doctorina o bajo su licencia,deberás obtener autorización escrita de Doctorina. Las solicitudes de permiso pueden enviarse a [...]</p>
-
-    <p>10.3. Para evitar cualquier duda, Doctorina es titular de todos los textos, imágenes, fotografías, audios, videos, datos de ubicación, software, código y demás formas de datos ocomunicación que la Compañía cree y ponga a disposición en relación con los Servicios, incluidos —entre otros— las interfaces visuales, funciones interactivas, gráficos, diseño,compilación de Contenido del Usuario y calificaciones agregadas de usuarios, así como todos los demás elementos y componentes de la App, excluyendo el Contenido del Usuario(denominado colectivamente como el "Contenido de la Compañía"). Salvo lo expresamente indicado en este documento, no se te otorgan derechos expresos ni implícitos, y todos losderechos sobre los Servicios y el Contenido de Doctorina permanecen bajo nuestra titularidad.</p>
-
-    <h2>11. ENLACES</h2>
-
-    <p>11.1. Dentro de los Servicios puedes encontrar enlaces a otros sitios web operados por terceros. La inclusión de cualquier enlace, redirección o referencia ("enlaces") a otros sitiosweb desde o hacia los Servicios no implica ningún tipo de relación, colaboración o dependencia entre nosotros y los responsables de dichos sitios. No somos responsables delcontenido que visualices o utilices al acceder a esos sitios web.</p>
-
-    <h2>12. INDEMNIZACIÓN</h2>
-
-    <p>12.1. En la máxima medida permitida por la ley aplicable, aceptas indemnizar, defender y mantener indemne a nosotros y a cada uno de nuestros respectivos directores, ejecutivos,agentes, socios y empleados (individual y colectivamente, los "Miembros del Servicio") frente a cualquier pérdida, responsabilidad, reclamación, demanda, daño, gasto o costo("Reclamaciones") que surjan de o estén relacionados con: (a) tu acceso o uso de nuestros Servicios; (b) tu Contenido del Usuario; (c) tu incumplimiento de este Acuerdo; (d) tuinfracción, apropiación indebida o violación de los derechos de terceros (incluidos derechos de propiedad intelectual o derechos de privacidad); o (e) tu conducta en relación connuestros Servicios. Aceptas notificar de inmediato a los Miembros del Servicio sobre cualquier Reclamación de terceros, cooperar con ellos en la defensa de dichas Reclamaciones ypagar todos los honorarios, costos y gastos asociados con la defensa (incluidos, entre otros, los honorarios legales). Los Miembros del Servicio tendrán control sobre la defensa oresolución de cualquier Reclamación de terceros. Esta obligación de indemnización se suma, y no reemplaza, a cualquier otra que esté estipulada en un acuerdo escrito entre tú y losServicios o los demás Miembros del Servicio.</p>
-
-    <h2>13. EXCLUSIÓN DE GARANTÍAS Y LIMITACIÓN DE RESPONSABILIDAD</h2>
-
-    <p>13.1. Eres el único responsable de proporcionar los medios necesarios (incluidos los costos de conexión a Internet) para acceder a los Servicios. Si experimentas alguna dificultad oincidente, puedes informarlo por correo electrónico a support@doctorina.com. Una vez recibido el reporte, lo analizaremos y te daremos instrucciones razonables para resolverlo.</p>
-
-    <p>13.2. Nos reservamos el derecho de suspender o cancelar tu acceso a los Servicios en cualquier momento y sin previo aviso, ya sea por motivos técnicos, de seguridad,mantenimiento, interrupción del suministro eléctrico u otras causas, estén o no especificadas en este Acuerdo.</p>
-
-    <p>13.3. No tenemos la obligación de controlar cómo los usuarios interactúan o utilizan los Servicios, por lo que no garantizamos que su uso se ajuste a este Acuerdo. No estamosobligados a verificar la identidad de los usuarios ni la exactitud, validez, integridad o autenticidad de la información que proporcionan.</p>
-
-    <p>13.4. En la máxima medida permitida por la ley, rechazamos cualquier responsabilidad por daños derivados del uso de los Servicios o de la falta de veracidad, integridad y/oautenticidad de la información que los usuarios proporcionen a otros, incluyendo pero no limitándose a daños por suplantación de identidad.</p>
-
-    <p>13.5. Controlamos y operamos los Servicios desde diferentes ubicaciones y no garantizamos que estén disponibles en todas partes. Es posible que ciertas funciones no esténdisponibles en tu ubicación o varíen según la región.</p>
-
-    <p>13.6. LOS SERVICIOS, INCLUIDOS LOS SERVICIOS EN FASE BETA DE DOCTORINA, SE PROPORCIONAN "TAL CUAL", "SEGÚN DISPONIBILIDAD" Y SIN GARANTÍA DENINGÚN TIPO, EXPRESA O IMPLÍCITA, INCLUIDAS, ENTRE OTRAS, LAS GARANTÍAS IMPLÍCITAS DE COMERCIABILIDAD, ADECUACIÓN PARA UN FIN PARTICULAR, NOINFRACCIÓN O TITULARIDAD. NI LA COMPAÑÍA NI SUS DIRECTIVOS, EMPLEADOS, AGENTES, SOCIOS, PROVEEDORES O REPRESENTANTES GARANTIZAN QUE: (a)LOS SERVICIOS FUNCIONARÁN DE MANERA SEGURA O ESTARÁN DISPONIBLES EN UN MOMENTO O LUGAR ESPECÍFICO; (b) CUALQUIER DEFECTO SERÁCORREGIDO; (c) EL CONTENIDO ESTÁ LIBRE DE VIRUS U OTROS COMPONENTES DAÑINOS; (d) LOS RESULTADOS OBTENIDOS SATISFARÁN TUS EXPECTATIVAS; (e) LAINFORMACIÓN ES PRECISA, FIABLE O COMPLETA. El uso de los Servicios corre bajo tu propio riesgo. Algunas jurisdicciones no permiten limitaciones a las garantías implícitas,por lo que es posible que las anteriores no se apliquen a ti.</p>
-
-    <p>13.7. EN NINGÚN CASO LA COMPAÑÍA NI NINGUNO DE SUS REPRESENTANTES SERÁ RESPONSABLE DE DAÑOS INDIRECTOS, ESPECIALES, INCIDENTALES,CONSECUENCIALES O PUNITIVOS (INCLUYENDO PÉRDIDA DE USO, DE DATOS O DE BENEFICIOS), YA SEA POR CONTRATO, NEGLIGENCIA U OTRA TEORÍA LEGAL. Laresponsabilidad total de la Compañía no excederá el monto que hayas pagado por los Servicios, o cien dólares estadounidenses (USD $100) si no has realizado pagos. Nada en esteAcuerdo excluye responsabilidad donde la ley no lo permita. Si alguna disposición excede el límite legal permitido, se considerará restringida al máximo permitido.</p>
-
-    <h2>14. LEY APLICABLE Y RESOLUCIÓN DE DISPUTAS</h2>
-
-    <p>14.1. Si resides en un país de la Unión Europea, Reino Unido, Suiza, Noruega o Islandia, los tribunales de la República de Chipre tendrán jurisdicción exclusiva sobre cualquierdisputa derivada de este Acuerdo.</p>
-
-    <p>14.2. Si resides en otro país, tú y la Compañía aceptan resolver cualquier controversia mediante arbitraje individual vinculante conforme a las Reglas de Arbitraje del Consumidor de laAsociación Americana de Arbitraje (AAA). Más información en www.adr.org.</p>
-
-    <p>14.3. Si resides en EE. UU., puedes elegir que el arbitraje se realice en tu estado o en Boston, Massachusetts. Si resides fuera de EE. UU., el lugar será determinado por el árbitro.Las audiencias pueden realizarse por videollamada o resolverse mediante documentos si ambas partes lo acuerdan. La Ley Federal de Arbitraje regirá los procedimientos en EE. UU.</p>
-
-    <p>14.3.1. Antes de iniciar el arbitraje, debes enviar un Aviso de Disputa a 13 Myrtiotissis Street, AQUA MANSIONS, Apartment/Office 1 Germasogeia, 4041, Limassol, Cyprus.. LaCompañía hará lo mismo a tu correo electrónico. Si no se resuelve en 30 días, cualquiera podrá iniciar el proceso formal.</p>
-
-    <p>14.3.2. Los costos del arbitraje seguirán las reglas de la AAA. El árbitro podrá ordenar que se paguen honorarios legales si una parte actúa de mala fe.</p>
-
-    <p>14.3.3. El laudo arbitral será vinculante y podrá ejecutarse en cualquier tribunal competente.</p>
-
-    <p>14.3.4. Puedes rechazar esta cláusula de arbitraje notificándonos por escrito dentro de los 30 días posteriores a tu aceptación inicial del Acuerdo.</p>
-
-    <p>14.3.5. Si la Compañía cambia esta cláusula y tú no estás de acuerdo, puedes rechazar el cambio notificándonos por escrito dentro de los 30 días posteriores a la entrada en vigor delcambio.</p>
-
-    <p>14.3.6. Nada en esta sección impide que (i) presentes una demanda individual en tribunales de menor cuantía; (ii) busques medidas cautelares; (iii) busques apoyo legal para elarbitraje; o (iv) impugnes la ejecución del laudo. Si la ley aplicable prohíbe el arbitraje, cualquiera de las partes podrá recurrir a tribunales competentes.</p>
-
-    <p>14.4. Disposiciones adicionales:</p>
-
-    <ul>
-      <li>Las disputas deben iniciarse dentro del plazo de 1 año desde que surgieron.</li>
-      <li>Ambas partes renuncian al derecho de participar en demandas colectivas.</li>
-      <li>Se renuncia al derecho a juicios con jurado.</li>
-      <li>Este Acuerdo se rige por la ley inglesa, excluyendo sus normas sobre conflictos de leyes.</li>
-    </ul>
-
-    <p>14.5. This Agreement shall be governed by English law (with the exclusion of its conflict of laws rules).</p>
-
-    <h2>15. COMUNICACIONES ELECTRÓNICAS</h2>
-
-    <p>15.1. Al utilizar los Servicios, aceptas recibir comunicaciones electrónicas (respuestas a solicitudes, notificaciones, promociones, alertas de seguridad, etc.), ya sea por correoelectrónico, notificación push o publicaciones en los Servicios.</p>
-
-    <h2>16. TERMINACIÓN</h2>
-
-    <p>16.1. Podemos suspender o cancelar tu Cuenta: (i) si incumples este Acuerdo; (ii) si dejamos de ofrecer los Servicios; (iii) si estás inactivo más de 6 meses; (iv) o sin causa, encualquier momento.</p>
-
-    <p>16.2. En caso de terminación, deberás dejar de usar los Servicios. Tu acceso a la Cuenta y su contenido podrá ser revocado y eliminado.</p>
-
-    <p>16.3. Al terminar este Acuerdo, seguirán vigentes todas aquellas cláusulas que por su naturaleza deban sobrevivir, como resolución de disputas, propiedad intelectual, exclusión degarantías y limitación de responsabilidad.</p>
-
-    <h2>17. DIVISIBILIDAD</h2>
-
-    <p>17.1. Si alguna disposición de este Acuerdo se considera inválida, ilegal o inaplicable, dicha disposición será separable y no afectará la validez de las demás.</p>
-
-    <h2>18. PROCEDIMIENTO DE NOTIFICACIÓN Y RETIRO DE CONTENIDO</h2>
-
-    <p>18.1. Si consideras que algún contenido disponible a través de los Servicios infringe tus derechos de autor, puedes solicitar su eliminación contactándonos con la siguienteinformación:</p>
-
-    <ul>
-      <li>Identificación de la obra protegida;</li>
-      <li>Ubicación del contenido presuntamente infractor;</li>
-      <li>Tu nombre, dirección, teléfono y correo electrónico;</li>
-      <li>Declaración de buena fe indicando que el uso no está autorizado;</li>
-      <li>Declaración de veracidad bajo pena de perjurio;</li>
-      <li>Firma física o electrónica del titular o su representante autorizado.</li>
-    </ul>
-
-    <h2>19. OTRAS DISPOSICIONES</h2>
-
-    <p>19.1. Podemos modificar este Acuerdo cuando lo consideremos necesario. Publicaremos la versión actualizada en línea y, si la ley lo exige, te informaremos de los cambios.</p>
-
-    <p>19.2. El uso continuo de los Servicios tras la entrada en vigor de una versión actualizada constituye aceptación del nuevo Acuerdo.</p>
-
-    <p>19.3. Si no estás de acuerdo con los cambios, deberás dejar de usar los Servicios.</p>
-
-    <p>19.4. Podemos ceder nuestros derechos y obligaciones bajo este Acuerdo a cualquier afiliada o entidad de nuestro grupo.</p>
-
-    <h2>20. CONTÁCTANOS</h2>
-
-    <p>20.1. Si tienes dudas, comentarios, necesitas asistencia o deseas presentar un reclamo, contáctanos en: support@doctorina.com</p>
-  ` : `
-    <h1>Términos y Condiciones</h1>
+  content: ({ isApple }) => `
+    <h1>${isApple ? 'Términos de Uso' : 'Términos y Condiciones'}</h1>
 
     <p>Vigentes desde 2025-05-29</p>
-
-    <p>Versiones anteriores disponibles aquí:<a href="https://doctorina.com/es/terms-and-conditions-version-1">Versión 1 (2024-09-02)</a></p>
-
+    <p>Versiones anteriores disponibles aquí: Versión 1 (2024-09-02)</p>
     <p>Estos Términos de Uso se aplican a tu acceso y uso del sitio web, de las aplicaciones móviles y web asociadas, y de cualquier otro producto o servicio gratuito o de pago en línea (en conjunto, los "<strong>Servicios</strong>") proporcionados por Doctorina ("<strong>Doctorina</strong>", "<strong>la Compañía</strong>" o "<strong>nosotros</strong>").</p>
-
     <p>Al acceder o utilizar cualquiera de nuestros Servicios, aceptas quedar vinculado por estos términos y condiciones, así como por la Política de Privacidad de Doctorina, incorporada aquí por referencia (conjuntamente, el "Acuerdo"). El uso de los Servicios está expresamente condicionado a tu aceptación de todos los términos de este Acuerdo, incluida la cláusula de arbitraje y la renuncia a acciones colectivas para resolver cualquier disputa con Doctorina. Si no estás de acuerdo con alguno de estos términos, por favor no utilices nuestros Servicios.</p>
-
     <p>DOCTORINA SE OFRECE ACTUALMENTE COMO UN SERVICIO EXPERIMENTAL EN FASE BETA Y SE ENCUENTRA DISPONIBLE "TAL CUAL" Y "SEGÚN DISPONIBILIDAD".</p>
-
     <p>La plataforma está en desarrollo activo y, por lo tanto, puede contener errores, fallos o limitaciones funcionales. La Compañía se reserva el derecho, a su exclusivo criterio y sin previo aviso, de modificar, suspender o eliminar cualquier característica, contenido, funcionalidad o resultado de la plataforma en cualquier momento. Al acceder y utilizar Doctorina durante esta fase beta, reconoces y aceptas expresamente que el servicio no es un producto final, que puede experimentar cambios sustanciales y que puede no funcionar de manera ininterrumpida ni estar libre de errores. También aceptas todos los riesgos asociados con el uso de este servicio en fase beta y renuncias a cualquier reclamación contra la Compañía derivada de su carácter experimental.</p>
 
     <h2>1. CONDICIONES GENERALES Y ACEPTACIÓN</h2>
@@ -268,7 +17,7 @@ const locale: LocaleModule = {
     <p>1.1. Por favor, lee detenidamente este Acuerdo antes de usar los Servicios. Si no estás de acuerdo con todas o algunas de las cláusulas, no deberías utilizar los Servicios. La aceptación de este Acuerdo IMPLICA QUE:</p>
 
     <ul>
-      <li>Has leído y comprendido su contenido, incluida la Política de Privacidad disponible en [ENLACE];<a href="https://doctorina.com/es/privacy-policy">Política de Privacidad</a>.</li>
+      <li>Has leído y comprendido su contenido, incluida la Política de Privacidad disponible en [ENLACE]; Política de Privacidad.</li>
       <li>Tienes al menos 18 años de edad y la capacidad legal para contratar los Servicios;</li>
       <li>Asumes todas las obligaciones establecidas en el presente documento.</li>
     </ul>
@@ -337,7 +86,7 @@ const locale: LocaleModule = {
 
     <h2>6. USO DE LOS SERVICIOS</h2>
 
-    <p>6.1. Cualquier contenido que envíes a través de los Servicios se rige por nuestra<a href="https://www.doctorina.com/es/privacy-policy">Política de Privacidad</a>. Si envías una pregunta o respuesta, eres el único responsable de tus comunicaciones, de las consecuencias de publicarlas y de la confianza que deposites en cualquier comunicación que se encuentre en áreas públicas. La Compañía no se hace responsable de las consecuencias de dichas comunicaciones. COMO CONDICIÓN PARA UTILIZAR LOS SERVICIOS, ACEPTAS NO UTILIZARLOS PARA NINGÚN PROPÓSITO PROHIBIDO O NO ESPECÍFICAMENTE AUTORIZADO POR ESTE ACUERDO, INCLUYENDO EL DIAGNÓSTICO MÉDICO O AUTODIAGNÓSTICO. Eres responsable de todas tus actividades en relación con los Servicios y deberás cumplir con todas las leyes locales, estatales, nacionales e internacionales aplicables.</p>
+    <p>6.1. Cualquier contenido que envíes a través de los Servicios se rige por nuestra Política de Privacidad. Si envías una pregunta o respuesta, eres el único responsable de tus comunicaciones, de las consecuencias de publicarlas y de la confianza que deposites en cualquier comunicación que se encuentre en áreas públicas. La Compañía no se hace responsable de las consecuencias de dichas comunicaciones. COMO CONDICIÓN PARA UTILIZAR LOS SERVICIOS, ACEPTAS NO UTILIZARLOS PARA NINGÚN PROPÓSITO PROHIBIDO O NO ESPECÍFICAMENTE AUTORIZADO POR ESTE ACUERDO, INCLUYENDO EL DIAGNÓSTICO MÉDICO O AUTODIAGNÓSTICO. Eres responsable de todas tus actividades en relación con los Servicios y deberás cumplir con todas las leyes locales, estatales, nacionales e internacionales aplicables.</p>
 
     <p>6.2. Aceptas que, si realizas cualquiera de las siguientes acciones, estarás incumpliendo gravemente este Acuerdo, y por lo tanto, te COMPROMETES A NO:</p>
 
@@ -425,7 +174,7 @@ const locale: LocaleModule = {
 
     <h2>12. INDEMNIZACIÓN</h2>
 
-    <p>12.1. En la máxima medida permitida por la ley aplicable, aceptas indemnizar, defender y mantener indemne a nosotros y a cada uno de nuestros respectivos directores, ejecutivos, agentes, socios y empleados (individual y colectivamente, los "Miembros del Servicio") frente a cualquier pérdida, responsabilidad, reclamación, demanda, daño, gasto o costo ("Reclamaciones") que surjan de o estén relacionados con: (a) tu acceso o uso de nuestros Servicios; (b) tu Contenido del Usuario; (c) tu incumplimiento de este Acuerdo; (d) tu infracción, apropiación indebida o violación de los derechos de terceros (incluidos derechos de propiedad intelectual o derechos de privacidad); o (e) tu conducta en relación con nuestros Servicios. Aceptas notificar de inmediato a los Miembros del Servicio sobre cualquier Reclamación de terceros, cooperar con ellos en la defensa de dichas Reclamaciones y pagar todos los honorarios, costos y gastos asociados con la defensa (incluidos, entre otros, los honorarios legales). Los Miembros del Servicio tendrán control sobre la defensa o resolución de cualquier Reclamación de terceros. Esta obligación de indemnización se suma, y no reemplaza, a cualquier otra que esté estipulada en un acuerdo escrito entre tú y los Servicios o los demás Miembros del Servicio.Services Parties") from and against any loss, liability, claim, demand, damages, expenses or costs ("Claims") arising out of or related to (a) your access to or use of our Services; (b) your User Content; (c) your violation of this Agreement; (d) your violation, misappropriation or infringement of any rights of another (including intellectual property rights or privacy rights); or (e) your conduct in connection with our Services. You agree to promptly notify Service Parties of any third-party Claims, cooperate with Service Parties in defending such Claims, and pay all fees, costs, and expenses associated with defending such Claims (including, but not limited to, attorneys' fees). You also agree that the Service Parties will have control of the defense or settlement of any third-party Claims. This indemnity is in addition to, and not in lieu of, any other indemnities set forth in a written agreement between you and the Service or the other Service parties.</p>
+    <p>12.1. En la máxima medida permitida por la ley aplicable, aceptas indemnizar, defender y mantener indemne a nosotros y a cada uno de nuestros respectivos directores, ejecutivos, agentes, socios y empleados (individual y colectivamente, los "Miembros del Servicio") frente a cualquier pérdida, responsabilidad, reclamación, demanda, daño, gasto o costo ("Reclamaciones") que surjan de o estén relacionados con: (a) tu acceso o uso de nuestros Servicios; (b) tu Contenido del Usuario; (c) tu incumplimiento de este Acuerdo; (d) tu infracción, apropiación indebida o violación de los derechos de terceros (incluidos derechos de propiedad intelectual o derechos de privacidad); o (e) tu conducta en relación con nuestros Servicios. Aceptas notificar de inmediato a los Miembros del Servicio sobre cualquier Reclamación de terceros, cooperar con ellos en la defensa de dichas Reclamaciones y pagar todos los honorarios, costos y gastos asociados con la defensa (incluidos, entre otros, los honorarios legales). Los Miembros del Servicio tendrán control sobre la defensa o resolución de cualquier Reclamación de terceros. Esta obligación de indemnización se suma, y no reemplaza, a cualquier otra que esté estipulada en un acuerdo escrito entre tú y los Servicios o los demás Miembros del Servicio.<strong>Services Parties</strong>") from and against any loss, liability, claim, demand, damages, expenses or costs ("<strong>Claims</strong>") arising out of or related to (a) your access to or use of our Services; (b) your User Content; (c) your violation of this Agreement; (d) your violation, misappropriation or infringement of any rights of another (including intellectual property rights or privacy rights); or (e) your conduct in connection with our Services. You agree to promptly notify Service Parties of any third-party Claims, cooperate with Service Parties in defending such Claims, and pay all fees, costs, and expenses associated with defending such Claims (including, but not limited to, attorneys' fees). You also agree that the Service Parties will have control of the defense or settlement of any third-party Claims. This indemnity is in addition to, and not in lieu of, any other indemnities set forth in a written agreement between you and the Service or the other Service parties.</p>
 
     <h2>13. EXCLUSIÓN DE GARANTÍAS Y LIMITACIÓN DE RESPONSABILIDAD</h2>
 
@@ -471,8 +220,6 @@ const locale: LocaleModule = {
       <li>You and the Company acknowledge and agree that, to the fullest extent permitted by law, we are each waiving the right to participate in a consolidated proceeding.</li>
       <li>IN ADDITION, TO THE FULLEST EXTENT PERMITTED UNDER APPLICABLE LAW, YOU AND THE COMPANY UNCONDITIONALLY WAIVE ANY RESPECTIVE RIGHTS TO A JURY TRIAL.</li>
     </ul>
-
-    <p>14.5. This Agreement shall be governed by English law (with the exclusion of its conflict of laws rules).</p>
 
     <h2>15. COMUNICACIONES ELECTRÓNICAS</h2>
 

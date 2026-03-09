@@ -16,11 +16,11 @@ const locale: LocaleModule = {
       <li>We may change this Privacy Policy from time to time. If the changes are material, we will notify you. Your continued use of the Services after this policy has been updated indicatesyour acceptance of the changes made. If you do not accept the terms of the Privacy Policy, please do not use the Services.</li>
     </ul>
 
-    <p>1. Intro</p>
+    <h2>1. Intro</h2>
 
     <p>This Privacy Policy explains how A.I. Doctor Medical Assist LTD ("Doctorina" or "we" or "us") analyzes, collects, stores, uses, transfers and shares personal information from our users("you") in connection with https://app.doctorina.com/ ("App"), including any products and services related to it, available online or via any applications (all collectively, "Services").Doctorina is the 'data controller' as defined under applicable data protection laws, including Regulation (EU) 2016/679. We may change this Privacy Policy from time to time. If thechanges are material, we will notify you. If permitted by law, your continued use of the Services after this policy has been updated indicates your acceptance of changes made. If youdo not accept the terms of the Privacy Policy, please do not use the Services. CONSENT TO PRIVACY POLICY. CONSENTING TO OUR PRIVACY POLICY DURING REGISTRATIONOR OTHERWISE, YOU CONSENT TO ITS CONTENTS IN ITS ENTIRETY, INCLUDING THE PROCESSING ACTIVITIES THAT RELY ON CONSENT AS A LEGAL BASIS. FAILURETO ACCEPT THIS PRIVACY POLICY MEANS THAT YOU ARE NOT ALLOWED TO USE THE SERVICES, SINCE WE MIGHT NOT BE ABLE TO PROVIDE YOU WITH THESERVICES AS DESCRIBED IN THIS POLICY.</p>
 
-    <p>2. What personal data do we collect?</p>
+    <h2>2. What personal data do we collect?</h2>
 
     <p>We may collect personal data when you interact with the Services. Such personal data may be provided by you or collected automatically.We may collect the following personal data directly from you:</p>
 
@@ -45,7 +45,7 @@ const locale: LocaleModule = {
       <li>Data associated with the<a href="https://doctorina.com/cookies">Cookies Policy</a></li>
     </ul>
 
-    <p>3. How do we use your personal data?</p>
+    <h2>3. How do we use your personal data?</h2>
 
     <p>Depending on which features of the Services you use, we will process your personal data based on one or more of the following legal bases:</p>
 
@@ -114,11 +114,11 @@ const locale: LocaleModule = {
 
     <p>The App and the Services do not make any clinical decisions or recommend courses of treatment. All outputs and insights provided by the Services are intended to support you in yourhealthcare journey, inform you about available information, and provide information in a readable and ready-to-consume format. You should not rely on the outputs provided by theServices.</p>
 
-    <p>4. How long will we keep your personal data?</p>
+    <h2>4. How long will we keep your personal data?</h2>
 
     <p>Your personal data shall be stored as long as your contractual relationship with us lasts. However, we shall store certain personal identification and traffic data for a maximum period of2 years after your last day of inactivity to make sure you can resume the Services. At any time, you can deactivate your account and erase your personal data by emailingsupport@doctorina.com. We will address your deletion request within 30 days after receipt. Please note that in certain cases, it may take up to 90 days to fully erase your personal datafrom our backup systems. If you choose to deactivate your account, we will generally delete all associated personal data, and this data will not be recoverable if you choose to create anew account in the future</p>
 
-    <p>5. Will we share your personal data?</p>
+    <h2>5. Will we share your personal data?</h2>
 
     <p>We engage third-party entities to process your personal data on our behalf in accordance with applicable data protection laws. Such engagement is a standard practice within thetechnology industry, as it would be operationally impractical and economically unfeasible for us to independently develop and maintain infrastructure for hosting services, data analytics,email delivery, and similar functionalities. These third parties are referred to as 'processors' within the meaning of applicable data protection legislation. We contractually prohibit ourprocessors from processing personal data for any purpose other than the specific purposes related to the provision of our Services, as instructed by us. Processors support theoperation of our Services, facilitate communications with users, and perform other Services-related functions necessary to ensure the proper functioning and delivery of the Services.We remain fully responsible for the actions and omissions of our processors in relation to the processing of personal data and undertake to enter into legally binding data processingagreements with them, as required by applicable data protection laws, including but not limited to the General Data Protection Regulation (GDPR), where relevant.Here are some of the main processors we rely on:</p>
 
@@ -130,7 +130,7 @@ const locale: LocaleModule = {
       <li><strong>Amazon Web Services (AWS) AI, Anthropic, Google Cloud A, and OpenAI:</strong>We may integrate various AI functions and tools to enable the Services that would be helpful anduseful to you</li>
     </ul>
 
-    <p>6. How else can we share your personal data?</p>
+    <h2>6. How else can we share your personal data?</h2>
 
     <p><strong>Third-party platforms and social media networks.</strong></p>
 
@@ -152,7 +152,7 @@ const locale: LocaleModule = {
 
     <p>We may be required to use and share your personal data to comply with applicable laws, lawful requests, and legal processes, such as responding to subpoenas or requests fromgovernment authorities.</p>
 
-    <p>7. Your privacy rights</p>
+    <h2>7. Your privacy rights</h2>
 
     <p>We believe privacy is a fundamental human right. Therefore, all our users have the following universal rights:</p>
 
@@ -171,11 +171,11 @@ const locale: LocaleModule = {
 
     <p>National laws. Please note, that if your local laws provide for additional rights and protection otherwise not specified in this Privacy Policy, we undertake to comply with such additionalrequirements, if we are obligated to do so in accordance with the applicable laws.</p>
 
-    <p>8. Other Sites, Mobile Applications, and Services</p>
+    <h2>8. Other Sites, Mobile Applications, and Services</h2>
 
     <p>The Services may contain links to other websites, mobile applications and online services operated by third parties. These links are not an endorsement of, or indication that we areaffiliated with, any third party. In addition, our content may be included on webpages or in mobile applications or online services that are not associated with us. We do not control thirdparty websites, mobile applications or online services and we are not responsible for their actions. Other websites, mobile applications and online services follow different rulesregarding the collection, use and sharing of your personal data. We encourage you to read the privacy policies of the other websites, mobile applications, and online services you use.</p>
 
-    <p>9. Data Security and Retention</p>
+    <h2>9. Data Security and Retention</h2>
 
     <p>We implement a range of technical and organizational measures to protect personal data against loss, theft, misuse, and unauthorized access, disclosure, alteration, and destruction.These measures are designed taking into account the nature of the personal data we process and the risks associated with special categories of personal data, where applicable.Specifically, we implemented the following measures to protect your personal data:</p>
 
@@ -187,21 +187,21 @@ const locale: LocaleModule = {
       <li><strong>Technical Measures:</strong>We regularly monitor and update our IT systems to address potential vulnerabilities and apply security patches in a timely manner. Multi-factor authentication(MFA) is employed where appropriate to strengthen access controls. Regular security assessments and penetration testing are conducted to evaluate the effectiveness of ourtechnical safeguards.</li>
     </ul>
 
-    <p>10. Cross-Border Data Transfers</p>
+    <h2>10. Cross-Border Data Transfers</h2>
 
     <p>Doctorina is based in Cyprus. Our servers are located in Germany, Cyprus, the United States, and other countries within the European Union. If you access our Services from outsidethese locations, please be aware that your personal data may be transferred to, stored in, and processed at our facilities or those of our trusted third-party service providers, includingin the United States, the European Union, and other jurisdictions. If you are a resident of the European Economic Area (EEA), the United Kingdom (UK), or Switzerland, please notethat some of these countries may not provide the same level of data protection as is afforded under the laws of your country. Nevertheless, we take all necessary steps to ensure thatyour personal data is protected in accordance with this Privacy Notice and applicable data protection laws, including implementing appropriate safeguards for cross-border datatransfers. For further information, please contact us at support@doctorina.com</p>
 
-    <p>11. Children's privacy</p>
+    <h2>11. Children's privacy</h2>
 
     <p>Minors under 18 years of age are not able to contractually agree to the terms of use for the Services. For this reason, for the protection of minors, the application is not directed atminors under the age of 18, and our Terms of Use do not allow minors under 18 years of age to use the Service. If we learn that we have collected the personal data of a child underthe age of 18, we will delete it. We encourage parents with concerns to contact us. We do not store or process personal data of anyone under 18.</p>
 
-    <p>12. How to Contact Us</p>
+    <h2>12. How to Contact Us</h2>
 
     <p>Please direct any questions or comments regarding this Policy or our privacy practices to support@doctorina.com. You may also write to us via post at: 13 Myrtiotissis Street, AQUAMANSIONS, Apartment/Office 1 Germasogeia, 4041, Limassol, Cyprus.</p>
   ` : `
     <h1>Privacy Policy</h1>
 
-    <p>1. Intro</p>
+    <h2>1. Intro</h2>
 
     <p>This Privacy Policy explains how A.I. Doctor Medical Assist LTD ("Doctorina" or "we" or "us") analyzes, collects, stores, uses, transfers and shares personal information from our users ("you") in connection with https://app.doctorina.com/ ("App"), including any products and services related to it, available online or via any applications (all collectively, "Services").</p>
 
@@ -211,7 +211,7 @@ const locale: LocaleModule = {
 
     <p><strong>CONSENT TO PRIVACY POLICY.</strong>CONSENTING TO OUR PRIVACY POLICY DURING REGISTRATION OR OTHERWISE, YOU CONSENT TO ITS CONTENTS IN ITS ENTIRETY, INCLUDING THE PROCESSING ACTIVITIES THAT RELY ON CONSENT AS A LEGAL BASIS. FAILURE TO ACCEPT THIS PRIVACY POLICY MEANS THAT YOU ARE NOT ALLOWED TO USE THE SERVICES, SINCE WE MIGHT NOT BE ABLE TO PROVIDE YOU WITH THE SERVICES AS DESCRIBED IN THIS POLICY.</p>
 
-    <p>2. What personal data do we collect?</p>
+    <h2>2. What personal data do we collect?</h2>
 
     <p>We may collect personal data when you interact with the Services. Such personal data may be provided by you or collected automatically.</p>
 
@@ -236,7 +236,7 @@ const locale: LocaleModule = {
       <li><strong>Data associated with the</strong><a href="https://doctorina.com/cookies">Cookies Policy.</a></li>
     </ul>
 
-    <p>3. How do we use your personal data?</p>
+    <h2>3. How do we use your personal data?</h2>
 
     <p>Depending on which features of the Services you use, we will process your personal data based on one or more of the following legal bases:</p>
 
@@ -311,7 +311,7 @@ const locale: LocaleModule = {
 
     <p>The App and the Services do not make any clinical decisions or recommend courses of treatment. All outputs and insights provided by the Services are intended to support you in your healthcare journey, inform you about available information, and provide information in a readable and ready-to-consume format. You should not rely on the outputs provided by the Services.</p>
 
-    <p>4. How long will we keep your personal data?</p>
+    <h2>4. How long will we keep your personal data?</h2>
 
     <p>Your personal data shall be stored as long as your contractual relationship with us lasts.</p>
 
@@ -321,7 +321,7 @@ const locale: LocaleModule = {
 
     <p>Please note that in certain cases, it may take up to 90 days to fully erase your personal data from our backup systems. If you choose to deactivate your account, we will generally delete all associated personal data, and this data will not be recoverable if you choose to create a new account in the future</p>
 
-    <p>5. Will we share your personal data?</p>
+    <h2>5. Will we share your personal data?</h2>
 
     <p>We engage third-party entities to process your personal data on our behalf in accordance with applicable data protection laws.</p>
 
@@ -360,7 +360,7 @@ const locale: LocaleModule = {
     </tr>
     </table>
 
-    <p>6. How else can we share your personal data?</p>
+    <h2>6. How else can we share your personal data?</h2>
 
     <p><strong>Third-party platforms and social media networks.</strong>Where you choose to enable features that connect our Services with third-party platforms or social media networks—such as by logging into the App using your credentials from a third-party service, providing an API key or access token, or otherwise linking your account—or when you otherwise go to a separate apps, services, and websites - for example, by clicking any links- we will no longer be able to control what information is shared with such parties. All data processing activities will be dictated by the relevant privacy policies of such services. We encourage you to review those terms carefully before enabling such integrations.</p>
 
@@ -372,7 +372,7 @@ const locale: LocaleModule = {
 
     <p><strong>Compliance with Law.</strong>We may be required to use and share your personal data to comply with applicable laws, lawful requests, and legal processes, such as responding to subpoenas or requests from government authorities.</p>
 
-    <p>7. Your privacy rights</p>
+    <h2>7. Your privacy rights</h2>
 
     <p>We believe privacy is a fundamental human right.</p>
 
@@ -397,11 +397,11 @@ const locale: LocaleModule = {
 
     <p><strong>National laws.</strong>Please note, that if your local laws provide for additional rights and protection otherwise not specified in this Privacy Policy, we undertake to comply with such additional requirements, if we are obligated to do so in accordance with the applicable laws.</p>
 
-    <p>8. Other Sites, Mobile Applications, and Services</p>
+    <h2>8. Other Sites, Mobile Applications, and Services</h2>
 
     <p>The Services may contain links to other websites, mobile applications and online services operated by third parties. These links are not an endorsement of, or indication that we are affiliated with, any third party. In addition, our content may be included on webpages or in mobile applications or online services that are not associated with us. We do not control third party websites, mobile applications or online services and we are not responsible for their actions. Other websites, mobile applications and online services follow different rules regarding the collection, use and sharing of your personal data. We encourage you to read the privacy policies of the other websites, mobile applications, and online services you use.</p>
 
-    <p>9. Data Security and Retention</p>
+    <h2>9. Data Security and Retention</h2>
 
     <p>We implement a range of technical and organizational measures to protect personal data against loss, theft, misuse, and unauthorized access, disclosure, alteration, and destruction. These measures are designed taking into account the nature of the personal data we process and the risks associated with special categories of personal data, where applicable.</p>
 
@@ -415,7 +415,7 @@ const locale: LocaleModule = {
       <li><strong>Technical Measures:</strong>We regularly monitor and update our IT systems to address potential vulnerabilities and apply security patches in a timely manner. Multi-factor authentication (MFA) is employed where appropriate to strengthen access controls. Regular security assessments and penetration testing are conducted to evaluate the effectiveness of our technical safeguards.</li>
     </ul>
 
-    <p>10. Cross-Border Data Transfers</p>
+    <h2>10. Cross-Border Data Transfers</h2>
 
     <p>Doctorina is based in Cyprus.</p>
 
@@ -425,11 +425,11 @@ const locale: LocaleModule = {
 
     <p>For further information, please contact us at support@doctorina.com</p>
 
-    <p>11. Children's Privacy</p>
+    <h2>11. Children's Privacy</h2>
 
     <p>Minors under 18 years of age are not able to contractually agree to the terms of use for the Services. For this reason, for the protection of minors, the application is not directed at minors under the age of 18, and our Terms of Use do not allow minors under 18 years of age to use the Service. If we learn that we have collected the personal data of a child under the age of 18, we will delete it. We encourage parents with concerns to contact us. We do not store or process personal data of anyone under 18.</p>
 
-    <p>12. How to Contact Us</p>
+    <h2>12. How to Contact Us</h2>
 
     <p>Please direct any questions or comments regarding this Policy or our privacy practices to support@doctorina.com.</p>
 
