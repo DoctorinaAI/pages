@@ -5,118 +5,138 @@ const locale: LocaleModule = {
   content: () => `
     <h1>Política de Cookies</h1>
 
-    <p><strong>Vigente desde 2025-05-29.</strong><br>
-    Versiones anteriores disponibles bajo solicitud.</p>
-
-    <p>Esta Política de Cookies explica cómo A.I. Doctor Medical Assist LTD ("Doctorina", "nosotros" o "nuestro") utiliza cookies y tecnologías de seguimiento similares en nuestro sitio web <a href="https://doctorina.com">https://doctorina.com</a> y nuestra aplicación web <a href="https://app.doctorina.com">https://app.doctorina.com</a> (en conjunto, los "Servicios").</p>
-
-    <p>Al utilizar nuestros Servicios, consientes el uso de cookies y tecnologías similares según se describe en esta política.</p>
-
-    <h2>1. ¿Qué son las Cookies?</h2>
-
-    <p>Utilizamos cookies y tecnologías similares para mejorar tu experiencia en nuestro sitio web, personalizar el contenido y los anuncios, analizar el tráfico y garantizar la seguridad de los datos. Esta Política de Cookies explica qué cookies utilizamos, con qué fines y cómo puedes gestionarlas.</p>
-
-    <h2>2. Tipos de Cookies que Utilizamos</h2>
+    <p>2. Tipos de Cookies que Utilizamos</p>
 
     <p>Utilizamos las siguientes categorías de cookies:</p>
 
-    <ul>
-      <li><strong>Cookies Estrictamente Necesarias</strong> – Estas cookies son esenciales para el funcionamiento del sitio web, incluyendo la navegación y el acceso a áreas seguras.</li>
-      <li><strong>Cookies Funcionales</strong> – Estas cookies recuerdan tus preferencias y configuraciones (como idioma o región) para proporcionar una experiencia más personalizada.</li>
-      <li><strong>Cookies Analíticas</strong> – Estas cookies recopilan información sobre cómo los visitantes usan el sitio para ayudarnos a analizar y mejorar su rendimiento.</li>
-      <li><strong>Cookies de Marketing</strong> – Estas cookies se utilizan para ofrecer anuncios que sean relevantes para ti y para evaluar la efectividad de las campañas publicitarias.</li>
-    </ul>
+    <p><strong>Cookies Estrictamente Necesarias</strong>– Estas cookies son esenciales para el funcionamiento del sitio web, incluyendo la navegación y el acceso a áreas seguras.</p>
 
-    <h2>3. Tecnologías de Almacenamiento Local</h2>
+    <p><strong>Cookies Funcionales</strong>– Estas cookies recuerdan tus preferencias y configuraciones (como idioma o región) para proporcionar una experiencia más personalizada.</p>
+
+    <p><strong>Cookies Analíticas</strong>– Estas cookies recopilan información sobre cómo los visitantes usan el sitio para ayudarnos a analizar y mejorar su rendimiento.</p>
+
+    <p><strong>Cookies de Marketing</strong>– Estas cookies se utilizan para ofrecer anuncios que sean relevantes para ti y para evaluar la efectividad de las campañas publicitarias.</p>
+
+    <p>3. Tecnologías de Almacenamiento Local</p>
 
     <p>Además de las cookies, nuestros Servicios utilizan otras tecnologías de almacenamiento local:</p>
 
-    <h3>3.1 Almacenamiento local y almacenamiento de sesión</h3>
+    <p>3.1 Almacenamiento local y almacenamiento de sesión</p>
 
-    <ul>
-      <li><strong>Finalidad:</strong> Almacenar preferencias del usuario, estado de la aplicación y datos temporales.</li>
-      <li><strong>Datos:</strong> Configuración del usuario, preferencias de idioma, datos temporales de formularios.</li>
-      <li><strong>Retención:</strong> Hasta que se borren manualmente o se limpie la caché del navegador.</li>
-    </ul>
+    <p>Finalidad: Almacenar preferencias del usuario, estado de la aplicación y datos temporales</p>
 
-    <h3>3.2 IndexedDB (Aplicación web)</h3>
+    <p>Datos: Configuración del usuario, preferencias de idioma, datos temporales de formularios</p>
 
-    <ul>
-      <li><strong>Finalidad:</strong> Base de datos local para funcionalidad sin conexión y optimización del rendimiento.</li>
-      <li><strong>Datos:</strong> Mensajes de chat, datos del usuario para acceso sin conexión, caché de la aplicación.</li>
-      <li><strong>Retención:</strong> Hasta que se borre manualmente o cuando elimine su cuenta.</li>
-    </ul>
+    <p>Retención: Hasta que se borren manualmente o se limpie la caché del navegador</p>
 
-    <h3>3.3 SharedPreferences (Aplicación móvil)</h3>
+    <p>3.2 IndexedDB (Aplicación web)</p>
 
-    <ul>
-      <li><strong>Finalidad:</strong> Almacenar preferencias y configuraciones de la aplicación.</li>
-      <li><strong>Datos:</strong> Preferencias del usuario, estado de autenticación, configuración de la aplicación.</li>
-      <li><strong>Retención:</strong> Hasta que se desinstale la aplicación o los datos se borren manualmente.</li>
-    </ul>
+    <p>Finalidad: Base de datos local para funcionalidad sin conexión y optimización del rendimiento</p>
 
-    <h2>4. Servicios de Terceros</h2>
+    <p>Datos: Mensajes de chat, datos del usuario para acceso sin conexión, caché de la aplicación</p>
 
-    <h3>4.1 Firebase Analytics (Aplicación Móvil)</h3>
+    <p>Retención: Hasta que se borre manualmente o cuando elimine su cuenta</p>
 
-    <ul>
-      <li><strong>Proveedor:</strong> Google LLC.</li>
-      <li><strong>Propósito:</strong> Análisis y monitoreo de rendimiento de la aplicación móvil.</li>
-      <li><strong>Datos Recopilados:</strong> Patrones de uso de la aplicación, reportes de fallos, métricas de rendimiento.</li>
-      <li><strong>Política de Privacidad:</strong> <a href="https://policies.google.com/privacy">https://policies.google.com/privacy</a></li>
-      <li><strong>Exclusión:</strong> Disponible a través de la configuración de la aplicación.</li>
-    </ul>
+    <p>3.3 SharedPreferences (Aplicación móvil)</p>
 
-    <h3>4.2 YouTube (Videos Integrados)</h3>
+    <p>Finalidad: Almacenar preferencias y configuraciones de la aplicación</p>
 
-    <ul>
-      <li><strong>Proveedor:</strong> Google LLC.</li>
-      <li><strong>Propósito:</strong> Entrega de contenido de video en nuestra página de inicio.</li>
-      <li><strong>Datos Recopilados:</strong> Comportamiento de visualización de videos, información del dispositivo.</li>
-      <li><strong>Política de Privacidad:</strong> <a href="https://policies.google.com/privacy">https://policies.google.com/privacy</a></li>
-    </ul>
+    <p>Datos: Preferencias del usuario, estado de autenticación, configuración de la aplicación</p>
 
-    <h3>4.3 Google Fonts</h3>
+    <p>Retención: Hasta que se desinstale la aplicación o los datos se borren manualmente</p>
 
-    <ul>
-      <li><strong>Proveedor:</strong> Google LLC.</li>
-      <li><strong>Propósito:</strong> Entrega de fuentes web.</li>
-      <li><strong>Datos Recopilados:</strong> Dirección IP, información del navegador.</li>
-      <li><strong>Política de Privacidad:</strong> <a href="https://policies.google.com/privacy">https://policies.google.com/privacy</a></li>
-    </ul>
+    <p>4. Servicios de Terceros</p>
 
-    <h2>5. Gestión de Cookies y Tus Opciones</h2>
+    <p>4.1 Firebase Analytics (Aplicación Móvil)</p>
 
-    <h3>5.1 Configuración del Navegador</h3>
+    <p><strong>Provider:</strong>Proveedor: Google LLC</p>
+
+    <p><strong>Purpose:</strong>Propósito: Análisis y monitoreo de rendimiento de la aplicación móvil</p>
+
+    <p><strong>Data Collected:</strong>Datos Recopilados: Patrones de uso de la aplicación, reportes de fallos, métricas de rendimiento</p>
+
+    <p><strong>Privacy Policy:</strong><a href="https://policies.google.com/privacy">Política de Privacidad: https://policies.google.com/privacy</a></p>
+
+    <p><strong>Opt-out:</strong>Exclusión: Disponible a través de la configuración de la aplicación</p>
+
+    <p>4.2 YouTube (Videos Integrados)</p>
+
+    <p><strong>Provider:</strong>Proveedor: Google LLC</p>
+
+    <p><strong>Purpose:</strong>Propósito: Entrega de contenido de video en nuestra página de inicio</p>
+
+    <p><strong>Data Collected:</strong>Datos Recopilados: Comportamiento de visualización de videos, información del dispositivo</p>
+
+    <p><strong>Privacy Policy:</strong><a href="https://policies.google.com/privacy">Política de Privacidad: https://policies.google.com/privacy</a></p>
+
+    <p>4.3 Google Fonts</p>
+
+    <p><strong>Provider:</strong>Proveedor: Google LLC</p>
+
+    <p><strong>Purpose:</strong>Propósito: Entrega de fuentes web</p>
+
+    <p><strong>Data Collected:</strong>Datos Recopilados: Dirección IP, información del navegador</p>
+
+    <p><strong>Privacy Policy:</strong><a href="https://policies.google.com/privacy">Política de Privacidad: https://policies.google.com/privacy</a></p>
+
+    <p>5. Gestión de Cookies y Tus Opciones</p>
+
+    <p>5.1 Configuración del Navegador</p>
 
     <p>Puedes controlar las cookies a través de la configuración de tu navegador:</p>
 
-    <ul>
-      <li>Chrome: Configuración &gt; Privacidad y Seguridad &gt; Cookies y otros datos del sitio</li>
-      <li>Firefox: Configuración &gt; Privacidad y Seguridad &gt; Cookies y Datos del Sitio</li>
-      <li>Safari: Preferencias &gt; Privacidad &gt; Administrar Datos del Sitio Web</li>
-      <li>Edge: Configuración &gt; Permisos de cookies y sitio</li>
-    </ul>
+    <p>Chrome: Configuración > Privacidad y Seguridad > Cookies y otros datos del sitio</p>
 
-    <h3>5.2 Opciones de Exclusión</h3>
+    <p>Firefox: Configuración > Privacidad y Seguridad > Cookies y Datos del Sitio</p>
 
-    <ul>
-      <li><strong>Matomo Analytics:</strong> Puedes excluirte visitando nuestra configuración de privacidad o usando la función de exclusión en tu navegador.</li>
-      <li><strong>Firebase Analytics:</strong> Disponible a través de la configuración de la aplicación móvil.</li>
-      <li><strong>Todos los Análisis:</strong> Puedes deshabilitar el seguimiento de análisis contactándonos en <a href="mailto:support@doctorina.com">support@doctorina.com</a>.</li>
-    </ul>
+    <p>Safari: Preferencias > Privacidad > Administrar Datos del Sitio Web</p>
 
-    <h3>5.3 Consecuencias de Deshabilitar Cookies</h3>
+    <p>Edge: Configuración > Permisos de cookies y sitio</p>
+
+    <p>5.2 Opciones de Exclusión</p>
+
+    <p>Matomo Analytics: Puedes excluirte visitando nuestra configuración de privacidad o usando la función de exclusión en tu navegador</p>
+
+    <p>Firebase Analytics: Disponible a través de la configuración de la aplicación móvil</p>
+
+    <p>Todos los Análisis: Puedes deshabilitar el seguimiento de análisis contactándonos en support@doctorina.com</p>
+
+    <p>5.3 Consecuencias de Deshabilitar Cookies</p>
 
     <p>Deshabilitar ciertas cookies puede afectar la funcionalidad de nuestros Servicios:</p>
 
+    <p>Puede que necesites volver a ingresar información con más frecuencia</p>
+
+    <p>Algunas características pueden no funcionar correctamente</p>
+
+    <p>Tu experiencia de usuario puede ser menos personalizada</p>
+
     <ul>
-      <li>Puede que necesites volver a ingresar información con más frecuencia.</li>
-      <li>Algunas características pueden no funcionar correctamente.</li>
-      <li>Tu experiencia de usuario puede ser menos personalizada.</li>
+      <li>Chrome: Settings > Privacy and Security > Cookies and other site data</li>
+      <li>Firefox: Settings > Privacy & Security > Cookies and Site Data</li>
+      <li>Safari: Preferences > Privacy > Manage Website Data</li>
+      <li>Edge: Settings > Cookies and site permissions</li>
     </ul>
 
-    <h2>6. Seguridad de Datos</h2>
+    <p>5.2 Opt-Out Options</p>
+
+    <ul>
+      <li>Matomo Analytics: You can opt out by visiting our privacy settings or using the opt-out feature in your browser</li>
+      <li>Firebase Analytics: Available through mobile app settings</li>
+      <li>All Analytics: You can disable analytics tracking by contacting us at support@doctorina.com</li>
+    </ul>
+
+    <p>5.3 Consequences of Disabling Cookies</p>
+
+    <p>Disabling certain cookies may affect the functionality of our Services:</p>
+
+    <ul>
+      <li>You may need to re-enter information more frequently</li>
+      <li>Some features may not work properly</li>
+      <li>Your user experience may be less personalized</li>
+    </ul>
+
+    <p>6. Seguridad de Datos</p>
 
     <p>Implementamos medidas técnicas y organizativas apropiadas para proteger los datos de cookies:</p>
 
@@ -127,7 +147,7 @@ const locale: LocaleModule = {
       <li><strong>Controles de acceso y autenticación</strong></li>
     </ul>
 
-    <h2>7. Transferencias Internacionales de Datos</h2>
+    <p>7. Transferencias Internacionales de Datos</p>
 
     <p>Algunos de nuestros proveedores de servicios pueden estar ubicados fuera de tu país. Cuando transferimos datos de cookies internacionalmente, aseguramos que se implementen las salvaguardas apropiadas, incluyendo:</p>
 
@@ -137,7 +157,7 @@ const locale: LocaleModule = {
       <li>Otras salvaguardas apropiadas según lo requiera la ley aplicable</li>
     </ul>
 
-    <h2>8. Actualizaciones de Esta Política</h2>
+    <p>8. Actualizaciones de Esta Política</p>
 
     <p>Podemos actualizar esta Política de Cookies de vez en cuando. Cuando hagamos cambios materiales, te notificaremos:</p>
 
@@ -147,15 +167,19 @@ const locale: LocaleModule = {
       <li>Mostrando un aviso en nuestros Servicios</li>
     </ul>
 
-    <h2>9. Información de Contacto</h2>
+    <p>9. Información de Contacto</p>
 
     <p>Si tienes preguntas sobre esta Política de Cookies o nuestro uso de cookies, por favor contáctanos:</p>
 
-    <p><strong>Correo Electrónico:</strong> <a href="mailto:support@doctorina.com">support@doctorina.com</a><br>
-    <strong>Dirección Postal:</strong> 13 Myrtiotissis Street, AQUA MANSIONS, Apartment/Office 1 Germasogeia 4041, Limassol, Cyprus</p>
+    <p>Correo Electrónico: support@doctorina.com</p>
 
-    <p><strong>Última Actualización:</strong> 2025-05-29<br>
-    <strong>Versiones Anteriores:</strong> Disponibles bajo solicitud</p>
+    <p>Dirección Postal:13 Myrtiotissis Street, AQUA MANSIONS</p>
+
+    <p>Apartment/Office 1 Germasogeia4041, Limassol, Cyprus</p>
+
+    <p>Última Actualización: 2025-05-29</p>
+
+    <p>Versiones Anteriores: Disponibles bajo solicitud</p>
   `,
 };
 
