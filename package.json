@@ -1,6 +1,6 @@
 {
     "name": "pages",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Doctorina Pages - Multiple lightweight HTML pages",
     "type": "module",
     "scripts": {
