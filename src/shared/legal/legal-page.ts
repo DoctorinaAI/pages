@@ -6,12 +6,24 @@ interface LegalPageConfig {
   localeNames: Record<string, string>;
 }
 
+function isApplePlatform(): boolean {
+  const ua = navigator.userAgent;
+  return /iPhone|iPad|iPod|Macintosh|Mac OS X/.test(ua);
+}
+
 function getParams(): { locale: string | null; isApple: boolean } {
   const params = new URLSearchParams(window.location.search);
   const locale =
     params.get('locale') || params.get('lang') || params.get('l') || null;
-  const isApple =
-    params.get('variant') === 'apple' || params.get('apple') === 'true';
+
+  const variant = params.get('variant');
+  const appleParam = params.get('apple');
+  const hasExplicitVariant = variant !== null || appleParam !== null;
+
+  const isApple = hasExplicitVariant
+    ? variant === 'apple' || appleParam === 'true'
+    : isApplePlatform();
+
   return { locale, isApple };
 }
 
