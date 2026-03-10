@@ -1,8 +1,8 @@
 import type { LocaleModule } from '~/shared/legal/locale-resolver';
 
 const locale: LocaleModule = {
-  title: 'Política de Privacidad - Doctorina',
-  content: ({ isApple }) => isApple ? `
+    title: 'Política de Privacidad - Doctorina',
+    content: ({ isApple }) => isApple ? `
     <h1>Política de Privacidad</h1>
 
     <p>A continuación, algunos puntos clave sobre nuestras prácticas de privacidad:</p>
@@ -42,7 +42,7 @@ const locale: LocaleModule = {
       <li>Tu interacción con las funciones de chat, incluidas aquellas operadas por nuestros socios (por ejemplo, ChatGBP / OpenAI), como el historial de interacción, los mensajesenviados y las respuestas recibidas.</li>
       <li>Historial de compras, como la confirmación de que eres un suscriptor de pago.</li>
       <li>Información de redes sociales, si decides iniciar sesión en los Servicios a través de una plataforma de terceros o redes sociales, podemos recopilar información sobre ti desde esaplataforma o red (por ejemplo, tu ID de usuario en redes sociales), de acuerdo con sus respectivas políticas de privacidad y/o de cookies.</li>
-      <li>Datos asociados a la<a href="https://doctorina.com/es/cookies">Política de Cookies</a>.</li>
+      <li>Datos asociados a la <a href="https://pages.doctorina.com/legal/cookies?lang=es">Política de Cookies</a>.</li>
     </ul>
 
     <h2>3. ¿Cómo utilizamos tus datos personales?</h2>
@@ -239,7 +239,7 @@ const locale: LocaleModule = {
       <li><strong>Your interaction with chat features</strong>(Tu interacción con las funciones de chat), incluidas aquellas operadas por nuestros socios, como ChatGPT / OpenAI, incluyendo el historial de interacción, los mensajes enviados y las respuestas recibidas.</li>
       <li><strong>Purchase history (Historial de compras),</strong>como la confirmación de que es un suscriptor de pago.</li>
       <li><strong>Social media information</strong>(Información de redes sociales), si decide iniciar sesión en los Servicios a través de una plataforma de terceros o redes sociales, podemos recopilar información sobre usted desde esa plataforma o red (por ejemplo, su ID de usuario en redes sociales), de acuerdo con sus respectivas políticas de privacidad y/o de cookies.</li>
-      <li>Datos asociados a la<a href="https://doctorina.com/es/cookies">Política de Cookies</a></li>
+      <li>Datos asociados a la <a href="https://pages.doctorina.com/legal/cookies?lang=es">Política de Cookies</a></li>
     </ul>
 
     <h2>3. ¿Cómo utilizamos tus datos personales?</h2>
@@ -401,7 +401,7 @@ const locale: LocaleModule = {
 
     <p><strong>Opción de no recibir comunicaciones de marketing y otras notificaciones push.</strong>Puede optar por no recibir comunicaciones relacionadas con marketing y otras notificaciones push que podamos enviarle cambiando la configuración en su dispositivo móvil o en el sitio web.</p>
 
-    <p><strong>Publicidad en línea dirigida.</strong>Algunos de los socios comerciales que recopilan información sobre las actividades de los usuarios en o a través de los Servicios pueden ser miembros de organizaciones o programas que ofrecen a los individuos opciones sobre el uso de su comportamiento de navegación o el uso del Servicio móvil con fines de publicidad dirigida. Consulte más información en la<a href="https://doctorina.com/es/cookies">Política de Cookies.</a></p>
+    <p><strong>Publicidad en línea dirigida.</strong>Algunos de los socios comerciales que recopilan información sobre las actividades de los usuarios en o a través de los Servicios pueden ser miembros de organizaciones o programas que ofrecen a los individuos opciones sobre el uso de su comportamiento de navegación o el uso del Servicio móvil con fines de publicidad dirigida. Consulte más información en la <a href="https://pages.doctorina.com/legal/cookies?lang=es">Política de Cookies.</a></p>
 
     <p><strong>Prueba de identidad.</strong>También podemos solicitarle que demuestre su identidad en algunos casos. Normalmente, nos aseguramos de verificar que la solicitud provenga de una persona legítima. En algunos casos, podemos pedirle que realice medidas de verificación adicionales para garantizar que respondemos adecuadamente a las solicitudes.</p>
 

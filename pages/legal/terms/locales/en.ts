@@ -1,13 +1,11 @@
 import type { LocaleModule } from '~/shared/legal/locale-resolver';
 
 const locale: LocaleModule = {
-  title: 'Terms and Conditions - Doctorina',
-  content: ({ isApple }) => `
+    title: 'Terms and Conditions - Doctorina',
+    content: ({ isApple }) => `
     <h1>${isApple ? 'Terms of Use' : 'Terms and Conditions'}</h1>
 
     <p>Effective as of 2025-05-29</p>
-
-    <p>Previous versions are available here: Version 1 (2024-09-02)</p>
 
     <p>These Terms of Use apply to your access and use of the website, any associated mobile and web applications, and any other free or paid online products and services (collectively, our "<strong>Services</strong>") provided by Doctorina ("<strong>Doctorina</strong>", "<strong>Company</strong>", or "<strong>we</strong>").</p>
 

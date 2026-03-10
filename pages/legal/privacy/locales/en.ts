@@ -1,8 +1,8 @@
 import type { LocaleModule } from '~/shared/legal/locale-resolver';
 
 const locale: LocaleModule = {
-  title: 'Privacy Policy - Doctorina',
-  content: ({ isApple }) => isApple ? `
+    title: 'Privacy Policy - Doctorina',
+    content: ({ isApple }) => isApple ? `
     <h1>Privacy Policy</h1>
 
     <p>Here are a few key points about our privacy practices:</p>
@@ -42,7 +42,7 @@ const locale: LocaleModule = {
       <li>Your interaction with chat features, including those powered by our partners (e.g. ChatGPT / Open AI), for example, your interaction history, messages sent, and answers received.</li>
       <li>Purchase history, such as confirmation that you are a paid subscriber.</li>
       <li>Social media information, if you choose to log in to the Services via a third-party platform or social media networks, we may collect information about you from that platform ornetworks (for example, social media ID) in accordance with their own privacy and/ or cookie policies.</li>
-      <li>Data associated with the<a href="https://doctorina.com/cookies">Cookies Policy</a></li>
+      <li>Data associated with the <a href="https://pages.doctorina.com/legal/cookies">Cookies Policy</a></li>
     </ul>
 
     <h2>3. How do we use your personal data?</h2>
@@ -233,7 +233,7 @@ const locale: LocaleModule = {
       <li><strong>Your interaction with chat features,</strong>including those powered by our partners (e.g. ChatGPT / Open AI), for example, your interaction history, messages sent, and answers received.</li>
       <li><strong>Purchase history,</strong>such as confirmation that you are a paid subscriber.</li>
       <li><strong>Social media information,</strong>if you choose to log in to the Services via a third-party platform or social media networks, we may collect information about you from that platform or networks (for example, social media ID) in accordance with their own privacy and/ or cookie policies.</li>
-      <li><strong>Data associated with the</strong><a href="https://doctorina.com/cookies">Cookies Policy.</a></li>
+      <li><strong>Data associated with the</strong> <a href="https://pages.doctorina.com/legal/cookies">Cookies Policy.</a></li>
     </ul>
 
     <h2>3. How do we use your personal data?</h2>
@@ -391,7 +391,7 @@ const locale: LocaleModule = {
 
     <p><strong>Opt out of marketing communications and other push notifications.</strong>You may opt out of marketing-related communications and other push notifications we may send you by changing the settings on your mobile device or the website.</p>
 
-    <p><strong>Targeted online advertising.</strong>Some of the business partners that collect information about users' activities on or through the Services may be members of organizations or programs that provide choices to individuals regarding the use of their browsing behavior or mobile Service usage for purposes of targeted advertising. See more in the<a href="https://doctorina.com/cookies">Cookies Policy.</a></p>
+    <p><strong>Targeted online advertising.</strong>Some of the business partners that collect information about users' activities on or through the Services may be members of organizations or programs that provide choices to individuals regarding the use of their browsing behavior or mobile Service usage for purposes of targeted advertising. See more in the <a href="https://pages.doctorina.com/legal/cookies">Cookies Policy.</a></p>
 
     <p><strong>Proof of identity.</strong>We might also require you to prove your identity in some cases. Normally, we make sure to verify that the request is coming from a legitimate person. In some cases, we may ask you to undergo additional verification measures in an effort to ensure we are appropriately responding to requests.</p>
 

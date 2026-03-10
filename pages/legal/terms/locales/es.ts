@@ -1,15 +1,18 @@
 import type { LocaleModule } from '~/shared/legal/locale-resolver';
 
 const locale: LocaleModule = {
-  title: 'Términos y Condiciones - Doctorina',
-  content: ({ isApple }) => `
+    title: 'Términos y Condiciones - Doctorina',
+    content: ({ isApple }) => `
     <h1>${isApple ? 'Términos de Uso' : 'Términos y Condiciones'}</h1>
 
     <p>Vigentes desde 2025-05-29</p>
-    <p>Versiones anteriores disponibles aquí: Versión 1 (2024-09-02)</p>
+
     <p>Estos Términos de Uso se aplican a tu acceso y uso del sitio web, de las aplicaciones móviles y web asociadas, y de cualquier otro producto o servicio gratuito o de pago en línea (en conjunto, los "<strong>Servicios</strong>") proporcionados por Doctorina ("<strong>Doctorina</strong>", "<strong>la Compañía</strong>" o "<strong>nosotros</strong>").</p>
+
     <p>Al acceder o utilizar cualquiera de nuestros Servicios, aceptas quedar vinculado por estos términos y condiciones, así como por la Política de Privacidad de Doctorina, incorporada aquí por referencia (conjuntamente, el "Acuerdo"). El uso de los Servicios está expresamente condicionado a tu aceptación de todos los términos de este Acuerdo, incluida la cláusula de arbitraje y la renuncia a acciones colectivas para resolver cualquier disputa con Doctorina. Si no estás de acuerdo con alguno de estos términos, por favor no utilices nuestros Servicios.</p>
+
     <p>DOCTORINA SE OFRECE ACTUALMENTE COMO UN SERVICIO EXPERIMENTAL EN FASE BETA Y SE ENCUENTRA DISPONIBLE "TAL CUAL" Y "SEGÚN DISPONIBILIDAD".</p>
+
     <p>La plataforma está en desarrollo activo y, por lo tanto, puede contener errores, fallos o limitaciones funcionales. La Compañía se reserva el derecho, a su exclusivo criterio y sin previo aviso, de modificar, suspender o eliminar cualquier característica, contenido, funcionalidad o resultado de la plataforma en cualquier momento. Al acceder y utilizar Doctorina durante esta fase beta, reconoces y aceptas expresamente que el servicio no es un producto final, que puede experimentar cambios sustanciales y que puede no funcionar de manera ininterrumpida ni estar libre de errores. También aceptas todos los riesgos asociados con el uso de este servicio en fase beta y renuncias a cualquier reclamación contra la Compañía derivada de su carácter experimental.</p>
 
     <h2>1. CONDICIONES GENERALES Y ACEPTACIÓN</h2>
