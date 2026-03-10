@@ -1,6 +1,11 @@
+export interface ContentOptions {
+  isApple: boolean;
+  version?: string;
+}
+
 export interface LocaleModule {
   title: string;
-  content: (options: { isApple: boolean }) => string;
+  content: (options: ContentOptions) => string;
 }
 
 /**

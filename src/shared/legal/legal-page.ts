@@ -11,7 +11,7 @@ function isApplePlatform(): boolean {
     return /iPhone|iPad|iPod|Macintosh|Mac OS X/.test(ua);
 }
 
-function getParams(): { locale: string | null; isApple: boolean } {
+function getParams(): { locale: string | null; isApple: boolean; version?: string } {
     const params = new URLSearchParams(window.location.search);
     const locale =
         params.get('locale') || params.get('lang') || params.get('l') || null;
@@ -24,7 +24,9 @@ function getParams(): { locale: string | null; isApple: boolean } {
         ? variant === 'apple' || appleParam === 'true'
         : isApplePlatform();
 
-    return { locale, isApple };
+    const version = params.get('version') || params.get('v') || undefined;
+
+    return { locale, isApple, version };
 }
 
 function extractAvailableLocales(
@@ -71,12 +73,13 @@ function renderDropdown(
 async function renderContent(
     mod: LocaleModule,
     isApple: boolean,
+    version?: string,
 ): Promise<void> {
     const content = document.getElementById('content');
     if (!content) return;
 
     document.title = mod.title;
-    content.innerHTML = mod.content({ isApple });
+    content.innerHTML = mod.content({ isApple, version });
 }
 
 /**
@@ -95,14 +98,14 @@ async function renderContent(
 export function initLegalPage(config: LegalPageConfig): void {
     const { localeModules, localeNames } = config;
     const availableLocales = extractAvailableLocales(localeModules);
-    const { locale: paramLocale, isApple } = getParams();
+    const { locale: paramLocale, isApple, version } = getParams();
 
     const currentLocale = resolveLocale(availableLocales, paramLocale);
 
     async function loadAndRender(locale: string): Promise<void> {
         const mod = await loadLocale(localeModules, locale);
         document.documentElement.lang = locale;
-        await renderContent(mod, isApple);
+        await renderContent(mod, isApple, version);
         renderDropdown(locale, availableLocales, localeNames, loadAndRender);
     }
 

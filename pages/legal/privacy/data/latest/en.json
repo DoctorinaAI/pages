@@ -1,0 +1,245 @@
+{
+    "title": "Privacy Policy",
+    "effectiveDate": "Effective as of 2025-05-29",
+    "previousVersions": "Previous versions are available here: <a href=\"?version=v1\">Version 1 (2025-02-20)</a>",
+    "introduction": {
+        "description": "Doctorina is your personal health information companion. Doctorina is an AI-powered digital platform designed to help users better understand healthcare topics, organize their health-related inputs, and explore potential directions for further research into their conditions. Doctorina aims to hand over the responsibility for your health to you and put you in control.",
+        "disclaimer": "We are not a licensed medical provider, and we encourage you to seek professional assistance when needed. Our service does not replace or substitute a doctor and cannot be treated as medical advice."
+    },
+    "keyPoints": {
+        "title": "Here are a few key points about our privacy practices:",
+        "points": [
+            "We use your personal data only in accordance with this Privacy Policy.",
+            "To ensure our services run smoothly, we use third-party providers, such as Amazon Web Services or OpenAI, for cloud storage and data processing. These providers are bound by our mutual contractual arrangements and cannot use your personal data for any purpose except the one we bind them to.",
+            "We take security measures to protect your personal data from loss, theft, misuse, or unauthorized access.",
+            "You have full control over your data. You can always access, correct, erase, and update your personal data by messaging us at support@doctorina.com",
+            "We believe in transparency and open dialogue. You can always contact us at support@doctorina.com",
+            "We may change this Privacy Policy from time to time. If the changes are material, we will notify you. Your continued use of the Services after this policy has been updated indicates your acceptance of the changes made. If you do not accept the terms of the Privacy Policy, please do not use the Services."
+        ]
+    },
+    "sections": {
+        "intro": {
+            "title": "1. Intro",
+            "content": "This Privacy Policy explains how A.I. Doctor Medical Assist LTD (\"Doctorina\" or \"we\" or \"us\") analyzes, collects, stores, uses, transfers and shares personal information from our users (\"you\") in connection with https://app.doctorina.com/ (\"App\"), including any products and services related to it, available online or via any applications (all collectively, \"Services\").\n\nDoctorina is the 'data controller' as defined under applicable data protection laws, including Regulation (EU) 2016/679.\n\nWe may change this Privacy Policy from time to time. If the changes are material, we will notify you. If permitted by law, your continued use of the Services after this policy has been updated indicates your acceptance of changes made. If you do not accept the terms of the Privacy Policy, please do not use the Services.\n\nCONSENT TO PRIVACY POLICY. CONSENTING TO OUR PRIVACY POLICY DURING REGISTRATION OR OTHERWISE, YOU CONSENT TO ITS CONTENTS IN ITS ENTIRETY, INCLUDING THE PROCESSING ACTIVITIES THAT RELY ON CONSENT AS A LEGAL BASIS. FAILURE TO ACCEPT THIS PRIVACY POLICY MEANS THAT YOU ARE NOT ALLOWED TO USE THE SERVICES, SINCE WE MIGHT NOT BE ABLE TO PROVIDE YOU WITH THE SERVICES AS DESCRIBED IN THIS POLICY."
+        },
+        "dataCollection": {
+            "title": "2. What personal data do we collect?",
+            "intro": "We may collect personal data when you interact with the Services. Such personal data may be provided by you or collected automatically.",
+            "directCollection": {
+                "title": "We may collect the following personal data directly from you:",
+                "items": [
+                    "Account registration information: email, phone number, account login details, username, first name, surname, age, gender, and password.",
+                    "Any input information, such as questions asked, additional context, and anything else you choose to input into the chat of the App.",
+                    "Health and wellness data. Please note that our App is intended to help you navigate various health-related questions in a personal fashion, which is why we could collect certain personal data that may be related to your health and well-being.",
+                    "Payment details: if you choose to subscribe to our paid service, we may collect your name, ID number, postal address, and other financial data such as a bank account, credit card, PayPal, etc."
+                ],
+                "note": "You are in full control of what you provide when interacting with the Services. If you do not want us to process such categories of data, do not input them when interacting with the Services and the App. Avoid providing excessive, too detailed, or too personal information. You can request erasure of your personal data at any time in accordance with this Privacy Policy."
+            },
+            "automaticCollection": {
+                "title": "We may also collect certain personal data automatically:",
+                "items": [
+                    "Device data, such as your computer and operating system type and version number, manufacturer and model, device ID, push tokens, Google Advertising ID, IDFA, browser type, screen resolution, IP address, and other information about the device you are using to visit the application.",
+                    "Application usage information such as information about how you use and interact with the Services, including your preferred language, the date and time when you first used Services and the date and time you last used it, your onboarding path (e.g. the source you found us from, geolocation data, logs associated with your interaction with the Services.",
+                    "Data we receive from third parties, for example, attribution data from networks or information from third parties.",
+                    "Your interaction with chat features, including those powered by our partners (e.g. ChatGPT / Open AI), for example, your interaction history, messages sent, and answers received.",
+                    "Purchase history, such as confirmation that you are a paid subscriber.",
+                    "Social media information, if you choose to log in to the Services via a third-party platform or social media networks, we may collect information about you from that platform or networks (for example, social media ID) in accordance with their own privacy and/ or cookie policies.",
+                    "Data associated with the <a href=\"/legal/cookies/\">Cookies Policy</a>"
+                ]
+            }
+        },
+        "dataUsage": {
+            "title": "3. How do we use your personal data?",
+            "intro": "Depending on which features of the Services you use, we will process your personal data based on one or more of the following legal bases:",
+            "legalBases": [
+                "Your consent. For example, on the registration screen when you give us permission to process your personal data related to the onboarding questionnaire, selfie analysis, and provide consent to our Privacy Policy.",
+                "Our contractual obligations to you in order to provide the Services. For example, we may process your personal data to fulfill our contractual obligations such as account management, sending of service-related messages, and other administrative purposes.",
+                "Legitimate interest. For example, we may process your personal data in relation to our interests in providing the Services to you, including our interest in protecting the security and integrity of the Services.",
+                "Legal obligation. For example, we may be obligated to process some of your personal data to comply with applicable laws and regulations."
+            ],
+            "purposes": {
+                "title": "For example, we may use your personal data for the following purposes:",
+                "tableHeaders": {
+                    "purpose": "Purpose of processing",
+                    "legalBasis": "Legal basis",
+                    "example": "Example"
+                },
+                "table": [
+                    {
+                        "purpose": "to provide the Services that you have requested or interacted with",
+                        "legalBasis": "Contractual obligation",
+                        "example": "We need to process your inputs and provide relevant information back to you using our AI-powered Services"
+                    },
+                    {
+                        "purpose": "to let you know about other services or products which may be of interest to you",
+                        "legalBasis": "Consent, Legitimate basis",
+                        "example": "We may send you some offers related to other products via email or other means of communication"
+                    },
+                    {
+                        "purpose": "to personalize your experience",
+                        "legalBasis": "Contractual obligation",
+                        "example": "We may personalize your experience based on your historic interaction with the Services"
+                    },
+                    {
+                        "purpose": "to inform you about changes and improvements to the App",
+                        "legalBasis": "Legitimate interests",
+                        "example": "We may send you an email updating you about our new features, our current product development"
+                    },
+                    {
+                        "purpose": "to manage your account and to make sure we keep it secure",
+                        "legalBasis": "Legal obligation",
+                        "example": "We need to process your registration data, monitor your account for any unusual activities, to record your payment data"
+                    },
+                    {
+                        "purpose": "To protect our Services",
+                        "legalBasis": "Legitimate interest",
+                        "example": "We may process your information as part of our efforts to keep our Services safe and secure, including fraud monitoring and prevention."
+                    },
+                    {
+                        "purpose": "to monitor and analyze your usage trends",
+                        "legalBasis": "Legitimate interests",
+                        "example": "We may analyze your activity to understand what you like or dislike about it in order to improve your future experience"
+                    },
+                    {
+                        "purpose": "to place ads within the App",
+                        "legalBasis": "Consent",
+                        "example": "We may use your usage data (such as your inputs history and your preferences) to suggest products and services"
+                    }
+                ]
+            },
+            "additionalInfo": {
+                "dataMinimization": "Data minimization and purpose limitation. We will not process personal data in a way that is incompatible with the purposes for which it has been collected or subsequently authorized by you or collect any personal data that is not needed for the mentioned purposes.",
+                "advertisement": "Advertisement. We can work with advertising partners to display advertisements when you use the Services. These ads are delivered by our advertising partners and may be targeted based on your use of the Services or your activity. To learn more about your choices in connection with advertisements, please see the section below titled \"Targeted online advertising.\"",
+                "anonymousData": "Anonymous, aggregated, or de-identified data. We may create anonymous, aggregated, or de-identified data from your personal data and the personal data of other individuals. We may aggregate, anonymize, or de-identify your personal data by removing information that makes the data personally identifiable. We may use this anonymous, aggregated, or (and) de-identified data and share it with third parties for our lawful business purposes or use it for internal business improvements.",
+                "communication": "Communication with you. We may contact you from time to time via email or through other means (like pop-ups or notifications) to communicate with you about products, services, offers, promotions, rewards offered by us, and provide news and information that we think will be of interest to you. You can always opt out of receiving emails by unsubscribing via the \"Unsubscribe\" link contained in the email. Opting-out of these emails or notifications will not end the transmission of important service-related emails that are necessary for your use of the Services. You may also opt out of receiving pop-ups or push notifications by adjusting your settings on your device. If applicable laws prescribe so, we may ask some users to provide their additional consent for such communications.\n\nPlease note that we may contact you with information about products, services, offers, promotions, rewards offered by us and others via third-party platforms (like social media).",
+                "automatedDecisions": "No automated decision-making. Processing of your personal data will not be subject to decisions based on automated processing that may produce legal effects or significantly affect you.",
+                "clinicalDecisions": "The App and the Services do not make any clinical decisions or recommend courses of treatment. All outputs and insights provided by the Services are intended to support you in your healthcare journey, inform you about available information, and provide information in a readable and ready-to-consume format. You should not rely on the outputs provided by the Services."
+            }
+        },
+        "dataRetention": {
+            "title": "4. How long will we keep your personal data?",
+            "content": "Your personal data shall be stored as long as your contractual relationship with us lasts.\n\nHowever, we shall store certain personal identification and traffic data for a maximum period of 2 years after your last day of inactivity to make sure you can resume the Services.\n\nAt any time, you can deactivate your account and erase your personal data by emailing support@doctorina.com. We will address your deletion request within 30 days after receipt.\n\nPlease note that in certain cases, it may take up to 90 days to fully erase your personal data from our backup systems. If you choose to deactivate your account, we will generally delete all associated personal data, and this data will not be recoverable if you choose to create a new account in the future"
+        },
+        "dataSharing": {
+            "title": "5. Will we share your personal data?",
+            "intro": "We engage third-party entities to process your personal data on our behalf in accordance with applicable data protection laws.\n\nSuch engagement is a standard practice within the technology industry, as it would be operationally impractical and economically unfeasible for us to independently develop and maintain infrastructure for hosting services, data analytics, email delivery, and similar functionalities. These third parties are referred to as 'processors' within the meaning of applicable data protection legislation.\n\nWe contractually prohibit our processors from processing personal data for any purpose other than the specific purposes related to the provision of our Services, as instructed by us. Processors support the operation of our Services, facilitate communications with users, and perform other Services-related functions necessary to ensure the proper functioning and delivery of the Services.\n\nWe remain fully responsible for the actions and omissions of our processors in relation to the processing of personal data and undertake to enter into legally binding data processing agreements with them, as required by applicable data protection laws, including but not limited to the General Data Protection Regulation (GDPR), where relevant.",
+            "processors": {
+                "title": "Here are some of the main processors we rely on:",
+                "list": [
+                    {
+                        "processor": "Microsoft Azure, Amazon Web Services (AWS) and Google Cloud Platform",
+                        "activity": "Our storage and infrastructure providers allow us to securely store your data"
+                    },
+                    {
+                        "processor": "Firebase Crash Reporting, Firebase Performance Monitoring, and Sentry",
+                        "activity": "Our performance analytics providers allow us to monitor bugs, errors, and security events."
+                    },
+                    {
+                        "processor": "Google Analytics for Firebase, Google Analytics, Google Ads, Facebook Analytics, and other partners",
+                        "activity": "Our marketing partners that help us spread information about the Services and reach more users"
+                    },
+                    {
+                        "processor": "Amazon Payments, Android Pay, Apple Pay, Google Wallet, PayPal, Stripe, and Klarna",
+                        "activity": "Our payment providers that help us process your payments (including banking card data)"
+                    },
+                    {
+                        "processor": "Amazon Web Services (AWS) AI, Anthropic, Google Cloud A, and OpenAI",
+                        "activity": "We may integrate various AI functions and tools to enable the Services that would be helpful and useful to you"
+                    }
+                ]
+            },
+            "otherSharing": {
+                "title": "5. How else can we share your personal data?",
+                "scenarios": [
+                    {
+                        "title": "Third-party platforms and social media networks",
+                        "content": "Where you choose to enable features that connect our Services with third-party platforms or social media networks—such as by logging into the App using your credentials from a third-party service, providing an API key or access token, or otherwise linking your account—or when you otherwise go to a separate apps, services, and websites - for example, by clicking any links - we will no longer be able to control what information is shared with such parties. All data processing activities will be dictated by the relevant privacy policies of such services. We encourage you to review those terms carefully before enabling such integrations."
+                    },
+                    {
+                        "title": "For compliance, fraud prevention and safety",
+                        "content": "We may share your personal data for the compliance, fraud prevention and safety purposes described."
+                    },
+                    {
+                        "title": "Business transfers",
+                        "content": "We may sell, transfer or otherwise share some or all of our business or assets, including your personal data,, in connection with a business transaction (or potential business transaction) such as a corporate divestiture, merger, consolidation, acquisition, reorganization or sale of assets, or in the event of bankruptcy or dissolution."
+                    },
+                    {
+                        "title": "Affiliates and use by our employees and contractors",
+                        "content": "We may share your information with our subsidiaries and affiliates for purposes consistent with this Privacy Policy. Our employees and contractors may also have access to your personal data on a need-to-know basis subject to security measures outlined in Section 8 of this Privacy Policy."
+                    },
+                    {
+                        "title": "Compliance with Law",
+                        "content": "We may be required to use and share your personal data to comply with applicable laws, lawful requests, and legal processes, such as responding to subpoenas or requests from government authorities."
+                    }
+                ]
+            }
+        },
+        "privacyRights": {
+            "title": "6. Your privacy rights",
+            "intro": "We believe privacy is a fundamental human right.\nTherefore, all our users have the following universal rights:",
+            "rights": [
+                "You have a right to request information about what personal data we process about you, including in a portable form ('Access right').",
+                "You may ask us to erase your personal data ('Deletion right'). Please be aware that erasing some personal data may affect your experience using certain features of the Services that rely on historical data.",
+                "In some cases, you can object to the processing of your personal data, for example, if we process it under the legitimate interest basis ('Objection right').",
+                "If you believe your personal data is inaccurate or incomplete, you can request to correct or, in some cases, correct it yourself from within the App. ('Correction right')."
+            ],
+            "exerciseRights": {
+                "title": "How to exercise your rights",
+                "content": "Contact us at support@doctorina.com to exercise your Access right, Deletion right, Objection right, and Correction right.\nAlternatively, you can also mail us at 13 Myrtiotissis Street, AQUA MANSIONS, Apartment/Office 1 Germasogeia, 4041, Limassol, Cyprus. We will address your request within 30 days after receipt. It can take us up to 90 days in some cases, for example, for full erasure of your personal data stored in our backup systems. We will let you know if we need more time and explain the reasons for the delay."
+            },
+            "optOut": "Opt out of marketing communications and other push notifications. You may opt out of marketing-related communications and other push notifications we may send you by changing the settings on your mobile device or the website.",
+            "targetedAdvertising": "Targeted online advertising. Some of the business partners that collect information about users' activities on or through the Services may be members of organizations or programs that provide choices to individuals regarding the use of their browsing behavior or mobile Service usage for purposes of targeted advertising. See more in the <a href=\"/legal/cookies/\">Cookies Policy</a>",
+            "proofOfIdentity": "Proof of identity. We might also require you to prove your identity in some cases. Normally, we make sure to verify that the request is coming from a legitimate person. In some cases, we may ask you to undergo additional verification measures in an effort to ensure we are appropriately responding to requests.",
+            "nationalLaws": "National laws. Please note, that if your local laws provide for additional rights and protection otherwise not specified in this Privacy Policy, we undertake to comply with such additional requirements, if we are obligated to do so in accordance with the applicable laws."
+        },
+        "otherSites": {
+            "title": "7. Other Sites, Mobile Applications, and Services",
+            "content": "The Services may contain links to other websites, mobile applications and online services operated by third parties. These links are not an endorsement of, or indication that we are affiliated with, any third party. In addition, our content may be included on webpages or in mobile applications or online services that are not associated with us. We do not control third party websites, mobile applications or online services and we are not responsible for their actions. Other websites, mobile applications and online services follow different rules regarding the collection, use and sharing of your personal data. We encourage you to read the privacy policies of the other websites, mobile applications, and online services you use."
+        },
+        "dataSecurity": {
+            "title": "8. Data Security and Retention",
+            "intro": "We implement a range of technical and organizational measures to protect personal data against loss, theft, misuse, and unauthorized access, disclosure, alteration, and destruction. These measures are designed taking into account the nature of the personal data we process and the risks associated with special categories of personal data, where applicable.\n\nSpecifically, we implemented the following measures to protect your personal data:",
+            "measures": [
+                {
+                    "title": "Encryption",
+                    "content": "We use an industry-standard security protocol (Secure Sockets Layer—SSL) to help ensure that the information is encrypted and protected from third parties. SSL helps ensure that the communication between your browser and our servers is private and that the information contained therein is safe and delivered only to our computers."
+                },
+                {
+                    "title": "Firewall",
+                    "content": "Once your information reaches our servers, we protect it in many ways, including storing it on secure servers and using a device known as a firewall which protects your information by detecting and preventing unauthorized access to the information."
+                },
+                {
+                    "title": "Authorized access",
+                    "content": "Using our firewalls and other mechanisms, we also protect your information by only allowing access to it by employees and authorized parties who have a legitimate and verified need to access the information in order to service your requests and administer policies and claims."
+                },
+                {
+                    "title": "Organizational Measures",
+                    "content": "We maintain internal data protection policies and procedures designed to ensure the lawful and secure processing of personal data. Employees receive regular training on data protection principles, security awareness, and confidentiality obligations. We have incident response plans in place to promptly address any potential data breaches or security incidents."
+                },
+                {
+                    "title": "Technical Measures",
+                    "content": "We regularly monitor and update our IT systems to address potential vulnerabilities and apply security patches in a timely manner. Multi-factor authentication (MFA) is employed where appropriate to strengthen access controls. Regular security assessments and penetration testing are conducted to evaluate the effectiveness of our technical safeguards."
+                }
+            ]
+        },
+        "crossBorderTransfers": {
+            "title": "9. Cross-Border Data Transfers",
+            "content": "Doctorina is based in Cyprus.\nOur servers are located in Germany, Cyprus, the United States, and other countries within the European Union. If you access our Services from outside these locations, please be aware that your personal data may be transferred to, stored in, and processed at our facilities or those of our trusted third-party service providers, including in the United States, the European Union, and other jurisdictions.\nIf you are a resident of the European Economic Area (EEA), the United Kingdom (UK), or Switzerland, please note that some of these countries may not provide the same level of data protection as is afforded under the laws of your country. Nevertheless, we take all necessary steps to ensure that your personal data is protected in accordance with this Privacy Notice and applicable data protection laws, including implementing appropriate safeguards for cross-border data transfers.\nFor further information, please contact us at support@doctorina.com"
+        },
+        "childrensPrivacy": {
+            "title": "10. Children's privacy",
+            "content": "Minors under 18 years of age are not able to contractually agree to the terms of use for the Services. For this reason, for the protection of minors, the application is not directed at minors under the age of 18, and our Terms of Use do not allow minors under 18 years of age to use the Service. If we learn that we have collected the personal data of a child under the age of 18, we will delete it. We encourage parents with concerns to contact us. We do not store or process personal data of anyone under 18."
+        },
+        "contact": {
+            "title": "11. How to Contact Us",
+            "content": "Please direct any questions or comments regarding this Policy or our privacy practices to support@doctorina.com.\nYou may also write to us via post at:\n13 Myrtiotissis Street, AQUA MANSIONS, Apartment/Office 1 Germasogeia, 4041, Limassol, Cyprus."
+        }
+    },
+    "footer": {
+        "legal": {
+            "terms": "Terms and Conditions",
+            "privacy": "Privacy Policy",
+            "cookies": "Cookies Policy"
+        }
+    }
+}

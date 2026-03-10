@@ -1,0 +1,102 @@
+{
+    "title": "Privacy Policy",
+    "lastUpdated": "Last Updated: 2025-02-20",
+    "sections": {
+        "introduction": {
+            "title": "1. Introduction",
+            "content": "This Privacy Policy governs the collection, use, and storage of personal and medical data by our AI Doctor service (hereinafter referred to as \"Service\"). By using the Service, you agree to the terms set out in this policy, including but not limited by the processing of your data under the lawful basis of legitimate interests as permitted by the General Data Protection Regulation (GDPR)."
+        },
+        "dataController": {
+            "title": "2. Data Controller",
+            "content": "Our company is the Data Controller responsible for deciding how and why your personal data is processed. If you have any questions regarding this policy or your data, you may contact our Data Protection Officer (DPO) at dpo@doctorina.com."
+        },
+        "dataTypes": {
+            "title": "3. Types of Data Collected",
+            "intro": "We collect different types of personal data for different reasons – this may include:",
+            "contact": "- Contact information: Information such as your name, job title, postal address, home address where you provide this to us, business address, telephone number, mobile number, fax number and email address.",
+            "payment": "- Payment data: Data necessary for us to process payments and implement fraud prevention measures, including credit / debit card numbers, security code numbers and other such relevant billing details.",
+            "business": "- Business details: Business information which we necessarily process as part of our instructions or projects we are involved in or otherwise provided by you voluntarily.",
+            "compliance": "- Compliance details: Information we are legally required to collect for compliance purposes, such as 'know your client' information, details relevant to international sanctions and restrictive measures and information about relevant and significant litigation, which may impact our ability to provide our services to you.",
+            "preferences": "- Preferences: Information about your preferences, where it is relevant to the services we provide.",
+            "platform": "- Platform information: Your password and other related log-in details for platforms maintained by us, where you have access to any.",
+            "public": "- Publicly available information: Information collected from publicly available resources, including but not limited to information collected from databases we use to carry out compliance checks or credit rating agencies.",
+            "statutory": "- Statutory Register Information: Information about you on account of an interest or office you may hold in or certain relationships you may have with a corporate entity, partnership, trust or other vehicle which may be relevant to the services which we provide to you (each such entity, a Third Party Entity).",
+            "medical": "- Medical Information: This includes medical history, symptoms, diagnoses, treatment plans, and other health-related information. This information is collected to provide you with our services based only on your active consent and our legitimate interests.",
+            "usage": "- Usage Data: Information on how you interact with our Service, including logs, cookies, and analytics data.",
+            "technical": "- Technical Data: Data regarding your device, operating system, and network used to access our Service."
+        },
+        "purpose": {
+            "title": "4. Purpose and Legal Basis for Processing",
+            "intro": "We process your personal and medical data under the lawful basis of legitimate interests and your active consent. Our legitimate interests include:",
+            "service": "- Providing and improving our Service: Your data is used to deliver accurate medical advice, enhance our AI algorithms, and improve user experience.",
+            "communication": "- Communication: We may contact you for follow-up on your treatments, to offer participation in clinical trials, or to provide additional services that may be beneficial to your health.",
+            "research": "- Research and Development: Your data may be used to conduct internal research, clinical evaluations, and to develop new features for our Service.",
+            "compliance": "- Compliance and Protection: We process data to ensure compliance with legal obligations, protect our Service from fraud, and safeguard the rights of our users and company."
+        },
+        "retention": {
+            "title": "5. Data Retention",
+            "content": "We retain your personal and medical data for as long as necessary to fulfill the purposes outlined in this policy, including providing our Service, complying with legal obligations, and for internal analysis and research. Typically, medical data is stored in compliance with applicable health regulations, which often require long-term retention."
+        },
+        "dataController2": {
+            "title": "6. Data Controller",
+            "intro": "We are committed to the responsible use of your data:",
+            "internal": "- Internal Use: Your data may be accessed by our medical professionals, AI developers, and other personnel as needed to deliver and improve the Service.",
+            "thirdParty": "- Third-Party Processors: We may share your data with trusted third-party service providers who assist us in operating our Service, provided they comply with GDPR and other applicable laws.",
+            "research": "- Research and Clinical Trials: We may contact you regarding participation in clinical trials or other research initiatives based on the information you have provided.",
+            "legal": "- Legal Compliance: Your data may be disclosed to comply with legal requirements, protect our rights, and prevent fraud.",
+            "note": "Usually your identification data will be separated from your sensitive personal data providing an additional privacy protection."
+        },
+        "rights": {
+            "title": "7. Data Subject Rights",
+            "intro": "Under GDPR, you have the following rights regarding your data:",
+            "access": "- Access: You can request access to your personal and medical data at any time.",
+            "rectification": "- Rectification: You have the right to correct any inaccuracies in your data.",
+            "erasure": "- Erasure: You can request the deletion of your data, subject to certain legal obligations.",
+            "restriction": "- Restriction: You can request the restriction of data processing in certain circumstances.",
+            "portability": "- Data Portability: You have the right to receive your data in a structured, machine-readable format.",
+            "objection": "- Objection: You can object to the processing of your data under certain conditions.",
+            "contact": "To exercise these rights, contact our DPO at dpo@doctorina.com. Please note that some requests may be subject to legal limitations."
+        },
+        "security": {
+            "title": "8. Security Measures",
+            "content": "We take the security of your data seriously and implement technical and organizational measures to protect it from unauthorized access, alteration, and loss. These measures include encryption, access controls, and regular security audits."
+        },
+        "transfers": {
+            "title": "9. International Data Transfers",
+            "content": "In cases where your data may be transferred outside of the European Economic Area (EEA), we ensure that appropriate safeguards are in place, such as Standard Contractual Clauses (SCCs), to protect your data in compliance with GDPR."
+        },
+        "testing": {
+            "title": "10. Testing Phase Disclaimer",
+            "intro": "Currently, our AI Doctor Service is in a testing phase. This means that the Service is available for evaluation and testing purposes only and is not intended for commercial use. The data collected during this phase is used primarily to refine and improve the Service. By using the Service during this testing phase, you acknowledge and agree that:",
+            "functionality": "- The Service may not function as intended, and errors or inaccuracies may occur.",
+            "advice": "- Any advice or information provided by the Service is for evaluation purposes only and should not be relied upon for making significant medical decisions.",
+            "data": "- Your data will still be processed according to this policy, and we may contact you regarding your experience or for additional testing-related purposes."
+        },
+        "changes": {
+            "title": "11. Changes to This Privacy Policy",
+            "content": "We may update this Privacy Policy from time to time to reflect changes in our processing practices or legal obligations. The most current version will always be available on our website, and we encourage you to review it regularly. By continuing to use the Service after changes are posted, you agree to the revised terms."
+        },
+        "contact": {
+            "title": "12. Contact Information",
+            "content": "If you have any questions, concerns, or wish to exercise your rights under this Privacy Policy, including your data deletion please contact our Data Protection Officer at dpo@doctorina.com."
+        },
+        "cookies": {
+            "title": "13. Cookies",
+            "content": "We may store cookies on your devices for the purposes of delivering a better user experience for you on our websites – please see our <a href=\"/legal/cookies/\">Cookies Policy</a>"
+        },
+        "related": {
+            "title": "14. Related documents",
+            "content": "Privacy Policy should be read in conjunction with our Terms and Conditions, <a href=\"/legal/cookies/\">Cookies Policy</a> and any additional documents referred to therein, outlines the principles governing the processing of any personal data that we collect from you or that you voluntarily provide to us. We encourage you to review this Privacy Policy thoroughly to gain a clear understanding of the types of personal data we collect, how we use this data, under what conditions we may share it with third parties, and the rights available to you in relation to your personal data."
+        },
+        "other": {
+            "title": "15. Other considerations",
+            "content": "You must be 18 years or older to use our Services"
+        }
+    },
+    "footer": {
+        "legal": {
+            "terms": "Terms and Conditions",
+            "privacy": "Privacy Policy"
+        }
+    }
+} 
