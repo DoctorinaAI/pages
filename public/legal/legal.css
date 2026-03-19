@@ -1,4 +1,4 @@
-/* Legal page shared styles */
+/* Legal page styles (used by Doctorina legal pages, not delivered by legal.js) */
 * {
   box-sizing: border-box;
 }
@@ -193,23 +193,6 @@ hr {
   border: none;
   border-top: 1px solid #e0e0e0;
   margin: 24px 0;
-}
-
-/* Loading state */
-#content:empty::after {
-  content: '';
-  display: block;
-  width: 40px;
-  height: 40px;
-  margin: 80px auto;
-  border: 3px solid #eee;
-  border-top-color: #667eea;
-  border-radius: 50%;
-  animation: spin 0.6s linear infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
 }
 
 /* Responsive */
