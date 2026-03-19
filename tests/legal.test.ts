@@ -38,7 +38,7 @@ const SAMPLE_HTML = `
 <h1>Privacy Policy</h1>
 <p>Effective as of 2025-05-29</p>
 <p>Some content here</p>
-<a href="#" data-legal-version="v1">Version 1</a>
+<a href="#legal/privacy?version=v1">Version 1</a>
 <div data-exclude="apple">Desktop only</div>
 <div data-include="apple">Apple only</div>
 `;
@@ -477,25 +477,23 @@ describe('legal.js', () => {
     });
   });
 
-  // ── Version link interception ────────────────────────────────────
+  // ── Link interception (universal router) ────────────────────────
 
-  describe('version links', () => {
-    it('should wire click handlers on data-legal-version links', async () => {
+  describe('link routing', () => {
+    it('should handle #legal/ version links', async () => {
       document.body.innerHTML = '<div data-legal="terms" data-version="latest"></div>';
-      const fetchMock = mockFetch(SAMPLE_HTML);
+      const fetchMock = mockFetch(
+        '<h1>Terms</h1><a href="#legal/terms?version=v1">Version 1</a>',
+      );
       global.fetch = fetchMock;
 
       loadScript();
       await flushPromises();
 
-      // Click the version link
-      const link = document.querySelector('[data-legal-version="v1"]') as HTMLElement;
-      expect(link).not.toBeNull();
-
-      // Reset fetch to track the new call
       fetchMock.mockClear();
       fetchMock.mockResolvedValue({ ok: true, text: () => Promise.resolve('<h1>V1</h1>') });
 
+      const link = document.querySelector('a[href*="version=v1"]') as HTMLElement;
       link.click();
       await flushPromises();
 
@@ -506,22 +504,147 @@ describe('legal.js', () => {
 
     it('should fallback locale to en when switching to version without current locale', async () => {
       document.body.innerHTML = '<div data-legal="terms" data-version="latest" data-locale="es"></div>';
-      const fetchMock = mockFetch(SAMPLE_HTML);
+      const fetchMock = mockFetch(
+        '<h1>Terms</h1><a href="#legal/terms?version=v1">Version 1</a>',
+      );
       global.fetch = fetchMock;
 
       loadScript();
       await flushPromises();
 
-      // terms v1 only has 'en', not 'es'
       fetchMock.mockClear();
       fetchMock.mockResolvedValue({ ok: true, text: () => Promise.resolve('<h1>V1</h1>') });
 
-      const link = document.querySelector('[data-legal-version="v1"]') as HTMLElement;
+      const link = document.querySelector('a[href*="version=v1"]') as HTMLElement;
       link.click();
       await flushPromises();
 
       const url = fetchMock.mock.calls[0][0] as string;
       expect(url).toContain('/terms/v1/en.html');
+    });
+
+    it('should navigate to a different document via #legal/privacy', async () => {
+      document.body.innerHTML = '<div data-legal="terms" data-version="latest"></div>';
+      const fetchMock = mockFetch(
+        '<h1>Terms</h1><a href="#legal/privacy">Privacy Policy</a>',
+      );
+      global.fetch = fetchMock;
+
+      loadScript();
+      await flushPromises();
+
+      fetchMock.mockClear();
+      fetchMock.mockResolvedValue({ ok: true, text: () => Promise.resolve('<h1>Privacy</h1>') });
+
+      const link = document.querySelector('a[href="#legal/privacy"]') as HTMLElement;
+      link.click();
+      await flushPromises();
+
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+      const url = fetchMock.mock.calls[0][0] as string;
+      expect(url).toContain('/legal/content/privacy/latest/');
+    });
+
+    it('should handle #legal/ links with query params', async () => {
+      document.body.innerHTML = '<div data-legal="privacy" data-version="latest"></div>';
+      const fetchMock = mockFetch(
+        '<h1>Privacy</h1><a href="#legal/cookies?variant=apple">Cookies</a>',
+      );
+      global.fetch = fetchMock;
+
+      loadScript();
+      await flushPromises();
+
+      fetchMock.mockClear();
+      fetchMock.mockResolvedValue({ ok: true, text: () => Promise.resolve('<h1>Cookies</h1>') });
+
+      const link = document.querySelector('a[href*="cookies"]') as HTMLElement;
+      link.click();
+      await flushPromises();
+
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+      const url = fetchMock.mock.calls[0][0] as string;
+      expect(url).toContain('/legal/content/cookies/latest/');
+    });
+
+    it('should switch to latest version when navigating to a different document', async () => {
+      document.body.innerHTML = '<div data-legal="terms" data-version="v1"></div>';
+      const fetchMock = mockFetch(
+        '<h1>Terms v1</h1><a href="#legal/privacy">Privacy</a>',
+      );
+      global.fetch = fetchMock;
+
+      loadScript();
+      await flushPromises();
+
+      fetchMock.mockClear();
+      fetchMock.mockResolvedValue({ ok: true, text: () => Promise.resolve('<h1>Privacy</h1>') });
+
+      const link = document.querySelector('a[href="#legal/privacy"]') as HTMLElement;
+      link.click();
+      await flushPromises();
+
+      const url = fetchMock.mock.calls[0][0] as string;
+      expect(url).toContain('/privacy/latest/');
+    });
+
+    it('should NOT intercept external links', async () => {
+      document.body.innerHTML = '<div data-legal="privacy" data-version="latest"></div>';
+      global.fetch = mockFetch(
+        '<h1>Privacy</h1><a href="https://example.com">External</a>',
+      );
+
+      loadScript();
+      await flushPromises();
+
+      const fetchMock = vi.fn();
+      global.fetch = fetchMock;
+
+      const link = document.querySelector('a[href="https://example.com"]') as HTMLAnchorElement;
+      link.addEventListener('click', (e) => e.preventDefault());
+      link.click();
+
+      expect(fetchMock).not.toHaveBeenCalled();
+    });
+
+    it('should NOT intercept mailto: links', async () => {
+      document.body.innerHTML = '<div data-legal="privacy" data-version="latest"></div>';
+      global.fetch = mockFetch(
+        '<h1>Privacy</h1><a href="mailto:support@example.com">Email</a>',
+      );
+
+      loadScript();
+      await flushPromises();
+
+      const fetchMock = vi.fn();
+      global.fetch = fetchMock;
+
+      const link = document.querySelector('a[href^="mailto:"]') as HTMLAnchorElement;
+      link.addEventListener('click', (e) => e.preventDefault());
+      link.click();
+
+      expect(fetchMock).not.toHaveBeenCalled();
+    });
+
+    it('should parse version from #legal/terms?version=v1', async () => {
+      document.body.innerHTML = '<div data-legal="privacy" data-version="latest"></div>';
+      const fetchMock = mockFetch(
+        '<h1>Privacy</h1><a href="#legal/terms?version=v1">Terms v1</a>',
+      );
+      global.fetch = fetchMock;
+
+      loadScript();
+      await flushPromises();
+
+      fetchMock.mockClear();
+      fetchMock.mockResolvedValue({ ok: true, text: () => Promise.resolve('<h1>Terms v1</h1>') });
+
+      const link = document.querySelector('a[href*="terms"]') as HTMLElement;
+      link.click();
+      await flushPromises();
+
+      const url = fetchMock.mock.calls[0][0] as string;
+      expect(url).toContain('/terms/v1/');
     });
   });
 
@@ -688,25 +811,26 @@ describe('HTML content files', () => {
     expect(content).toContain('<h1>');
   });
 
-  it('should not contain old-style version links (href="?")', () => {
+  it('should not contain old-style links (data-legal-version or /legal/ paths)', () => {
     for (const file of expectedFiles) {
       const content = fs.readFileSync(path.join(CONTENT_DIR, file), 'utf8');
+      expect(content).not.toMatch(/data-legal-version/);
+      expect(content).not.toMatch(/href="\/legal\//);
       expect(content).not.toMatch(/href="\?version=/);
-      expect(content).not.toMatch(/href="\?">/);
     }
   });
 
-  it('should use data-legal-version in version links', () => {
+  it('should use #legal/ hash links for internal navigation', () => {
     const latest = ['terms/latest/en.html', 'privacy/latest/en.html'];
     for (const file of latest) {
       const content = fs.readFileSync(path.join(CONTENT_DIR, file), 'utf8');
-      expect(content).toContain('data-legal-version="v1"');
+      expect(content).toMatch(/#legal\/\w+\?version=v1/);
     }
 
     const v1 = ['terms/v1/en.html', 'privacy/v1/en.html'];
     for (const file of v1) {
       const content = fs.readFileSync(path.join(CONTENT_DIR, file), 'utf8');
-      expect(content).toContain('data-legal-version="latest"');
+      expect(content).toMatch(/#legal\/\w+\?version=latest/);
     }
   });
 });

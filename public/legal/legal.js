@@ -188,26 +188,54 @@
     }
   }
 
-  // ── Link interception ──────────────────────────────────────────────
+  // ── Link interception (universal router) ──────────────────────────
 
-  function wireVersionLinks(el) {
-    var links = el.querySelectorAll('[data-legal-version]');
-    for (var i = 0; i < links.length; i++) {
-      links[i].addEventListener('click', handleVersionClick);
-    }
+  // All internal links use hash format: #legal/{doc}?version=v1&variant=apple
+  var HASH_RE = /^#legal\/(terms|privacy|cookies)/;
+
+  function wireLinks(el) {
+    el.addEventListener('click', function (e) {
+      var link = e.target.closest('a');
+      if (!link) return;
+
+      var href = link.getAttribute('href');
+      if (!href) return;
+
+      var match = href.match(HASH_RE);
+      if (!match) return;
+
+      e.preventDefault();
+      var targetDoc = match[1];
+      var params = {};
+      var qIdx = href.indexOf('?');
+      if (qIdx !== -1) {
+        var sp = new URLSearchParams(href.substring(qIdx));
+        if (sp.get('variant')) params.variant = sp.get('variant');
+        if (sp.get('version')) params.version = sp.get('version');
+        if (sp.get('locale')) params.locale = sp.get('locale');
+      }
+      navigateTo({ doc: targetDoc, version: params.version, variant: params.variant, locale: params.locale });
+    });
   }
 
-  function handleVersionClick(e) {
-    e.preventDefault();
-    var newVersion = this.getAttribute('data-legal-version');
-    if (newVersion === _version) return;
+  function navigateTo(opts) {
+    var newDoc = opts.doc || _doc;
+    var catalog = CATALOG[newDoc];
+    if (!catalog) return;
 
-    var catalog = CATALOG[_doc];
-    if (!catalog || !catalog[newVersion]) return;
+    var newVersion = opts.version || (newDoc !== _doc ? 'latest' : _version);
+    if (!catalog[newVersion]) newVersion = 'latest';
 
-    // Ensure current locale is available in new version, fallback to 'en'
     var available = catalog[newVersion];
-    _locale = available[_locale] ? _locale : 'en';
+
+    // Update variant if explicitly provided, keep current otherwise
+    if (opts.variant !== undefined) {
+      _variant = opts.variant || null;
+    }
+
+    // Resolve locale for the new doc/version
+    _locale = available[opts.locale || _locale] ? (opts.locale || _locale) : 'en';
+    _doc = newDoc;
     _version = newVersion;
     fetchAndRender();
   }
@@ -266,7 +294,7 @@
           processNoVariant(_el);
         }
 
-        wireVersionLinks(_el);
+        wireLinks(_el);
         populateSelector();
         document.documentElement.lang = _locale;
       })
