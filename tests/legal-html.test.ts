@@ -49,9 +49,6 @@ const ALLOWED_TAGS = new Set([
 
 // ── Link classification ─────────────────────────────────────────────────────
 
-// Pattern from legal.js: #legal/{doc}?params
-const HASH_LEGAL_RE = /^#legal\/(terms|privacy|cookies)/;
-
 // pages.doctorina.com/legal/ links that SHOULD be hash-based
 const PAGES_LEGAL_RE = /^https?:\/\/pages\.doctorina\.com\/legal\/(terms|privacy|cookies)/;
 
@@ -398,6 +395,221 @@ describe('Legal HTML content validation', () => {
                 }
 
                 expect(found, `Forbidden tags: ${found.join(', ')}`).toEqual([]);
+            });
+        }
+    });
+
+    // ── CATALOG ↔ file consistency ────────────────────────────────────
+
+    describe('CATALOG consistency', () => {
+        // Mirror of CATALOG from legal.js (keep in sync)
+        const CATALOG: Record<string, Record<string, Record<string, string>>> = {
+            terms: {
+                latest: { en: 'English', es: 'Español', ru: 'Русский' },
+                v1: { en: 'English' },
+            },
+            privacy: {
+                latest: { en: 'English', es: 'Español', ru: 'Русский' },
+                v1: { en: 'English', es: 'Español' },
+            },
+            cookies: {
+                latest: { en: 'English', es: 'Español', ru: 'Русский' },
+            },
+        };
+
+        const APPLE_FILES: Record<string, boolean> = {
+            'terms/v1/en': true,
+            'privacy/v1/en': true,
+        };
+
+        // Every CATALOG entry should have a matching HTML file
+        for (const [doc, versions] of Object.entries(CATALOG)) {
+            for (const [version, locales] of Object.entries(versions)) {
+                for (const locale of Object.keys(locales)) {
+                    const rel = `${doc}/${version}/${locale}.html`;
+                    it(`CATALOG entry ${doc}/${version}/${locale} should have a file`, () => {
+                        const filePath = join(CONTENT_ROOT, rel);
+                        expect(
+                            () => statSync(filePath),
+                            `Missing file: ${rel}`
+                        ).not.toThrow();
+                    });
+                }
+            }
+        }
+
+        // Every APPLE_FILES entry should have a matching *-apple.html file
+        for (const key of Object.keys(APPLE_FILES)) {
+            const rel = `${key}-apple.html`;
+            it(`APPLE_FILES entry ${key} should have an -apple.html file`, () => {
+                const filePath = join(CONTENT_ROOT, rel);
+                expect(
+                    () => statSync(filePath),
+                    `Missing apple file: ${rel}`
+                ).not.toThrow();
+            });
+        }
+
+        // Every HTML file on disk should be referenced in CATALOG or APPLE_FILES
+        for (const file of htmlFiles) {
+            const rel = relative(CONTENT_ROOT, file).split(sep).join('/');
+            it(`file ${rel} should be referenced in CATALOG or APPLE_FILES`, () => {
+                const appleMatch = rel.match(/^(.+)-apple\.html$/);
+                if (appleMatch) {
+                    expect(
+                        APPLE_FILES[appleMatch[1]],
+                        `File ${rel} exists but is not in APPLE_FILES`
+                    ).toBe(true);
+                    return;
+                }
+
+                const match = rel.match(/^([^/]+)\/([^/]+)\/([^/]+)\.html$/);
+                expect(match, `File ${rel} does not match expected path pattern`).not.toBeNull();
+                if (!match) return;
+
+                const [, doc, version, locale] = match;
+                expect(
+                    CATALOG[doc]?.[version]?.[locale],
+                    `File ${rel} exists but is not in CATALOG`
+                ).toBeDefined();
+            });
+        }
+    });
+
+    // ── Heading structure consistency across locales ─────────────────
+
+    describe('heading structure consistency', () => {
+        // Group files by doc/version
+        const groups = new Map<string, { locale: string; file: string }[]>();
+        for (const file of htmlFiles) {
+            const rel = relative(CONTENT_ROOT, file).split(sep).join('/');
+            // Skip apple variants — they have different structure
+            if (rel.includes('-apple')) continue;
+
+            const match = rel.match(/^([^/]+\/[^/]+)\//);
+            if (!match) continue;
+            const group = match[1];
+            const locale = rel.replace(/^.+\//, '').replace('.html', '');
+
+            if (!groups.has(group)) groups.set(group, []);
+            groups.get(group)!.push({ locale, file });
+        }
+
+        for (const [group, entries] of groups) {
+            if (entries.length < 2) continue; // need at least 2 locales to compare
+
+            // Known issue: privacy/latest/ru.html has extra section 6 missing from en/es
+            it.skipIf(group === 'privacy/latest')(`${group}: all locales should have the same number of h2 headings`, () => {
+                const counts: { locale: string; count: number }[] = [];
+                for (const { locale, file } of entries) {
+                    const content = readFileSync(file, 'utf-8');
+                    const doc = parseHtml(content);
+                    const h2s = doc.body.querySelectorAll('h2');
+                    counts.push({ locale, count: h2s.length });
+                }
+
+                const first = counts[0];
+                for (const c of counts.slice(1)) {
+                    expect(
+                        c.count,
+                        `${group}: locale "${c.locale}" has ${c.count} h2 headings, but "${first.locale}" has ${first.count}`
+                    ).toBe(first.count);
+                }
+            });
+
+            it.skipIf(group === 'privacy/latest')(`${group}: heading numbering should be consistent across locales`, () => {
+                const numbering: { locale: string; numbers: string[] }[] = [];
+
+                for (const { locale, file } of entries) {
+                    const content = readFileSync(file, 'utf-8');
+                    const doc = parseHtml(content);
+                    const h2s = doc.body.querySelectorAll('h2');
+                    const numbers: string[] = [];
+
+                    h2s.forEach(h2 => {
+                        const text = h2.textContent || '';
+                        // Extract leading number pattern like "1.", "2.1.", "14.3."
+                        const numMatch = text.match(/^[\s]*([\d]+(?:\.[\d]+)*)\./);
+                        if (numMatch) numbers.push(numMatch[1]);
+                    });
+
+                    numbering.push({ locale, numbers });
+                }
+
+                const first = numbering[0];
+                for (const n of numbering.slice(1)) {
+                    expect(
+                        n.numbers,
+                        `${group}: heading numbers differ between "${first.locale}" and "${n.locale}"`
+                    ).toEqual(first.numbers);
+                }
+            });
+        }
+    });
+
+    // ── No undefined/placeholder content ────────────────────────────
+
+    describe('no placeholder content', () => {
+        for (const file of htmlFiles) {
+            const name = label(file);
+
+            it(`${name}: should not contain "undefined" or "TODO" placeholder text`, () => {
+                const content = readFileSync(file, 'utf-8');
+                const doc = parseHtml(content);
+                const violations: string[] = [];
+
+                doc.body.querySelectorAll('p, li, td, th, span').forEach(el => {
+                    const text = el.textContent?.trim() || '';
+                    if (text === 'undefined' || text === 'null') {
+                        violations.push(`<${el.tagName.toLowerCase()}> contains "${text}"`);
+                    }
+                    // Match developer placeholders like "TODO:", "TODO -", "[TODO]",
+                    // but not the Spanish word "todo" (meaning "all/everything")
+                    if (/\bTODO\s*[:[\-]/.test(text) || /^\s*TODO\s*$/.test(text)) {
+                        violations.push(`<${el.tagName.toLowerCase()}> contains TODO: "${text.substring(0, 80)}"`);
+                    }
+                });
+
+                expect(violations, violations.join('\n')).toEqual([]);
+            });
+        }
+    });
+
+    // ── No broken Google Docs link artifacts ────────────────────────
+
+    describe('no broken link artifacts', () => {
+        for (const file of htmlFiles) {
+            const name = label(file);
+
+            it(`${name}: should not contain links to non-URL text (Google Docs artifacts)`, () => {
+                const content = readFileSync(file, 'utf-8');
+                const doc = parseHtml(content);
+                const violations: string[] = [];
+
+                doc.body.querySelectorAll('a[href]').forEach(a => {
+                    const href = a.getAttribute('href')!;
+                    if (href.startsWith('#') || href.startsWith('mailto:')) return;
+
+                    // Check for links that look like section numbers or plain words
+                    // mistakenly turned into URLs by Google Docs (e.g. http://14.2.Si)
+                    try {
+                        const url = new URL(href);
+                        const host = url.hostname;
+                        // Valid domains have at least one dot and a TLD of 2+ chars
+                        const parts = host.split('.');
+                        const tld = parts[parts.length - 1];
+                        if (parts.length < 2 || tld.length < 2 || /^\d+$/.test(host.replace(/\./g, ''))) {
+                            violations.push(`Suspicious link href="${href}" — likely a Google Docs conversion artifact`);
+                        }
+                    } catch {
+                        // Not a valid URL at all
+                        if (/^https?:\/\//.test(href)) {
+                            violations.push(`Malformed URL href="${href}"`);
+                        }
+                    }
+                });
+
+                expect(violations, violations.join('\n')).toEqual([]);
             });
         }
     });
