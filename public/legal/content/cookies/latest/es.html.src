@@ -1,0 +1,75 @@
+<h1>Política de Cookies</h1>
+
+<p>Vigente desde 2025-05-29.<br/>Versiones anteriores disponibles bajo solicitud.<br/>Esta Política de Cookies explica cómo A.I. Doctor Medical Assist LTD ("Doctorina", "nosotros" o "nuestro") utiliza cookies y tecnologías de seguimiento similares en nuestro sitio web https://doctorina.com y nuestra aplicación web https://app.doctorina.com (en conjunto, los "Servicios").<br/>Al utilizar nuestros Servicios, consientes el uso de cookies y tecnologías similares según se describe en esta política.</p>
+
+<h2>1. ¿Qué son las Cookies?</h2>
+<p>Utilizamos cookies y tecnologías similares para mejorar tu experiencia en nuestro sitio web, personalizar el contenido y los anuncios, analizar el tráfico y garantizar la seguridad de los datos. Esta Política de Cookies explica qué cookies utilizamos, con qué fines y cómo puedes gestionarlas.</p>
+
+<h2>2. Tipos de Cookies que Utilizamos</h2>
+<p>Utilizamos las siguientes categorías de cookies:</p>
+<p><strong>Cookies Estrictamente Necesarias</strong> – Estas cookies son esenciales para el funcionamiento del sitio web, incluyendo la navegación y el acceso a áreas seguras.</p>
+<p><strong>Cookies Funcionales</strong> – Estas cookies recuerdan tus preferencias y configuraciones (como idioma o región) para proporcionar una experiencia más personalizada.</p>
+<p><strong>Cookies Analíticas</strong> – Estas cookies recopilan información sobre cómo los visitantes usan el sitio para ayudarnos a analizar y mejorar su rendimiento.</p>
+<p><strong>Cookies de Marketing</strong> – Estas cookies se utilizan para ofrecer anuncios que sean relevantes para ti y para evaluar la efectividad de las campañas publicitarias.</p>
+
+<h2>3. Tecnologías de Almacenamiento Local</h2>
+<p>Además de las cookies, nuestros Servicios utilizan otras tecnologías de almacenamiento local:</p>
+<p>3.1 Almacenamiento Local y de Sesión.<br/>Propósito: Almacenar preferencias del usuario, estado de la aplicación y datos temporales.<br/>Datos: Configuraciones del usuario, preferencias de idioma, entradas temporales de formularios.<br/>Retención: Hasta que se elimine manualmente o se borre la caché del navegador.</p>
+<p>3.2 IndexedDB (Aplicación Web).<br/>Propósito: Base de datos local para funcionalidad offline y optimización de rendimiento.<br/>Datos: Mensajes de chat, datos del usuario para acceso offline, caché de la aplicación.<br/>Retención: Hasta que se elimine manualmente o cuando elimines tu cuenta.</p>
+<p>3.3 SharedPreferences (Aplicación Móvil).<br/>Propósito: Almacenar preferencias y configuraciones de la aplicación.<br/>Datos: Preferencias del usuario, estado de autenticación, configuración de la aplicación.<br/>Retención: Hasta que se desinstale la aplicación o se eliminen los datos manualmente.</p>
+
+<h2>4. Servicios de Terceros</h2>
+<p>4.1 Firebase Analytics (Aplicación Móvil).<br/><strong>Provider:</strong> Proveedor: Google LLC.<br/><strong>Purpose:</strong> Propósito: Análisis y monitoreo de rendimiento de la aplicación móvil.<br/><strong>Data Collected:</strong> Datos Recopilados: Patrones de uso de la aplicación, reportes de fallos, métricas de rendimiento.<br/><strong>Privacy Policy:</strong> <a href="https://policies.google.com/privacy">Política de Privacidad: https://policies.google.com/privacy</a><br/><strong>Opt-out:</strong> Exclusión: Disponible a través de la configuración de la aplicación.</p>
+<p>4.2 YouTube (Videos Integrados).<br/><strong>Provider:</strong> Proveedor: Google LLC.<br/><strong>Purpose:</strong> Propósito: Entrega de contenido de video en nuestra página de inicio.<br/><strong>Data Collected:</strong> Datos Recopilados: Comportamiento de visualización de videos, información del dispositivo.<br/><strong>Privacy Policy:</strong> <a href="https://policies.google.com/privacy">Política de Privacidad: https://policies.google.com/privacy</a></p>
+<p>4.3 Google Fonts<br/><strong>Provider:</strong> Proveedor: Google LLC.<br/><strong>Purpose:</strong> Propósito: Entrega de fuentes web.<br/><strong>Data Collected:</strong> Datos Recopilados: Dirección IP, información del navegador.<br/><strong>Privacy Policy:</strong> <a href="https://policies.google.com/privacy">Política de Privacidad: https://policies.google.com/privacy</a></p>
+
+<h2>5. Gestión de Cookies y Tus Opciones</h2>
+<p>5.1 Configuración del Navegador<br/>Puedes controlar las cookies a través de la configuración de tu navegador:</p>
+<ul>
+  <li>Chrome: Configuración > Privacidad y Seguridad > Cookies y otros datos del sitio</li>
+  <li>Firefox: Configuración > Privacidad y Seguridad > Cookies y Datos del Sitio</li>
+  <li>Safari: Preferencias > Privacidad > Administrar Datos del Sitio Web</li>
+  <li>Edge: Configuración > Permisos de cookies y sitio</li>
+</ul>
+<p>5.2 Opciones de Exclusión</p>
+<ul>
+  <li>Matomo Analytics: Puedes excluirte visitando nuestra configuración de privacidad o usando la función de exclusión en tu navegador</li>
+  <li>Firebase Analytics: Disponible a través de la configuración de la aplicación móvil</li>
+  <li>Todos los Análisis: Puedes deshabilitar el seguimiento de análisis contactándonos en support@doctorina.com</li>
+</ul>
+<p>5.3 Consecuencias de Deshabilitar Cookies<br/>Deshabilitar ciertas cookies puede afectar la funcionalidad de nuestros Servicios:</p>
+<ul>
+  <li>Puede que necesites volver a ingresar información con más frecuencia</li>
+  <li>Algunas características pueden no funcionar correctamente</li>
+  <li>Tu experiencia de usuario puede ser menos personalizada</li>
+</ul>
+
+<h2>6. Seguridad de Datos</h2>
+<p>Implementamos medidas técnicas y organizativas apropiadas para proteger los datos de cookies:</p>
+<ul>
+  <li>Cifrado SSL/TLS para transmisión de datos</li>
+  <li>Banderas de cookies seguras cuando sea apropiado</li>
+  <li>Evaluaciones regulares de seguridad</li>
+  <li>Controles de acceso y autenticación</li>
+</ul>
+
+<h2>7. Transferencias Internacionales de Datos</h2>
+<p>Algunos de nuestros proveedores de servicios pueden estar ubicados fuera de tu país. Cuando transferimos datos de cookies internacionalmente, aseguramos que se implementen las salvaguardas apropiadas, incluyendo:</p>
+<ul>
+  <li>Decisiones de adecuación por autoridades relevantes</li>
+  <li>Cláusulas contractuales estándar</li>
+  <li>Otras salvaguardas apropiadas según lo requiera la ley aplicable</li>
+</ul>
+
+<h2>8. Actualizaciones de Esta Política</h2>
+<p>Podemos actualizar esta Política de Cookies de vez en cuando. Cuando hagamos cambios materiales, te notificaremos:</p>
+<ul>
+  <li>Publicando la política actualizada en nuestro sitio web</li>
+  <li>Enviándote una notificación por correo electrónico (si tienes una cuenta)</li>
+  <li>Mostrando un aviso en nuestros Servicios</li>
+</ul>
+
+<h2>9. Información de Contacto</h2>
+<p>Si tienes preguntas sobre esta Política de Cookies o nuestro uso de cookies, por favor contáctanos:<br/>Correo Electrónico: support@doctorina.com<br/>Dirección Postal:<br/>13 Myrtiotissis Street, AQUA MANSIONS<br/>Apartment/Office 1 Germasogeia<br/>4041, Limassol, Cyprus</p>
+
+<p>Última Actualización: 2025-05-29<br/>Versiones Anteriores: Disponibles bajo solicitud</p>
