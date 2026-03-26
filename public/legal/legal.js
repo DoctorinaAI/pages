@@ -57,6 +57,7 @@
     var _baseUrl = '';
     var _scriptOrigin = '';
     var _spinnerInjected = false;
+    var _isNavigation = false;
 
     // Detect the origin this script was loaded from (for cross-origin embedding)
     (function () {
@@ -214,6 +215,7 @@
                 if (sp.get('version')) params.version = sp.get('version');
                 if (sp.get('locale')) params.locale = sp.get('locale');
             }
+            _isNavigation = true;
             navigateTo({ doc: targetDoc, version: params.version, variant: params.variant, locale: params.locale });
         });
     }
@@ -297,6 +299,13 @@
                 wireLinks(_el);
                 populateSelector();
                 document.documentElement.lang = _locale;
+
+                if (_isNavigation) {
+                    var h1 = _el.querySelector('h1');
+                    var target = h1 || _el;
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    _isNavigation = false;
+                }
             })
             .catch(function (err) {
                 _el.innerHTML = '<p>Failed to load document. Please try again later.</p>';
