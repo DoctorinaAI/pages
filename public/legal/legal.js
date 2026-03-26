@@ -58,6 +58,8 @@
     var _scriptOrigin = '';
     var _spinnerInjected = false;
     var _isNavigation = false;
+    var _linksWired = false;
+    var _fetchId = 0;
 
     // Detect the origin this script was loaded from (for cross-origin embedding)
     (function () {
@@ -91,11 +93,19 @@
         return /iPhone|iPad|iPod|Macintosh|Mac OS X/.test(navigator.userAgent);
     }
 
+    var VALID_VARIANTS = { apple: true };
+
+    function sanitizeParam(val) {
+        if (!val) return val;
+        return val.replace(/[^a-zA-Z0-9_-]/g, '');
+    }
+
     function resolveVariant(attrVariant) {
         var p = getUrlParams();
-        if (p.variant) return p.variant;
+        var v = sanitizeParam(p.variant);
+        if (v && VALID_VARIANTS[v]) return v;
         if (p.apple === 'true') return 'apple';
-        if (attrVariant) return attrVariant;
+        if (attrVariant && VALID_VARIANTS[attrVariant]) return attrVariant;
         if (isApplePlatform()) return 'apple';
         return null;
     }
@@ -126,11 +136,14 @@
     }
 
     function buildUrl(doc, version, locale, variant) {
-        var file = locale;
-        if (variant && APPLE_FILES[doc + '/' + version + '/' + locale]) {
-            file = locale + '-' + variant;
+        var safeDoc = sanitizeParam(doc);
+        var safeVersion = sanitizeParam(version);
+        var safeLocale = sanitizeParam(locale);
+        var file = safeLocale;
+        if (variant && APPLE_FILES[safeDoc + '/' + safeVersion + '/' + safeLocale]) {
+            file = safeLocale + '-' + sanitizeParam(variant);
         }
-        return _baseUrl + '/legal/content/' + doc + '/' + version + '/' + file + '.html';
+        return _baseUrl + '/legal/content/' + safeDoc + '/' + safeVersion + '/' + file + '.html';
     }
 
     // ── Spinner ────────────────────────────────────────────────────────
@@ -281,6 +294,7 @@
         }
 
         var url = buildUrl(_doc, _version, _locale, _variant);
+        var thisFetch = ++_fetchId;
 
         fetch(url)
             .then(function (res) {
@@ -288,6 +302,7 @@
                 return res.text();
             })
             .then(function (html) {
+                if (thisFetch !== _fetchId) return;
                 _el.innerHTML = html;
 
                 if (_variant) {
@@ -296,7 +311,10 @@
                     processNoVariant(_el);
                 }
 
-                wireLinks(_el);
+                if (!_linksWired) {
+                    wireLinks(_el);
+                    _linksWired = true;
+                }
                 populateSelector();
                 document.documentElement.lang = _locale;
 
@@ -308,7 +326,9 @@
                 }
             })
             .catch(function (err) {
+                if (thisFetch !== _fetchId) return;
                 _el.innerHTML = '<p>Failed to load document. Please try again later.</p>';
+                _isNavigation = false;
                 console.error('[DocLegal]', err);
             });
     }
