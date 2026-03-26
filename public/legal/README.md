@@ -1,6 +1,6 @@
 # Legal Document Embed Script
 
-A lightweight script that loads Doctorina legal documents (Terms, Privacy Policy, Cookies Policy) into any webpage. Works on both same-origin pages and third-party sites.
+A lightweight script that loads Doctorina legal documents (Terms, Privacy Policy, Cookie Policy) into any webpage. Works on both same-origin pages and third-party sites.
 
 ## Quick Start
 
@@ -19,7 +19,7 @@ That's it. The script auto-initializes, detects the user's language, and loads t
 | -------------- | ------------------ |
 | Terms of Use   | `terms`            |
 | Privacy Policy | `privacy`          |
-| Cookies Policy | `cookies`          |
+| Cookie Policy | `cookies`          |
 
 ## Configuration
 
