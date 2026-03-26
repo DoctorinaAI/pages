@@ -303,7 +303,7 @@
                 if (_isNavigation) {
                     var h1 = _el.querySelector('h1');
                     var target = h1 || _el;
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     _isNavigation = false;
                 }
             })
