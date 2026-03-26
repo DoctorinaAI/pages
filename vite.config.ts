@@ -1,11 +1,12 @@
-import { existsSync, readdirSync, copyFileSync, unlinkSync, rmdirSync } from 'fs';
-import { resolve, join } from 'path';
+import { existsSync, readdirSync, copyFileSync, unlinkSync, rmdirSync, mkdirSync } from 'fs';
+import { resolve, join, dirname } from 'path';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig, ViteDevServer, Plugin } from 'vite';
 
 /**
- * Automatically discover all HTML pages in the pages/ directory
- * Returns an object like: { index: '/pages/index/index.html', links: '/pages/links/index.html' }
+ * Automatically discover all HTML pages in the pages/ directory (supports nesting).
+ * Returns an object like:
+ *   { index: '/pages/index/index.html', 'legal/terms': '/pages/legal/terms/index.html' }
  */
 function discoverPages(): Record<string, string> {
   const pagesDir = resolve(__dirname, 'pages');
@@ -16,18 +17,26 @@ function discoverPages(): Record<string, string> {
     return pages;
   }
 
-  const entries = readdirSync(pagesDir, { withFileTypes: true });
+  function scan(dir: string, prefix: string = ''): void {
+    const entries = readdirSync(dir, { withFileTypes: true });
 
-  for (const entry of entries) {
-    if (entry.isDirectory()) {
-      const htmlPath = resolve(pagesDir, entry.name, 'index.html');
+    for (const entry of entries) {
+      if (!entry.isDirectory()) continue;
+
+      const key = prefix ? `${prefix}/${entry.name}` : entry.name;
+      const htmlPath = resolve(dir, entry.name, 'index.html');
+
       if (existsSync(htmlPath)) {
-        pages[entry.name] = htmlPath;
-        console.log(`📄 Found page: ${entry.name} -> ${htmlPath}`);
+        pages[key] = htmlPath;
+        console.log(`📄 Found page: ${key} -> ${htmlPath}`);
       }
+
+      // Recurse into subdirectories
+      scan(resolve(dir, entry.name), key);
     }
   }
 
+  scan(pagesDir);
   return pages;
 }
 
@@ -45,23 +54,43 @@ export default defineConfig(({ mode }) => {
             brotliSize: true,
           })
         : undefined,
-      // Custom plugin to handle short URLs
+      // Custom plugin to handle short URLs (supports nested paths like /legal/terms)
       {
         name: 'rewrite-page-urls',
         configureServer(server: ViteDevServer) {
           server.middlewares.use((req: any, res: any, next: any) => {
             const url = req.url || '';
 
-            // Match patterns like /pagename or /pagename/ or /pagename.html (with optional query params)
-            const cleanMatch = url.match(/^\/([a-zA-Z0-9-]+)(\/?(\?.*)?)?$/);
-            const htmlMatch = url.match(/^\/([a-zA-Z0-9-]+)\.html(\?.*)?$/);
+            // Rewrite /pagename/file → /pages/pagename/file (for assets like main.ts loaded from HTML)
+            const assetMatch = url.match(/^\/([a-zA-Z0-9-]+(?:\/[a-zA-Z0-9-]+)*)\/([^?]+\.[a-z]+)(\?.*)?$/);
+            if (assetMatch) {
+              const pageName = assetMatch[1];
+              const file = assetMatch[2];
+              const pageDir = resolve(__dirname, 'pages', pageName);
+              if (existsSync(resolve(pageDir, 'index.html')) && existsSync(resolve(pageDir, file))) {
+                req.url = `/pages/${pageName}/${file}${assetMatch[3] || ''}`;
+                return next();
+              }
+            }
+
+            // Match patterns like /pagename or /group/pagename (with optional query params)
+            const cleanMatch = url.match(/^\/([a-zA-Z0-9-]+(?:\/[a-zA-Z0-9-]+)*)(\/?)(\?.*)?$/);
+            const htmlMatch = url.match(/^\/([a-zA-Z0-9-/]+)\.html(\?.*)?$/);
 
             const match = cleanMatch || htmlMatch;
             if (match) {
               const pageName = match[1];
-              const queryString = match[2] || match[3] || '';
+              const hasTrailingSlash = cleanMatch ? match[2] === '/' : false;
+              const queryString = cleanMatch ? (match[3] || '') : (match[2] || '');
               const fullPath = resolve(__dirname, 'pages', pageName, 'index.html');
+
               if (existsSync(fullPath)) {
+                // Redirect to trailing slash so relative imports (./main.ts) resolve correctly
+                if (cleanMatch && !hasTrailingSlash) {
+                  res.writeHead(302, { Location: `/${pageName}/${queryString}` });
+                  res.end();
+                  return;
+                }
                 req.url = `/pages/${pageName}/index.html${queryString}`;
               }
             }
@@ -101,7 +130,7 @@ export default defineConfig(({ mode }) => {
           chunkFileNames: 'assets/[name]-[hash].js',
           assetFileNames: 'assets/[name]-[hash].[ext]',
         },
-        // Custom plugin to flatten HTML files in output
+        // Custom plugin to flatten HTML files in output (supports nested pages)
         plugins: [
           {
             name: 'flatten-html-pages',
@@ -114,15 +143,22 @@ export default defineConfig(({ mode }) => {
                 const newPath = join(outDir, `${pageName}.html`);
 
                 if (existsSync(oldPath)) {
+                  // Ensure target directory exists for nested pages (e.g., legal/terms.html)
+                  mkdirSync(dirname(newPath), { recursive: true });
+
                   copyFileSync(oldPath, newPath);
                   unlinkSync(oldPath);
                   console.log(`📄 Moved: pages/${pageName}/index.html -> ${pageName}.html`);
 
-                  // Try to remove empty directory
-                  try {
-                    rmdirSync(join(outDir, 'pages', pageName));
-                  } catch (e) {
-                    // Directory not empty or doesn't exist, ignore
+                  // Try to remove empty directories up the tree
+                  let dir = join(outDir, 'pages', pageName);
+                  while (dir !== join(outDir, 'pages') && dir.startsWith(join(outDir, 'pages'))) {
+                    try {
+                      rmdirSync(dir);
+                    } catch (e) {
+                      break; // Directory not empty, stop
+                    }
+                    dir = dirname(dir);
                   }
                 }
               }

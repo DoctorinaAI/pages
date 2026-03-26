@@ -74,3 +74,51 @@ jobs:
 
       - name: ✅ Build successful
         run: echo "✅ Build completed successfully"
+
+  ##############################################################################
+  # LEGAL HTML VALIDATION (runs only when legal content changes)
+  ##############################################################################
+
+  legal-html:
+    name: "📄 Legal HTML Validation"
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: 📦 Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🔎 Check for legal HTML changes
+        id: legal-changes
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE=${{ github.event.pull_request.base.sha }}
+          else
+            BASE=${{ github.event.before }}
+          fi
+          CHANGED=$(git diff --name-only "$BASE" HEAD -- 'public/legal/**/*.html' || true)
+          if [ -n "$CHANGED" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "Changed legal files:"
+            echo "$CHANGED"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No legal HTML files changed — skipping validation"
+          fi
+
+      - name: 🟢 Setup Node.js
+        if: steps.legal-changes.outputs.changed == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: 📥 Install dependencies
+        if: steps.legal-changes.outputs.changed == 'true'
+        run: npm ci
+
+      - name: 📄 Validate legal HTML
+        if: steps.legal-changes.outputs.changed == 'true'
+        run: npx vitest run tests/legal-html.test.ts

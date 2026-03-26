@@ -21,6 +21,32 @@
         ],
         "headers": [
             {
+                "source": "/legal/content/**",
+                "headers": [
+                    {
+                        "key": "Access-Control-Allow-Origin",
+                        "value": "*"
+                    },
+                    {
+                        "key": "Cache-Control",
+                        "value": "no-cache, no-store, must-revalidate"
+                    }
+                ]
+            },
+            {
+                "source": "/legal/legal.js",
+                "headers": [
+                    {
+                        "key": "Access-Control-Allow-Origin",
+                        "value": "*"
+                    },
+                    {
+                        "key": "Cache-Control",
+                        "value": "public, max-age=3600"
+                    }
+                ]
+            },
+            {
                 "source": "**/*.@(html|json)",
                 "headers": [
                     {

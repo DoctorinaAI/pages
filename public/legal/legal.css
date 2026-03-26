@@ -1,0 +1,251 @@
+/* Legal page styles (used by Doctorina legal pages, not delivered by legal.js) */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 15px;
+  color: #1a1a1a;
+  line-height: 1.7;
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#app {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+/* Header with logo and locale dropdown */
+#header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 10px 0;
+  margin-bottom: 16px;
+  z-index: 10;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.header-logo svg {
+  height: 28px;
+  width: auto;
+}
+
+.header-logo:hover {
+  opacity: 0.8;
+}
+
+.locale-select {
+  padding: 6px 28px 6px 10px;
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 13px;
+  color: #333;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23666'/%3E%3C/svg%3E") no-repeat right 10px center;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.locale-select:hover {
+  border-color: #999;
+}
+
+.locale-select:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+}
+
+/* Content */
+#content {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Typography */
+h1 {
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0 0 16px;
+  line-height: 1.3;
+  color: #111;
+}
+
+h2 {
+  font-size: 19px;
+  font-weight: 600;
+  margin: 32px 0 12px;
+  padding-top: 8px;
+  border-top: 1px solid #f0f0f0;
+  line-height: 1.4;
+  color: #111;
+}
+
+h2:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
+h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 24px 0 8px;
+  color: #222;
+}
+
+h4 {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 20px 0 8px;
+  color: #222;
+}
+
+p {
+  margin: 0 0 14px;
+}
+
+/* First paragraph after h1 (intro/effective date) */
+h1 + p {
+  color: #555;
+  font-size: 14px;
+  line-height: 1.8;
+  border-left: 3px solid #e0e0e0;
+  padding-left: 14px;
+  margin-bottom: 20px;
+}
+
+ul, ol {
+  margin: 0 0 14px;
+  padding-left: 24px;
+}
+
+li {
+  margin-bottom: 8px;
+}
+
+li:last-child {
+  margin-bottom: 0;
+}
+
+a {
+  color: #4a6cf7;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+strong {
+  font-weight: 600;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 14px;
+}
+
+th, td {
+  border: 1px solid #e0e0e0;
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: #f5f6f8;
+  font-weight: 600;
+  color: #333;
+}
+
+tr:nth-child(even) td {
+  background: #fafafa;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #e0e0e0;
+  margin: 24px 0;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+  #app {
+    padding: 32px 40px;
+  }
+
+  #header {
+    margin-bottom: 24px;
+  }
+
+  h1 {
+    font-size: 30px;
+  }
+
+  h2 {
+    font-size: 21px;
+    margin-top: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 22px;
+  }
+
+  h2 {
+    font-size: 17px;
+    margin-top: 24px;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  th, td {
+    padding: 8px;
+    font-size: 13px;
+  }
+}
+
+/* Safe area insets for notched devices */
+@supports (padding: env(safe-area-inset-top)) {
+  #app {
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
+    padding-bottom: max(16px, env(safe-area-inset-bottom));
+  }
+}
