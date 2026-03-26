@@ -80,12 +80,26 @@
     // ── Helpers ────────────────────────────────────────────────────────
 
     function getUrlParams() {
-        var params = new URLSearchParams(window.location.search);
+        // Build a case-insensitive lookup from the query string
+        var lowerParams = {};
+        new URLSearchParams(window.location.search).forEach(function (value, key) {
+            if (!lowerParams[key.toLowerCase()]) {
+                lowerParams[key.toLowerCase()] = value;
+            }
+        });
+
+        function first(keys) {
+            for (var i = 0; i < keys.length; i++) {
+                if (lowerParams[keys[i]]) return lowerParams[keys[i]];
+            }
+            return null;
+        }
+
         return {
-            locale: params.get('locale') || params.get('lang') || params.get('l'),
-            variant: params.get('variant'),
-            apple: params.get('apple') || params.get('isApple') || params.get('is_apple'),
-            version: params.get('version') || params.get('v')
+            locale:  first(['locale', 'lang', 'language', 'l']),
+            variant: first(['variant', 'var']),
+            apple:   first(['apple', 'isapple', 'is_apple']),
+            version: first(['version', 'ver', 'v'])
         };
     }
 
