@@ -71,7 +71,19 @@ export function createWidget(container: HTMLElement, config: WidgetConfig): void
   });
 
   // Placeholder animation
+  let destroyAnimation: (() => void) | undefined;
   if (config.phrases && config.phrases.length > 0) {
-    startPlaceholderAnimation(textarea, config.phrases);
+    destroyAnimation = startPlaceholderAnimation(textarea, config.phrases);
   }
+
+  // Expose cleanup for SPA / dynamic removal
+  container.addEventListener(
+    'dchat:destroy',
+    () => {
+      destroyAnimation?.();
+      textarea.removeEventListener('input', autoResize);
+      textarea.removeEventListener('input', updateButton);
+    },
+    { once: true },
+  );
 }

@@ -80,10 +80,6 @@ export function startPlaceholderAnimation(
 
   return () => {
     destroyed = true;
-    if (timer !== null) {
-      clearTimeout(timer);
-      timer = null;
-    }
     cancelTimer();
     textarea.removeEventListener('focus', onFocus);
     textarea.removeEventListener('blur', onBlur);
