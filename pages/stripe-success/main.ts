@@ -160,7 +160,7 @@ const translations = {
 function detectLanguage(): keyof typeof translations {
     const browserLang = navigator.language.split('-')[0].toLowerCase();
     const supportedLanguages: (keyof typeof translations)[] = ['en', 'ru', 'es', 'de', 'fr', 'pt', 'it', 'zh', 'ja', 'ar'];
-    return supportedLanguages.includes(browserLang as any) ? (browserLang as keyof typeof translations) : 'en';
+    return supportedLanguages.includes(browserLang as keyof typeof translations) ? (browserLang as keyof typeof translations) : 'en';
 }
 
 // Get current language and translations
@@ -190,7 +190,7 @@ if (app) {
     async function sendCallback() {
         // Determine callback URL based on environment and purchase ID
         function getCallbackUrl(): string | undefined {
-            let purchaseId = params.purchaseId;
+            const purchaseId = params.purchaseId;
             if (!purchaseId) return undefined;
             switch (params.environment) {
                 case 'stg':

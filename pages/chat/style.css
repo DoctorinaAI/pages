@@ -1,0 +1,214 @@
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #f7f7f8;
+    color: #1a1a1a;
+    line-height: 1.6;
+}
+
+.chat-page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 40px 20px 60px;
+}
+
+/* Hero */
+.chat-hero {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.chat-hero h1 {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0 0 12px;
+    color: #111;
+}
+
+.chat-hero p {
+    font-size: 17px;
+    color: #666;
+    margin: 0;
+    max-width: 540px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Language switcher */
+.lang-switch {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 32px;
+}
+
+.lang-btn {
+    padding: 6px 16px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    background: #fff;
+    color: #666;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.lang-btn:hover {
+    border-color: #25D366;
+    color: #25D366;
+}
+
+.lang-btn.active {
+    background: #25D366;
+    border-color: #25D366;
+    color: #fff;
+}
+
+/* Section */
+.chat-section {
+    margin-bottom: 40px;
+}
+
+.chat-section h2 {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0 0 16px;
+    color: #222;
+}
+
+.chat-section h3 {
+    font-size: 17px;
+    font-weight: 600;
+    margin: 24px 0 12px;
+    color: #333;
+}
+
+.chat-section p {
+    margin: 0 0 12px;
+    color: #555;
+}
+
+/* Demo widget container */
+.demo-widget {
+    max-width: 640px;
+    margin: 0 auto 32px;
+}
+
+/* Code block */
+.code-block {
+    position: relative;
+    margin: 16px 0;
+}
+
+.code-block pre {
+    background: #1e1e2e;
+    color: #cdd6f4;
+    padding: 20px;
+    border-radius: 12px;
+    overflow-x: auto;
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 0;
+    font-family: "SF Mono", "Fira Code", "Cascadia Code", Consolas, monospace;
+    -webkit-overflow-scrolling: touch;
+}
+
+.code-block code {
+    font-family: inherit;
+}
+
+.copy-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 6px 14px;
+    border: 0;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.12);
+    color: #cdd6f4;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.copy-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.copy-btn.copied {
+    background: #25D366;
+    color: #fff;
+}
+
+/* Config table */
+.config-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.config-table th,
+.config-table td {
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid #eee;
+}
+
+.config-table th {
+    background: #f0f0f2;
+    font-weight: 600;
+    color: #333;
+}
+
+.config-table td:first-child {
+    font-family: "SF Mono", Consolas, monospace;
+    font-size: 13px;
+    color: #8839ef;
+    white-space: nowrap;
+}
+
+.config-table td:nth-child(3) {
+    color: #888;
+    font-style: italic;
+}
+
+/* Examples section */
+.example-card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+}
+
+.example-card h3 {
+    margin-top: 0;
+}
+
+@media (max-width: 767px) {
+    .chat-page {
+        padding: 24px 16px 40px;
+    }
+
+    .chat-hero h1 {
+        font-size: 26px;
+    }
+
+    .chat-hero p {
+        font-size: 15px;
+    }
+
+    .code-block pre {
+        font-size: 12px;
+        padding: 14px;
+    }
+
+    .config-table {
+        font-size: 13px;
+    }
+
+    .config-table th,
+    .config-table td {
+        padding: 8px 10px;
+    }
+}

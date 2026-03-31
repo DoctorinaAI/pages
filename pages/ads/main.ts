@@ -107,7 +107,7 @@ const translations = {
 function detectLanguage(): keyof typeof translations {
     const browserLang = navigator.language.split('-')[0].toLowerCase();
     const supportedLanguages: (keyof typeof translations)[] = ['en', 'ru', 'es', 'de'];
-    return supportedLanguages.includes(browserLang as any) ? (browserLang as keyof typeof translations) : 'en';
+    return supportedLanguages.includes(browserLang as keyof typeof translations) ? (browserLang as keyof typeof translations) : 'en';
 }
 
 // Detect iOS devices
@@ -223,7 +223,7 @@ let isVideoCompleted = false;
 let seekAttempts = 0;
 let pauseCount = 0;
 let wasTabActive = true;
-let videoStartTime = Date.now();
+const videoStartTime = Date.now();
 let fullscreenCount = 0;
 let callbackSent = false;
 
@@ -244,7 +244,7 @@ const milestones = [0.25, 0.5, 0.75];
 const reachedMilestones = new Set<number>();
 
 // PostMessage helper for iframe/WebView communication
-function sendPostMessage(event: string, data: Record<string, any> = {}) {
+function sendPostMessage(event: string, data: Record<string, unknown> = {}) {
     const message = {
         event,
         timestamp: new Date().toISOString(),
@@ -270,13 +270,13 @@ function sendPostMessage(event: string, data: Record<string, any> = {}) {
 // Metadata collection
 const metadata = {
     userAgent: navigator.userAgent,
-    platform: (navigator as any).userAgentData?.platform || navigator.platform || 'unknown',
+    platform: (navigator as unknown as { userAgentData?: { platform?: string } }).userAgentData?.platform || navigator.platform || 'unknown',
     language: navigator.language,
     screenResolution: `${window.screen.width}x${window.screen.height}`,
     viewportSize: `${window.innerWidth}x${window.innerHeight}`,
     timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     referrer: document.referrer || 'direct',
-    deviceMemory: (navigator as any).deviceMemory || 'unknown',
+    deviceMemory: (navigator as unknown as { deviceMemory?: number }).deviceMemory || 'unknown',
     hardwareConcurrency: navigator.hardwareConcurrency || 'unknown',
 };
 
@@ -1281,11 +1281,3 @@ async function redirectToMobileApp() {
     }
 }
 
-function tryCloseTab() {
-    try {
-        // Try to close the window (will only work if opened via window.open)
-        window.close();
-    } catch (error) {
-        console.error('Failed to close tab:', error);
-    }
-}

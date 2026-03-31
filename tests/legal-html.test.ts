@@ -565,7 +565,7 @@ describe('Legal HTML content validation', () => {
                     }
                     // Match developer placeholders like "TODO:", "TODO -", "[TODO]",
                     // but not the Spanish word "todo" (meaning "all/everything")
-                    if (/\bTODO\s*[:[\-]/.test(text) || /^\s*TODO\s*$/.test(text)) {
+                    if (/\bTODO\s*[:[-]/.test(text) || /^\s*TODO\s*$/.test(text)) {
                         violations.push(`<${el.tagName.toLowerCase()}> contains TODO: "${text.substring(0, 80)}"`);
                     }
                 });

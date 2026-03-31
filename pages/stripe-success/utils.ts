@@ -63,7 +63,7 @@ export function extractStripeSuccessParams(searchParams: URLSearchParams): Strip
  * @returns Formatted string for console output
  */
 export function formatStripeSuccessLog(params: StripeSuccessParams): string {
-    let buffer = ['Stripe Success Page'];
+    const buffer = ['Stripe Success Page'];
     buffer.push(`Type: ${params.type || 'N/A'}`);
     buffer.push(`Checkout ID: ${params.checkoutId || 'N/A'}`);
     buffer.push(`Purchase ID: ${params.purchaseId || 'N/A'}`);
