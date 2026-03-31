@@ -1,7 +1,7 @@
 import { existsSync, readdirSync, copyFileSync, unlinkSync, rmdirSync, mkdirSync } from 'fs';
 import { resolve, join, dirname } from 'path';
 import { visualizer } from 'rollup-plugin-visualizer';
-import { defineConfig, ViteDevServer, Plugin } from 'vite';
+import { defineConfig, ViteDevServer } from 'vite';
 
 /**
  * Automatically discover all HTML pages in the pages/ directory (supports nesting).
@@ -155,7 +155,7 @@ export default defineConfig(({ mode }) => {
                   while (dir !== join(outDir, 'pages') && dir.startsWith(join(outDir, 'pages'))) {
                     try {
                       rmdirSync(dir);
-                    } catch (e) {
+                    } catch {
                       break; // Directory not empty, stop
                     }
                     dir = dirname(dir);
@@ -167,7 +167,7 @@ export default defineConfig(({ mode }) => {
               try {
                 rmdirSync(join(outDir, 'pages'));
                 console.log(`🗑️  Removed empty pages directory`);
-              } catch (e) {
+              } catch {
                 // Directory not empty or doesn't exist, ignore
               }
             },

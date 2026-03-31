@@ -24,6 +24,7 @@ on:
       - "package.json"
       - "package-lock.json"
       - "vite.config.ts"
+      - "vite.widget.config.ts"
       - ".github/workflows/deploy-preview.yaml"
 
 permissions:
@@ -63,7 +64,7 @@ jobs:
         run: npm run type-check
 
       - name: 🏗️ Build preview
-        run: npm run build
+        run: npm run build:all
 
       - name: 📦 Upload build artifact
         uses: actions/upload-artifact@v4

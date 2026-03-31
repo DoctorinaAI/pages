@@ -26,7 +26,6 @@ function mockFetchFail(status = 404) {
 function loadScript() {
   // The script's IIFE captures state in closure vars that persist.
   // Re-evaluating creates a fresh closure each time.
-  // eslint-disable-next-line no-eval
   eval(SCRIPT_SRC);
 }
 
@@ -462,10 +461,10 @@ describe('legal.js', () => {
     });
 
     it('should support comma-separated values in data-exclude', async () => {
-      (window as any).location.search = '?variant=google';
+      (window as any).location.search = '?variant=apple';
       document.body.innerHTML = '<div data-legal="privacy" data-version="latest"></div>';
       global.fetch = mockFetch(
-        '<div data-exclude="apple,google">Hidden</div><div data-exclude="apple">Visible</div>',
+        '<div data-exclude="apple,google">Hidden</div><div data-exclude="google">Visible</div>',
       );
 
       loadScript();
@@ -473,7 +472,7 @@ describe('legal.js', () => {
 
       const el = document.querySelector('[data-legal]')!;
       expect(el.querySelectorAll('[data-exclude]')).toHaveLength(1);
-      expect(el.querySelector('[data-exclude="apple"]')?.textContent).toBe('Visible');
+      expect(el.querySelector('[data-exclude="google"]')?.textContent).toBe('Visible');
     });
   });
 
@@ -664,9 +663,10 @@ describe('legal.js', () => {
       const selector = document.querySelector('[data-legal-locale-selector]')!;
       const select = selector.querySelector('select') as HTMLSelectElement;
       expect(select).not.toBeNull();
-      expect(select.options).toHaveLength(2);
+      expect(select.options).toHaveLength(3);
       expect(select.options[0].value).toBe('en');
       expect(select.options[1].value).toBe('es');
+      expect(select.options[2].value).toBe('ru');
     });
 
     it('should mark current locale as selected', async () => {
