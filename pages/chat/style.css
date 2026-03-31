@@ -59,8 +59,8 @@ body {
 }
 
 .lang-btn.active {
-    background: #25D366;
-    border-color: #25D366;
+    background: #167a3c;
+    border-color: #167a3c;
     color: #fff;
 }
 
@@ -168,7 +168,7 @@ body {
 }
 
 .config-table td:nth-child(3) {
-    color: #888;
+    color: #616161;
     font-style: italic;
 }
 
@@ -203,8 +203,16 @@ body {
         padding: 14px;
     }
 
+    .config-table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin: 0 -16px;
+        padding: 0 16px;
+    }
+
     .config-table {
         font-size: 13px;
+        min-width: 480px;
     }
 
     .config-table th,

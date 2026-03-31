@@ -8,7 +8,8 @@ export function createWidget(container: HTMLElement, config: WidgetConfig): void
   // Build DOM
   const box = document.createElement('div');
   box.className = 'dchat-box';
-  box.setAttribute('role', 'search');
+  box.setAttribute('role', 'form');
+  box.setAttribute('aria-label', 'Chat message');
 
   const textarea = document.createElement('textarea');
   textarea.className = 'dchat-textarea';
@@ -34,17 +35,28 @@ export function createWidget(container: HTMLElement, config: WidgetConfig): void
 
   // Auto-resize textarea
   function autoResize(): void {
-    textarea.style.height = '0px';
+    textarea.style.height = 'auto';
     textarea.style.height = Math.min(textarea.scrollHeight, 180) + 'px';
   }
   textarea.addEventListener('input', autoResize);
   autoResize();
 
+  // Toggle button state
+  function updateButton(): void {
+    const empty = textarea.value.trim() === '';
+    btn.disabled = empty;
+    btn.setAttribute('aria-disabled', String(empty));
+  }
+  textarea.addEventListener('input', updateButton);
+  updateButton();
+
   // Submit handler
   function submit(): void {
+    if (textarea.value.trim() === '') return;
     openTarget(config, textarea.value);
     textarea.value = '';
     autoResize();
+    updateButton();
   }
 
   btn.addEventListener('click', submit);

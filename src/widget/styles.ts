@@ -35,6 +35,11 @@ const CSS = `
   overflow-y: auto;
 }
 
+.dchat-textarea:focus {
+  outline: none;
+  box-shadow: none;
+}
+
 .dchat-textarea::placeholder {
   color: rgba(0, 0, 0, 0.4);
 }
@@ -56,15 +61,21 @@ const CSS = `
   -webkit-tap-highlight-color: transparent;
 }
 
-.dchat-btn:hover {
+.dchat-btn:hover:not(:disabled) {
   background: #1fb855;
+}
+
+.dchat-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+  transform: none;
 }
 
 .dchat-btn[title] {
   position: relative;
 }
 
-.dchat-btn:active {
+.dchat-btn:active:not(:disabled) {
   transform: scale(0.94);
 }
 

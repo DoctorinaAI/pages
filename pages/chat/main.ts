@@ -155,7 +155,7 @@ function render(lang: Lang): void {
     const app = document.getElementById('app')!;
 
     app.innerHTML = `
-    <div class="chat-page">
+    <main class="chat-page">
       <nav class="lang-switch" aria-label="Language">
         <button class="lang-btn ${lang === 'en' ? 'active' : ''}" data-lang="en" aria-pressed="${lang === 'en'}">English</button>
         <button class="lang-btn ${lang === 'es' ? 'active' : ''}" data-lang="es" aria-pressed="${lang === 'es'}">Español</button>
@@ -190,17 +190,19 @@ function render(lang: Lang): void {
       <section class="chat-section" aria-labelledby="config-heading">
         <h2 id="config-heading">${t.config}</h2>
         <p>${t.configDesc}</p>
-        <table class="config-table" aria-label="${t.config}">
-          <thead>
-            <tr><th scope="col">${t.attrName}</th><th scope="col">${t.attrDesc}</th><th scope="col">${t.attrDefault}</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>data-target-url</td><td>${t.attrTargetUrl}</td><td>${t.attrTargetUrlDefault}</td></tr>
-            <tr><td>data-placeholder</td><td>${t.attrPlaceholder}</td><td>${t.attrPlaceholderDefault}</td></tr>
-            <tr><td>data-phrases</td><td>${t.attrPhrases}</td><td>${t.attrPhrasesDefault}</td></tr>
-            <tr><td>data-params</td><td>${t.attrParams}</td><td>${t.attrParamsDefault}</td></tr>
-          </tbody>
-        </table>
+        <div class="config-table-wrap">
+          <table class="config-table" aria-label="${t.config}">
+            <thead>
+              <tr><th scope="col">${t.attrName}</th><th scope="col">${t.attrDesc}</th><th scope="col">${t.attrDefault}</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>data-target-url</td><td>${t.attrTargetUrl}</td><td>${t.attrTargetUrlDefault}</td></tr>
+              <tr><td>data-placeholder</td><td>${t.attrPlaceholder}</td><td>${t.attrPlaceholderDefault}</td></tr>
+              <tr><td>data-phrases</td><td>${t.attrPhrases}</td><td>${t.attrPhrasesDefault}</td></tr>
+              <tr><td>data-params</td><td>${t.attrParams}</td><td>${t.attrParamsDefault}</td></tr>
+            </tbody>
+          </table>
+        </div>
       </section>
 
       <section class="chat-section" aria-labelledby="examples-heading">
@@ -252,7 +254,7 @@ function render(lang: Lang): void {
         <h3>${t.programmatic}</h3>
         <p>${t.programmaticDesc}</p>
       </section>
-    </div>
+    </main>
   `;
 
     // Update html lang attribute
