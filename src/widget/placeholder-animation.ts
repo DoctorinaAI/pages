@@ -55,12 +55,21 @@ export function startPlaceholderAnimation(
     }
   }
 
+  function cancelTimer(): void {
+    if (timer !== null) {
+      clearTimeout(timer);
+      timer = null;
+    }
+  }
+
   function onFocus(): void {
+    cancelTimer();
     textarea.placeholder = '';
   }
 
   function onBlur(): void {
     if (!destroyed && textarea.value.trim() === '') {
+      cancelTimer();
       tick();
     }
   }
@@ -75,6 +84,7 @@ export function startPlaceholderAnimation(
       clearTimeout(timer);
       timer = null;
     }
+    cancelTimer();
     textarea.removeEventListener('focus', onFocus);
     textarea.removeEventListener('blur', onBlur);
   };

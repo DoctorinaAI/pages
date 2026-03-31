@@ -27,6 +27,8 @@ export function createWidget(container: HTMLElement, config: WidgetConfig): void
   btn.type = 'button';
   btn.setAttribute('aria-label', 'Send message');
   btn.title = 'Send message';
+  btn.disabled = true;
+  btn.setAttribute('aria-disabled', 'true');
   btn.innerHTML = SEND_ICON_SVG;
 
   box.appendChild(textarea);
