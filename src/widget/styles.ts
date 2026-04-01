@@ -37,7 +37,6 @@ const CSS = `
 
 .dchat-textarea:focus {
   outline: none;
-  box-shadow: none;
 }
 
 .dchat-textarea::placeholder {
@@ -73,6 +72,10 @@ const CSS = `
 
 .dchat-btn[title] {
   position: relative;
+}
+
+.dchat-btn:focus-visible {
+  box-shadow: 0 0 0 2px rgba(37, 211, 102, 0.35);
 }
 
 .dchat-btn:active:not(:disabled) {

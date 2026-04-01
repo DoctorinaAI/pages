@@ -24,10 +24,8 @@ const i18n = {
         attrDefault: 'Default',
         attrTargetUrl: 'App URL to redirect to',
         attrTargetUrlDefault: 'app.doctorina.com',
-        attrPlaceholder: 'Static placeholder text',
-        attrPlaceholderDefault: 'None',
-        attrPhrases: 'Child <code>&lt;p&gt;</code> elements used as phrases for typing animation',
-        attrPhrasesDefault: 'None',
+        attrChildren: 'Child <code>&lt;p&gt;</code> elements: 1 = static placeholder, 2+ = typing animation',
+        attrChildrenDefault: 'None',
         attrParams: 'JSON object of extra query parameters (e.g. UTM tags)',
         attrParamsDefault: 'None',
         examples: 'Examples',
@@ -63,10 +61,8 @@ const i18n = {
         attrDefault: 'Predeterminado',
         attrTargetUrl: 'URL de la app para redirigir',
         attrTargetUrlDefault: 'app.doctorina.com',
-        attrPlaceholder: 'Texto estático del placeholder',
-        attrPlaceholderDefault: 'Ninguno',
-        attrPhrases: 'Elementos hijos <code>&lt;p&gt;</code> usados como frases para la animación de escritura',
-        attrPhrasesDefault: 'Ninguno',
+        attrChildren: 'Elementos hijos <code>&lt;p&gt;</code>: 1 = placeholder estático, 2+ = animación de escritura',
+        attrChildrenDefault: 'Ninguno',
         attrParams: 'Objeto JSON con parámetros extra (ej. etiquetas UTM)',
         attrParamsDefault: 'Ninguno',
         examples: 'Ejemplos',
@@ -102,10 +98,8 @@ const i18n = {
         attrDefault: 'По умолчанию',
         attrTargetUrl: 'URL приложения для редиректа',
         attrTargetUrlDefault: 'app.doctorina.com',
-        attrPlaceholder: 'Статический текст placeholder',
-        attrPlaceholderDefault: 'Нет',
-        attrPhrases: 'Дочерние элементы <code>&lt;p&gt;</code> — фразы для анимации печатания',
-        attrPhrasesDefault: 'Нет',
+        attrChildren: 'Дочерние элементы <code>&lt;p&gt;</code>: 1 = статический placeholder, 2+ = анимация печатания',
+        attrChildrenDefault: 'Нет',
         attrParams: 'JSON-объект с дополнительными query-параметрами (напр. UTM-метки)',
         attrParamsDefault: 'Нет',
         examples: 'Примеры',
@@ -147,8 +141,8 @@ const SNIPPET_PHRASES = `<div id="doctorina-chat">
 </div>
 <script defer src="${WIDGET_HOST}/widget/doctorina-chat.js"></script>`;
 
-const SNIPPET_PLACEHOLDER = `<div id="doctorina-chat"
-     data-placeholder="Type your health question...">
+const SNIPPET_PLACEHOLDER = `<div id="doctorina-chat">
+  <p>Type your health question...</p>
 </div>
 <script defer src="${WIDGET_HOST}/widget/doctorina-chat.js"></script>`;
 
@@ -210,8 +204,7 @@ function render(lang: Lang): void {
             </thead>
             <tbody>
               <tr><td>data-target-url</td><td>${t.attrTargetUrl}</td><td>${t.attrTargetUrlDefault}</td></tr>
-              <tr><td>data-placeholder</td><td>${t.attrPlaceholder}</td><td>${t.attrPlaceholderDefault}</td></tr>
-              <tr><td>&lt;p&gt; children</td><td>${t.attrPhrases}</td><td>${t.attrPhrasesDefault}</td></tr>
+              <tr><td>&lt;p&gt; children</td><td>${t.attrChildren}</td><td>${t.attrChildrenDefault}</td></tr>
               <tr><td>data-params</td><td>${t.attrParams}</td><td>${t.attrParamsDefault}</td></tr>
             </tbody>
           </table>

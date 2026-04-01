@@ -14,17 +14,16 @@ export function parseConfig(container: HTMLElement): WidgetConfig {
     targetUrl: targetUrl.replace(/\/+$/, ''),
   };
 
-  const placeholder = container.getAttribute('data-placeholder');
-  if (placeholder) {
-    config.placeholder = placeholder;
-  }
-
-  const childPhrases = Array.from(container.children)
+  // Child elements = phrases for placeholder animation (translation-plugin friendly)
+  // 1 element → static placeholder, 2+ elements → animated cycling
+  const childTexts = Array.from(container.children)
     .map((el) => el.textContent?.trim() ?? '')
     .filter((text) => text.length > 0);
 
-  if (childPhrases.length > 0) {
-    config.phrases = childPhrases;
+  if (childTexts.length === 1) {
+    config.placeholder = childTexts[0];
+  } else if (childTexts.length > 1) {
+    config.phrases = childTexts;
   }
 
   const paramsAttr = container.getAttribute('data-params');
