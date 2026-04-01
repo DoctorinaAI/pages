@@ -5,17 +5,16 @@ import { startPlaceholderAnimation } from './placeholder-animation';
 const SEND_ICON_SVG = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>`;
 
 export function createWidget(container: HTMLElement, config: WidgetConfig): void {
-  // Build DOM
   const box = document.createElement('div');
   box.className = 'dchat-box';
   box.setAttribute('role', 'form');
-  box.setAttribute('aria-label', 'Chat message');
+  box.setAttribute('aria-label', container.getAttribute('data-aria-label') || 'Chat message');
 
   const textarea = document.createElement('textarea');
   textarea.className = 'dchat-textarea';
   textarea.rows = 1;
   textarea.setAttribute('autocomplete', 'off');
-  textarea.setAttribute('aria-label', 'Chat message');
+  textarea.setAttribute('aria-label', container.getAttribute('data-aria-input') || 'Message');
   textarea.maxLength = 4096;
 
   if (config.placeholder) {
@@ -25,8 +24,7 @@ export function createWidget(container: HTMLElement, config: WidgetConfig): void
   const btn = document.createElement('button');
   btn.className = 'dchat-btn';
   btn.type = 'button';
-  btn.setAttribute('aria-label', 'Send message');
-  btn.title = 'Send message';
+  btn.setAttribute('aria-label', container.getAttribute('data-aria-send') || 'Send');
   btn.disabled = true;
   btn.setAttribute('aria-disabled', 'true');
   btn.innerHTML = SEND_ICON_SVG;
@@ -63,12 +61,13 @@ export function createWidget(container: HTMLElement, config: WidgetConfig): void
 
   btn.addEventListener('click', submit);
 
-  textarea.addEventListener('keydown', (e) => {
+  function onKeydown(e: KeyboardEvent): void {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       submit();
     }
-  });
+  }
+  textarea.addEventListener('keydown', onKeydown);
 
   // Placeholder animation
   let destroyAnimation: (() => void) | undefined;
@@ -76,13 +75,15 @@ export function createWidget(container: HTMLElement, config: WidgetConfig): void
     destroyAnimation = startPlaceholderAnimation(textarea, config.phrases);
   }
 
-  // Expose cleanup for SPA / dynamic removal
+  // Cleanup for SPA / dynamic removal
   container.addEventListener(
     'dchat:destroy',
     () => {
       destroyAnimation?.();
       textarea.removeEventListener('input', autoResize);
       textarea.removeEventListener('input', updateButton);
+      textarea.removeEventListener('keydown', onKeydown);
+      btn.removeEventListener('click', submit);
     },
     { once: true },
   );

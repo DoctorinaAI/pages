@@ -14,21 +14,16 @@ export function parseConfig(container: HTMLElement): WidgetConfig {
     targetUrl: targetUrl.replace(/\/+$/, ''),
   };
 
-  const placeholder = container.getAttribute('data-placeholder');
-  if (placeholder) {
-    config.placeholder = placeholder;
-  }
+  // Child elements = phrases for placeholder animation (translation-plugin friendly)
+  // 1 element → static placeholder, 2+ elements → animated cycling
+  const childTexts = Array.from(container.children)
+    .map((el) => el.textContent?.trim() ?? '')
+    .filter((text) => text.length > 0);
 
-  const phrasesAttr = container.getAttribute('data-phrases');
-  if (phrasesAttr) {
-    try {
-      const parsed = JSON.parse(phrasesAttr);
-      if (Array.isArray(parsed) && parsed.length > 0) {
-        config.phrases = parsed.filter((p): p is string => typeof p === 'string' && p.trim() !== '');
-      }
-    } catch {
-      console.warn('[DoctorinaChat] Invalid data-phrases JSON:', phrasesAttr);
-    }
+  if (childTexts.length === 1) {
+    config.placeholder = childTexts[0];
+  } else if (childTexts.length > 1) {
+    config.phrases = childTexts;
   }
 
   const paramsAttr = container.getAttribute('data-params');

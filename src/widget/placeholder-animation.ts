@@ -10,6 +10,12 @@ export function startPlaceholderAnimation(
 ): () => void {
   if (phrases.length === 0) return () => {};
 
+  // Respect user motion preferences — show first phrase as static placeholder
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    textarea.placeholder = phrases[0];
+    return () => {};
+  }
+
   let phraseIndex = 0;
   let charIndex = 0;
   let deleting = false;
