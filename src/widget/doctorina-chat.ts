@@ -12,6 +12,7 @@ export function init(): void {
     container.dataset.dchatInited = '1';
 
     const config = parseConfig(container);
+    container.innerHTML = '';
 
     injectStyles();
     createWidget(container, config);

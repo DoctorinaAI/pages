@@ -26,7 +26,7 @@ const i18n = {
         attrTargetUrlDefault: 'app.doctorina.com',
         attrPlaceholder: 'Static placeholder text',
         attrPlaceholderDefault: 'None',
-        attrPhrases: 'JSON array of phrases for typing animation',
+        attrPhrases: 'Child <code>&lt;p&gt;</code> elements used as phrases for typing animation',
         attrPhrasesDefault: 'None',
         attrParams: 'JSON object of extra query parameters (e.g. UTM tags)',
         attrParamsDefault: 'None',
@@ -62,7 +62,7 @@ const i18n = {
         attrTargetUrlDefault: 'app.doctorina.com',
         attrPlaceholder: 'Texto estático del placeholder',
         attrPlaceholderDefault: 'Ninguno',
-        attrPhrases: 'Array JSON de frases para la animación de escritura',
+        attrPhrases: 'Elementos hijos <code>&lt;p&gt;</code> usados como frases para la animación de escritura',
         attrPhrasesDefault: 'Ninguno',
         attrParams: 'Objeto JSON con parámetros extra (ej. etiquetas UTM)',
         attrParamsDefault: 'Ninguno',
@@ -98,7 +98,7 @@ const i18n = {
         attrTargetUrlDefault: 'app.doctorina.com',
         attrPlaceholder: 'Статический текст placeholder',
         attrPlaceholderDefault: 'Нет',
-        attrPhrases: 'JSON-массив фраз для анимации печатания',
+        attrPhrases: 'Дочерние элементы <code>&lt;p&gt;</code> — фразы для анимации печатания',
         attrPhrasesDefault: 'Нет',
         attrParams: 'JSON-объект с дополнительными query-параметрами (напр. UTM-метки)',
         attrParamsDefault: 'Нет',
@@ -131,8 +131,10 @@ const SNIPPET_BASIC = `<!-- Doctorina Chat Widget -->
 <div id="doctorina-chat"></div>
 <script defer src="${WIDGET_HOST}/widget/doctorina-chat.js"></script>`;
 
-const SNIPPET_PHRASES = `<div id="doctorina-chat"
-     data-phrases='["What symptoms do you have?", "Ask about medications", "Get a health consultation"]'>
+const SNIPPET_PHRASES = `<div id="doctorina-chat">
+  <p>What symptoms do you have?</p>
+  <p>Ask about medications</p>
+  <p>Get a health consultation</p>
 </div>
 <script defer src="${WIDGET_HOST}/widget/doctorina-chat.js"></script>`;
 
@@ -172,8 +174,10 @@ function render(lang: Lang): void {
         <p>${t.demoDesc}</p>
         <div class="demo-widget">
           <div class="doctorina-chat"
-               data-target-url="https://doctorina-development.web.app"
-               data-phrases='["What symptoms do you have?", "Ask about medications", "Describe how you feel"]'>
+               data-target-url="https://doctorina-development.web.app">
+            <p>What symptoms do you have?</p>
+            <p>Ask about medications</p>
+            <p>Describe how you feel</p>
           </div>
         </div>
       </section>
@@ -198,7 +202,7 @@ function render(lang: Lang): void {
             <tbody>
               <tr><td>data-target-url</td><td>${t.attrTargetUrl}</td><td>${t.attrTargetUrlDefault}</td></tr>
               <tr><td>data-placeholder</td><td>${t.attrPlaceholder}</td><td>${t.attrPlaceholderDefault}</td></tr>
-              <tr><td>data-phrases</td><td>${t.attrPhrases}</td><td>${t.attrPhrasesDefault}</td></tr>
+              <tr><td>&lt;p&gt; children</td><td>${t.attrPhrases}</td><td>${t.attrPhrasesDefault}</td></tr>
               <tr><td>data-params</td><td>${t.attrParams}</td><td>${t.attrParamsDefault}</td></tr>
             </tbody>
           </table>

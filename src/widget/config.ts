@@ -19,16 +19,12 @@ export function parseConfig(container: HTMLElement): WidgetConfig {
     config.placeholder = placeholder;
   }
 
-  const phrasesAttr = container.getAttribute('data-phrases');
-  if (phrasesAttr) {
-    try {
-      const parsed = JSON.parse(phrasesAttr);
-      if (Array.isArray(parsed) && parsed.length > 0) {
-        config.phrases = parsed.filter((p): p is string => typeof p === 'string' && p.trim() !== '');
-      }
-    } catch {
-      console.warn('[DoctorinaChat] Invalid data-phrases JSON:', phrasesAttr);
-    }
+  const childPhrases = Array.from(container.children)
+    .map((el) => el.textContent?.trim() ?? '')
+    .filter((text) => text.length > 0);
+
+  if (childPhrases.length > 0) {
+    config.phrases = childPhrases;
   }
 
   const paramsAttr = container.getAttribute('data-params');
