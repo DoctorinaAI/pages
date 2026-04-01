@@ -39,6 +39,9 @@ const i18n = {
         exPlaceholderDesc: 'Simple static placeholder text:',
         exParamsTitle: 'With UTM Parameters',
         exParamsDesc: 'Pass custom query parameters (e.g. UTM tags) to the target URL:',
+        demoPhrase1: 'What symptoms do you have?',
+        demoPhrase2: 'Ask about medications',
+        demoPhrase3: 'Describe how you feel',
         multiWidget: 'Multiple Widgets',
         multiWidgetDesc: 'Use the class <code>doctorina-chat</code> instead of id to place multiple widgets on the same page. Each can have its own configuration.',
         programmatic: 'Programmatic API',
@@ -75,6 +78,9 @@ const i18n = {
         exPlaceholderDesc: 'Texto estático simple en el campo de entrada:',
         exParamsTitle: 'Con parámetros UTM',
         exParamsDesc: 'Pasa parámetros personalizados (ej. etiquetas UTM) a la URL de destino:',
+        demoPhrase1: '¿Qué síntomas tienes?',
+        demoPhrase2: 'Pregunta sobre medicamentos',
+        demoPhrase3: 'Describe cómo te sientes',
         multiWidget: 'Múltiples widgets',
         multiWidgetDesc: 'Usa la clase <code>doctorina-chat</code> en lugar de id para colocar múltiples widgets en la misma página. Cada uno puede tener su propia configuración.',
         programmatic: 'API programática',
@@ -111,6 +117,9 @@ const i18n = {
         exPlaceholderDesc: 'Простой статический текст в поле ввода:',
         exParamsTitle: 'С UTM-параметрами',
         exParamsDesc: 'Передача произвольных query-параметров (напр. UTM-меток) в целевой URL:',
+        demoPhrase1: 'Какие у вас симптомы?',
+        demoPhrase2: 'Спросите о лекарствах',
+        demoPhrase3: 'Опишите как вы себя чувствуете',
         multiWidget: 'Несколько виджетов',
         multiWidgetDesc: 'Используйте класс <code>doctorina-chat</code> вместо id, чтобы разместить несколько виджетов на одной странице. Каждый может иметь свою конфигурацию.',
         programmatic: 'Программный API',
@@ -175,9 +184,9 @@ function render(lang: Lang): void {
         <div class="demo-widget">
           <div class="doctorina-chat"
                data-target-url="https://doctorina-development.web.app">
-            <p>What symptoms do you have?</p>
-            <p>Ask about medications</p>
-            <p>Describe how you feel</p>
+            <p>${t.demoPhrase1}</p>
+            <p>${t.demoPhrase2}</p>
+            <p>${t.demoPhrase3}</p>
           </div>
         </div>
       </section>
