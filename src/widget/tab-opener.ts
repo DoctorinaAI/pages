@@ -1,7 +1,17 @@
 import type { WidgetConfig } from './config';
 
+// The widget *is* the user-message medium — every redirect is the user pressing Send.
+// Embedders override by passing utm_medium in data-params.
+const DEFAULT_PARAMS: Readonly<Record<string, string>> = Object.freeze({
+  utm_medium: 'user_message',
+});
+
 function normalizeMessage(raw: string): string {
   return raw.trim().replace(/\s+/g, ' ');
+}
+
+function effectiveParams(config: WidgetConfig): Record<string, string> {
+  return { ...DEFAULT_PARAMS, ...(config.params ?? {}) };
 }
 
 function buildTargetUrl(config: WidgetConfig, message?: string): string {
@@ -9,10 +19,8 @@ function buildTargetUrl(config: WidgetConfig, message?: string): string {
   url.searchParams.set('auto_accept_policies', '1');
   url.searchParams.set('referrer', window.location.href);
 
-  if (config.params) {
-    for (const [key, value] of Object.entries(config.params)) {
-      url.searchParams.set(key, value);
-    }
+  for (const [key, value] of Object.entries(effectiveParams(config))) {
+    url.searchParams.set(key, value);
   }
 
   if (message) {
@@ -43,9 +51,7 @@ export function openTarget(config: WidgetConfig, message: string): void {
     if (text) {
       payload.message = text;
     }
-    if (config.params) {
-      payload.params = config.params;
-    }
+    payload.params = effectiveParams(config);
     newTab.name = JSON.stringify(payload);
     newTab.location.href = buildTargetUrl(config);
   } else {
