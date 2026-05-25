@@ -26,8 +26,8 @@ const i18n = {
         attrTargetUrlDefault: 'app.doctorina.com',
         attrChildren: 'Child <code>&lt;p&gt;</code> elements: 1 = static placeholder, 2+ = typing animation',
         attrChildrenDefault: 'None',
-        attrParams: 'JSON object of extra query parameters (e.g. UTM tags)',
-        attrParamsDefault: 'None',
+        attrParams: 'JSON object of extra query parameters (e.g. UTM tags). Overrides defaults.',
+        attrParamsDefault: 'utm_medium=user_message',
         examples: 'Examples',
         exBasicTitle: 'Basic Usage',
         exBasicDesc: 'Minimal setup — just add the container and the script:',
@@ -63,8 +63,8 @@ const i18n = {
         attrTargetUrlDefault: 'app.doctorina.com',
         attrChildren: 'Elementos hijos <code>&lt;p&gt;</code>: 1 = placeholder estático, 2+ = animación de escritura',
         attrChildrenDefault: 'Ninguno',
-        attrParams: 'Objeto JSON con parámetros extra (ej. etiquetas UTM)',
-        attrParamsDefault: 'Ninguno',
+        attrParams: 'Objeto JSON con parámetros extra (ej. etiquetas UTM). Sobrescribe los valores predeterminados.',
+        attrParamsDefault: 'utm_medium=user_message',
         examples: 'Ejemplos',
         exBasicTitle: 'Uso básico',
         exBasicDesc: 'Configuración mínima — solo agrega el contenedor y el script:',
@@ -100,8 +100,8 @@ const i18n = {
         attrTargetUrlDefault: 'app.doctorina.com',
         attrChildren: 'Дочерние элементы <code>&lt;p&gt;</code>: 1 = статический placeholder, 2+ = анимация печатания',
         attrChildrenDefault: 'Нет',
-        attrParams: 'JSON-объект с дополнительными query-параметрами (напр. UTM-метки)',
-        attrParamsDefault: 'Нет',
+        attrParams: 'JSON-объект с дополнительными query-параметрами (напр. UTM-метки). Перекрывает значения по умолчанию.',
+        attrParamsDefault: 'utm_medium=user_message',
         examples: 'Примеры',
         exBasicTitle: 'Базовое подключение',
         exBasicDesc: 'Минимальная настройка — только контейнер и скрипт:',
@@ -147,7 +147,7 @@ const SNIPPET_PLACEHOLDER = `<div id="doctorina-chat">
 <script defer src="${WIDGET_HOST}/widget/doctorina-chat.js"></script>`;
 
 const SNIPPET_PARAMS = `<div id="doctorina-chat"
-     data-params='{"utm_source":"website","utm_campaign":"spring"}'>
+     data-params='{"utm_source":"landing","utm_campaign":"spring"}'>
 </div>
 <script defer src="${WIDGET_HOST}/widget/doctorina-chat.js"></script>`;
 
