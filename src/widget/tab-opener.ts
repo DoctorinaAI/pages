@@ -6,7 +6,7 @@ const DEFAULT_PARAMS: Readonly<Record<string, string>> = Object.freeze({
   utm_medium: 'user_message',
 });
 
-function normalizeMessage(raw: string): string {
+export function normalizeMessage(raw: string): string {
   return raw.trim().replace(/\s+/g, ' ');
 }
 
@@ -14,7 +14,7 @@ function effectiveParams(config: WidgetConfig): Record<string, string> {
   return { ...DEFAULT_PARAMS, ...(config.params ?? {}) };
 }
 
-function buildTargetUrl(config: WidgetConfig, message?: string): string {
+export function buildTargetUrl(config: WidgetConfig, message?: string): string {
   const url = new URL(config.targetUrl);
   url.searchParams.set('auto_accept_policies', '1');
   url.searchParams.set('referrer', window.location.href);
@@ -33,13 +33,17 @@ function buildTargetUrl(config: WidgetConfig, message?: string): string {
 /**
  * Opens the target app with the user's message.
  *
- * Primary: window.open() + window.name (no size limit, cross-origin safe).
- * Fallback (popup blocked): redirect via window.location with message in URL hash.
+ * The message is sent over BOTH channels so losing one still delivers it:
+ *  - window.name — survives cross-origin navigation, no size limit (primary);
+ *  - URL hash — survives when window.name is gone (e.g. an iOS universal-link
+ *    intercept tears down the originating tab) and is also the popup-blocked
+ *    fallback path.
+ * The web app reads window.name first and only falls back to the hash.
  */
 export function openTarget(config: WidgetConfig, message: string): void {
   const text = normalizeMessage(message);
 
-  // Try opening a new tab (must be synchronous in click handler for Safari)
+  // Try opening a new tab (must be synchronous in the click handler for Safari)
   const newTab = window.open('about:blank', '_blank');
   const popupBlocked = !newTab || newTab.closed;
 
@@ -53,7 +57,8 @@ export function openTarget(config: WidgetConfig, message: string): void {
     }
     payload.params = effectiveParams(config);
     newTab.name = JSON.stringify(payload);
-    newTab.location.href = buildTargetUrl(config);
+    // Also carry the message in the URL so it survives a lost window.name.
+    newTab.location.href = buildTargetUrl(config, text || undefined);
   } else {
     // Fallback: redirect in current tab, message in URL hash
     window.location.href = buildTargetUrl(config, text || undefined);
